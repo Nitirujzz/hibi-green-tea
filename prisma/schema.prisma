@@ -1,0 +1,337 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User and Authentication Models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  phone         String?
+  address       String?
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts    Account[]
+  sessions    Session[]
+  orders      Order[]
+  bookings    Booking[]
+  cartItems   CartItem[]
+  reviews     Review[]
+  addresses   Address[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+// Address Model
+model Address {
+  id           String  @id @default(cuid())
+  userId       String
+  firstName    String
+  lastName     String
+  company      String?
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  postalCode   String
+  country      String  @default("Thailand")
+  phone        String?
+  isDefault    Boolean @default(false)
+
+  // Relations
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders Order[] @relation("ShippingAddress")
+  billingOrders  Order[] @relation("BillingAddress")
+
+  @@map("addresses")
+}
+
+// Product Models
+model ProductCategory {
+  id          String    @id @default(cuid())
+  name        String
+  nameEn      String?
+  slug        String    @unique
+  description String?
+  descriptionEn String?
+  image       String?
+  parentId    String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  parent   ProductCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children ProductCategory[] @relation("CategoryHierarchy")
+  products Product[]
+
+  @@map("product_categories")
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  name          String
+  nameEn        String?
+  description   String
+  descriptionEn String?
+  price         Float
+  discountPrice Float?
+  image         String
+  images        String @default("[]") // JSON string array
+  categoryId    String
+  stock         Int      @default(0)
+  isActive      Boolean  @default(true)
+  tags          String @default("[]") // JSON string array
+  
+  // Nutrition Facts (JSON)
+  nutritionFacts Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  category  ProductCategory @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+  cartItems  CartItem[]
+  reviews    Review[]
+
+  @@map("products")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  rating    Int      // 1-5 stars
+  comment   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("reviews")
+}
+
+// Cart Model
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  quantity  Int      @default(1)
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("cart_items")
+}
+
+// Order Models
+model Order {
+  id                     String        @id @default(cuid())
+  userId                 String
+  status                 OrderStatus   @default(PENDING)
+  paymentStatus          PaymentStatus @default(PENDING)
+  totalAmount            Float
+  shippingAddressId      String
+  billingAddressId       String?
+  shippingMethod         ShippingMethod
+  paymentMethod          PaymentMethod
+  stripePaymentIntentId  String?       @unique
+  notes                  String?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  // Relations
+  user            User      @relation(fields: [userId], references: [id])
+  items           OrderItem[]
+  shippingAddress Address   @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  billingAddress  Address?  @relation("BillingAddress", fields: [billingAddressId], references: [id])
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id         String  @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  price      Float
+  totalPrice Float
+
+  // Relations
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum ShippingMethod {
+  STANDARD
+  EXPRESS
+  PICKUP
+}
+
+enum PaymentMethod {
+  STRIPE
+  CASH_ON_DELIVERY
+  BANK_TRANSFER
+}
+
+// Booking Models (for tea workshops/classes)
+model TeaSession {
+  id              String    @id @default(cuid())
+  title           String
+  titleEn         String?
+  description     String
+  descriptionEn   String?
+  instructor      String
+  duration        Int       // in minutes
+  maxParticipants Int
+  price           Float
+  image           String
+  tags            String @default("[]") // JSON string array
+  startDateTime   DateTime
+  endDateTime     DateTime
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  bookings Booking[]
+
+  @@map("tea_sessions")
+}
+
+model Booking {
+  id                    String        @id @default(cuid())
+  userId                String
+  sessionId             String
+  status                BookingStatus @default(PENDING)
+  participants          Int           @default(1)
+  totalAmount           Float
+  paymentStatus         PaymentStatus @default(PENDING)
+  stripePaymentIntentId String?       @unique
+  notes                 String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  // Relations
+  user    User       @relation(fields: [userId], references: [id])
+  session TeaSession @relation(fields: [sessionId], references: [id])
+
+  @@map("bookings")
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+// Newsletter Model
+model NewsletterSubscription {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  isActive     Boolean  @default(true)
+  subscribedAt DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("newsletter_subscriptions")
+}
+
+// Contact Form Submissions
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_submissions")
+}

@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hibi Green Tea Brand Variables */
+:root {
+  /* Brand Colors - mapped to Tailwind classes */
+  --hibi-50: #f0fdf4;
+  --hibi-500: #22c55e;
+  --hibi-600: #16a34a;
+  --tea-cream: #f7f3e9;
+  --tea-brown: #8b4513;
+  --tea-gold: #ffd700;
+  
+  /* Typography */
+  --font-brand: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Layout */
+  --header-height: 4rem;
+  --container-max-width: 1280px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* Base Styles */
+* {
+  @apply border-gray-200;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply font-body text-gray-900 bg-white antialiased;
+}
+
+/* Custom Component Classes */
+@layer components {
+  /* Container */
+  .hibi-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Button Variants */
+  .btn-primary {
+    @apply bg-hibi-500 hover:bg-hibi-600 text-white font-medium py-3 px-6 rounded-lg 
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-hibi-500 
+           focus:ring-offset-2 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-hibi-700 hover:bg-hibi-800 text-white font-medium py-3 px-6 rounded-lg 
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-hibi-700 
+           focus:ring-offset-2 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-hibi-500 text-hibi-500 hover:bg-hibi-500 hover:text-white 
+           font-medium py-3 px-6 rounded-lg transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-hibi-500 focus:ring-offset-2 
+           active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-hibi-600 hover:text-hibi-700 hover:bg-hibi-50 font-medium py-3 px-6 
+           rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 
+           focus:ring-hibi-500 focus:ring-offset-2;
+  }
+
+  .btn-tea-gold {
+    @apply bg-tea-gold hover:bg-yellow-500 text-tea-brown font-medium py-3 px-6 
+           rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 
+           focus:ring-tea-gold focus:ring-offset-2 shadow-md hover:shadow-lg;
+  }
+
+  /* Card Components */
+  .card {
+    @apply bg-white rounded-lg shadow-lg p-6 transition-all duration-300 
+           hover:shadow-xl border border-gray-100;
+  }
+
+  .card-hibi {
+    @apply bg-gradient-to-br from-hibi-50 to-hibi-100 border border-hibi-200 
+           rounded-lg p-6 shadow-sm hover:shadow-hibi;
+  }
+
+  .card-tea {
+    @apply bg-gradient-to-br from-tea-cream to-white border border-tea-brown/20 
+           rounded-lg p-6 shadow-sm hover:shadow-tea-warm;
+  }
+
+  .card-product {
+    @apply bg-white rounded-lg shadow-md hover:shadow-hibi-lg transition-all 
+           duration-300 p-4 border border-gray-100 group;
+  }
+
+  /* Input Styles */
+  .input-hibi {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
+           focus:ring-hibi-500 focus:border-hibi-500 transition-colors 
+           placeholder-gray-400;
+  }
+
+  .input-search {
+    @apply input-hibi pl-10 bg-gray-50 border-gray-200 focus:bg-white;
+  }
+
+  /* Focus Ring */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-hibi-500 focus:ring-offset-2;
+  }
+
+  /* Badge Components */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-hibi {
+    @apply badge bg-hibi-100 text-hibi-800;
+  }
+
+  .badge-tea {
+    @apply badge bg-tea-cream text-tea-brown;
+  }
+
+  .badge-gold {
+    @apply badge bg-tea-gold/20 text-tea-brown;
+  }
+
+  /* Alert Components */
+  .alert {
+    @apply p-4 rounded-lg border;
+  }
+
+  .alert-success {
+    @apply alert bg-hibi-50 border-hibi-200 text-hibi-800;
+  }
+
+  .alert-warning {
+    @apply alert bg-yellow-50 border-yellow-200 text-yellow-800;
+  }
+
+  .alert-error {
+    @apply alert bg-red-50 border-red-200 text-red-800;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply text-gray-700 hover:text-hibi-600 px-3 py-2 rounded-md text-sm 
+           font-medium transition-colors duration-200 focus-ring;
+  }
+
+  .nav-link-active {
+    @apply nav-link text-hibi-600 bg-hibi-50;
+  }
+
+  /* Typography */
+  .heading-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight;
+  }
+
+  .heading-2 {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 leading-tight;
+  }
+
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-bold text-gray-900 leading-tight;
+  }
+
+  .text-gradient-hibi {
+    @apply bg-gradient-to-r from-hibi-500 to-hibi-700 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-tea {
+    @apply bg-gradient-to-r from-tea-brown to-tea-gold bg-clip-text text-transparent;
+  }
+
+  /* Loading */
+  .spinner {
+    @apply animate-spin h-5 w-5 text-hibi-500;
+  }
+
+  .loading-dots {
+    @apply inline-flex space-x-1;
+  }
+
+  .loading-dots > div {
+    @apply w-2 h-2 bg-hibi-500 rounded-full animate-bounce;
+  }
+
+  .loading-dots > div:nth-child(2) {
+    @apply animation-delay-75;
+  }
+
+  .loading-dots > div:nth-child(3) {
+    @apply animation-delay-150;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  /* Background Gradients */
+  .gradient-hibi {
+    background: linear-gradient(135deg, theme('colors.hibi.400') 0%, theme('colors.hibi.600') 100%);
+  }
+
+  .gradient-hibi-light {
+    background: linear-gradient(135deg, theme('colors.hibi.50') 0%, theme('colors.hibi.200') 100%);
+  }
+
+  .gradient-tea-ceremony {
+    background: linear-gradient(135deg, theme('colors.hibi.300') 0%, theme('colors.hibi.600') 50%, theme('colors.bamboo.500') 100%);
+  }
+
+  .gradient-matcha {
+    background: linear-gradient(135deg, theme('colors.matcha.400') 0%, theme('colors.matcha.600') 100%);
+  }
+
+  .gradient-sencha {
+    background: linear-gradient(135deg, theme('colors.sencha.500') 0%, theme('colors.sencha.700') 100%);
+  }
+
+  .gradient-tea-warm {
+    background: linear-gradient(135deg, theme('colors.tea.cream') 0%, theme('colors.tea.gold') 100%);
+  }
+
+  /* Animation Utilities */
+  .animation-delay-75 {
+    animation-delay: 75ms;
+  }
+
+  .animation-delay-150 {
+    animation-delay: 150ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Scrollbar Styles */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.hibi.300') theme('colors.gray.100');
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: theme('colors.gray.100');
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: theme('colors.hibi.300');
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.hibi.400');
+  }
+
+  /* Japanese-inspired patterns */
+  .pattern-wave {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322c55e' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-16.569 13.431-30 30-30v60c-16.569 0-30-13.431-30-30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .pattern-bamboo {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2384cc16' fill-opacity='0.03'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v40c-11.046 0-20-8.954-20-20z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Backdrop filters */
+  .backdrop-hibi {
+    backdrop-filter: blur(8px) saturate(150%);
+    background: rgba(34, 197, 94, 0.1);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  .print-break {
+    page-break-after: always;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    @apply border-2 border-black;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-black text-black;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hibi-50: #14532d;
+    --hibi-500: #4ade80;
+    --hibi-600: #22c55e;
+  }
+}
+
+/* Mobile-first responsive typography */
+@media (min-width: 640px) {
+  .heading-1 {
+    @apply text-5xl;
+  }
+}
+
+@media (min-width: 768px) {
+  .heading-1 {
+    @apply text-6xl;
+  }
+  
+  .heading-2 {
+    @apply text-4xl;
+  }
+}

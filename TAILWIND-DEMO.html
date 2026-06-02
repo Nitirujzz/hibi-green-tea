@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hibi Green Tea - Tailwind Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hibi': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        'tea': {
+                            'cream': '#f7f3e9',
+                            'brown': '#8b4513',
+                            'gold': '#ffd700',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen py-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Header -->
+            <header class="text-center mb-12">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="w-12 h-12 bg-hibi-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">H</span>
+                    </div>
+                    <h1 class="text-4xl font-bold text-gray-900">Hibi Green Tea</h1>
+                </div>
+                <p class="text-lg text-gray-600">Premium Japanese Tea Experience</p>
+            </header>
+
+            <!-- Color Palette Demo -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Brand Color Palette</h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                    <div class="text-center">
+                        <div class="w-full h-20 bg-hibi-50 rounded-lg border"></div>
+                        <p class="text-sm mt-2">hibi-50</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-20 bg-hibi-200 rounded-lg"></div>
+                        <p class="text-sm mt-2">hibi-200</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-20 bg-hibi-400 rounded-lg"></div>
+                        <p class="text-sm mt-2 text-white">hibi-400</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-20 bg-hibi-600 rounded-lg"></div>
+                        <p class="text-sm mt-2 text-white">hibi-600</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-20 bg-hibi-800 rounded-lg"></div>
+                        <p class="text-sm mt-2 text-white">hibi-800</p>
+                    </div>
+                </div>
+
+                <!-- Tea Colors -->
+                <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                    <div class="text-center">
+                        <div class="w-full h-16 bg-tea-cream rounded-lg border"></div>
+                        <p class="text-sm mt-2">tea-cream</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-16 bg-tea-brown rounded-lg"></div>
+                        <p class="text-sm mt-2 text-white">tea-brown</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-full h-16 bg-tea-gold rounded-lg"></div>
+                        <p class="text-sm mt-2">tea-gold</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Button Demo -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Button Examples</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="bg-hibi-500 hover:bg-hibi-600 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                        Primary Button
+                    </button>
+                    <button class="bg-hibi-700 hover:bg-hibi-800 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                        Secondary Button
+                    </button>
+                    <button class="border-2 border-hibi-500 text-hibi-500 hover:bg-hibi-500 hover:text-white font-medium py-3 px-6 rounded-lg transition-all">
+                        Outline Button
+                    </button>
+                    <button class="bg-tea-gold hover:bg-yellow-500 text-tea-brown font-medium py-3 px-6 rounded-lg transition-colors">
+                        Gold Button
+                    </button>
+                </div>
+            </section>
+
+            <!-- Card Demo -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Card Examples</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                        <h3 class="text-lg font-semibold mb-2">Premium Matcha</h3>
+                        <p class="text-gray-600 mb-4">Ceremonial grade matcha from Uji, Japan</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-hibi-600">฿999</span>
+                            <button class="bg-hibi-500 hover:bg-hibi-600 text-white px-4 py-2 rounded transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-hibi-50 to-hibi-100 border border-hibi-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-2 text-hibi-800">Organic Sencha</h3>
+                        <p class="text-hibi-700 mb-4">Fresh green tea leaves from Mount Fuji</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-hibi-600">฿850</span>
+                            <button class="bg-hibi-600 hover:bg-hibi-700 text-white px-4 py-2 rounded transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-tea-cream to-white border border-tea-brown border-opacity-20 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-2 text-tea-brown">Tea Ceremony Set</h3>
+                        <p class="text-gray-600 mb-4">Complete traditional tea set</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-tea-brown">฿1,999</span>
+                            <button class="bg-tea-gold hover:bg-yellow-500 text-tea-brown px-4 py-2 rounded transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Usage Examples -->
+            <section>
+                <h2 class="text-2xl font-semibold mb-6 text-center">Usage Examples</h2>
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <pre class="text-sm bg-gray-100 p-4 rounded overflow-x-auto"><code><!-- Primary Brand Colors -->
+&lt;div class="bg-hibi-500 text-white"&gt;Primary&lt;/div&gt;
+&lt;div class="bg-hibi-600 text-white"&gt;Deep Green&lt;/div&gt;
+
+<!-- Tea-inspired Colors -->
+&lt;div class="bg-tea-cream text-tea-brown"&gt;Tea Cream&lt;/div&gt;
+&lt;div class="bg-tea-gold text-tea-brown"&gt;Tea Gold&lt;/div&gt;
+
+<!-- Gradients -->
+&lt;div class="bg-gradient-to-r from-hibi-400 to-hibi-600"&gt;Gradient&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
