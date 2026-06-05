@@ -1,13 +1,15 @@
-import { google, docs_v1 } from "googleapis";
+import { google, docs_v1, Auth } from "googleapis";
 import { OAuth2Client } from "google-auth-library";
 
 export class GoogleDocsService {
   private docs: docs_v1.Docs;
   private drive: ReturnType<typeof google.drive>;
 
-  constructor(auth: OAuth2Client) {
-    this.docs = google.docs({ version: "v1", auth });
-    this.drive = google.drive({ version: "v3", auth });
+  constructor(auth: OAuth2Client | Auth.GoogleAuth) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.docs = google.docs({ version: "v1", auth: auth as any });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.drive = google.drive({ version: "v3", auth: auth as any });
   }
 
   async createDoc(title: string, parentFolderId?: string): Promise<{ id: string; url: string }> {

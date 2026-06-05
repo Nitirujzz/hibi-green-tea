@@ -1,4 +1,4 @@
-import { drive_v3 } from "googleapis";
+import { drive_v3, Auth } from "googleapis";
 import { OAuth2Client } from "google-auth-library";
 export type DriveFile = drive_v3.Schema$File;
 export declare const HIBI_FOLDER_STRUCTURE: {
@@ -89,7 +89,7 @@ export declare const HIBI_FOLDER_STRUCTURE: {
 };
 export declare class GoogleDriveService {
     private drive;
-    constructor(auth: OAuth2Client);
+    constructor(auth: OAuth2Client | Auth.GoogleAuth);
     createFolder(name: string, parentId?: string): Promise<string>;
     findOrCreateFolder(name: string, parentId?: string): Promise<string>;
     setupHibiFolderStructure(): Promise<Record<string, string>>;

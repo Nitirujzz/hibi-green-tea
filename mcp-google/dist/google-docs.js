@@ -3,8 +3,10 @@ export class GoogleDocsService {
     docs;
     drive;
     constructor(auth) {
-        this.docs = google.docs({ version: "v1", auth });
-        this.drive = google.drive({ version: "v3", auth });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.docs = google.docs({ version: "v1", auth: auth });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.drive = google.drive({ version: "v3", auth: auth });
     }
     async createDoc(title, parentFolderId) {
         const res = await this.docs.documents.create({

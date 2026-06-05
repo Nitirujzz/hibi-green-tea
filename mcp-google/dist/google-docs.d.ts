@@ -1,9 +1,9 @@
-import { docs_v1 } from "googleapis";
+import { docs_v1, Auth } from "googleapis";
 import { OAuth2Client } from "google-auth-library";
 export declare class GoogleDocsService {
     private docs;
     private drive;
-    constructor(auth: OAuth2Client);
+    constructor(auth: OAuth2Client | Auth.GoogleAuth);
     createDoc(title: string, parentFolderId?: string): Promise<{
         id: string;
         url: string;

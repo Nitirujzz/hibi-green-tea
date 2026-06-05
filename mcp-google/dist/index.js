@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
-import { createOAuth2Client, runAuthFlow } from "./auth.js";
+import { createAuthClient, runAuthFlow, validateAuth } from "./auth.js";
 import { GoogleDriveService } from "./google-drive.js";
 import { GoogleDocsService } from "./google-docs.js";
 import { SESSION_SUMMARY, SESSION_DATE } from "./summary.js";
@@ -22,12 +22,40 @@ const server = new McpServer({
     version: "1.0.0",
 });
 function getServices() {
-    const auth = createOAuth2Client();
+    const auth = createAuthClient();
     return {
         drive: new GoogleDriveService(auth),
         docs: new GoogleDocsService(auth),
     };
 }
+// ─── TOOL: ตรวจสอบสถานะการเชื่อมต่อ Google ──────────────────────────────────
+server.tool("check_google_auth", "ตรวจสอบว่าเชื่อมต่อ Google ได้หรือไม่ และแสดงวิธีการ auth ที่ใช้อยู่", {}, async () => {
+    const serviceKeyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
+    const serviceKeyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
+    const hasOAuth = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_REFRESH_TOKEN;
+    let method = "❌ ไม่พบ Credentials";
+    if (serviceKeyPath || serviceKeyJson)
+        method = "✅ Service Account (แนะนำสำหรับ Remote)";
+    else if (hasOAuth)
+        method = "✅ OAuth2 + Refresh Token";
+    try {
+        await validateAuth();
+        return {
+            content: [{
+                    type: "text",
+                    text: `🔐 Google Auth Status\n\nวิธีการ: ${method}\n\n✅ เชื่อมต่อสำเร็จ — พร้อมใช้งาน Google Docs & Drive`,
+                }],
+        };
+    }
+    catch (err) {
+        return {
+            content: [{
+                    type: "text",
+                    text: `🔐 Google Auth Status\n\nวิธีการ: ${method}\n\n❌ เชื่อมต่อไม่สำเร็จ:\n${err.message}\n\nดูขั้นตอนแก้ไขที่ mcp-google/SETUP.md`,
+                }],
+        };
+    }
+});
 // ─── TOOL: สร้าง Folder Structure ทั้งหมดใน Google Drive ────────────────────
 server.tool("setup_hibi_drive", "สร้างโครงสร้าง Folder ทั้งหมดสำหรับ Hibi Matcha ใน Google Drive (9 หมวดหลัก)", {}, async () => {
     const { drive } = getServices();

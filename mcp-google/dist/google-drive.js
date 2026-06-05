@@ -89,7 +89,8 @@ export const HIBI_FOLDER_STRUCTURE = {
 export class GoogleDriveService {
     drive;
     constructor(auth) {
-        this.drive = google.drive({ version: "v3", auth });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.drive = google.drive({ version: "v3", auth: auth });
     }
     async createFolder(name, parentId) {
         const metadata = {
