@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── FC Minimal — Brand Font ───────────────────────────────────────────────── */
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('/fonts/fc-minimal/FCMinimal-Regular.otf') format('opentype'),
+       url('/fonts/fc-minimal/FCMinimal-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('/fonts/fc-minimal/FCMinimal-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('/fonts/fc-minimal/FCMinimal-Bold.otf') format('opentype'),
+       url('/fonts/fc-minimal/FCMinimal-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('/fonts/fc-minimal/FCMinimal-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: 'FC Minimal', Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-gray-900;
+    font-family: 'FC Minimal', Inter, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'FC Minimal', Inter, sans-serif;
+    @apply font-bold;
+  }
+}
+
+/* ─── Brand Components ───────────────────────────────────────────────────────── */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-hibi-600 hover:bg-hibi-700 text-white font-bold py-2 px-6 rounded-hibi transition-all duration-200 shadow-hibi hover:shadow-hibi-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-tea-cream hover:bg-hibi-100 text-hibi-700 font-bold py-2 px-6 rounded-hibi transition-all duration-200 border border-hibi-200;
+  }
+
+  .btn-outline {
+    @apply border-2 border-hibi-600 text-hibi-600 hover:bg-hibi-600 hover:text-white font-bold py-2 px-6 rounded-hibi transition-all duration-200;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-hibi-lg shadow-sm border border-gray-100 overflow-hidden;
+  }
+
+  .card-matcha {
+    @apply bg-hibi-50 rounded-hibi-lg border border-hibi-100 overflow-hidden;
+  }
+
+  /* Gradients */
+  .gradient-hibi {
+    @apply bg-gradient-to-br from-hibi-400 to-hibi-600;
+  }
+
+  .gradient-tea-ceremony {
+    background: linear-gradient(135deg, #f7f3e9 0%, #dcfce7 50%, #bbf7d0 100%);
+  }
+
+  /* Layout */
+  .hibi-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Logo usage classes */
+  .logo-light {
+    filter: brightness(0) invert(1); /* White version on dark bg */
+  }
+
+  .logo-dark {
+    filter: brightness(0); /* Black version on light bg */
+  }
+
+  .logo-green {
+    filter: invert(48%) sepia(80%) saturate(400%) hue-rotate(90deg) brightness(95%); /* Hibi Green */
+  }
+}
+
+/* ─── Utilities ──────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-10px); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

@@ -121,9 +121,18 @@
 - **Clay Brown:** `#92400e` — Earth tone ดั้งเดิม
 
 ### Typography
-- Font หลัก: **Inter** (ทั้ง Heading และ Body)
-- Mono: **JetBrains Mono** (สำหรับ Code)
-- ไม่ใช้ฟอนต์ที่ดูเด็กหรือ Casual เกินไป
+- **Brand Font:** FC Minimal (ภาษาไทยหลัก) — Regular, Bold, Italic, Bold Italic
+  - ไฟล์: `public/fonts/fc-minimal/FCMinimal-Regular.ttf` (.otf)
+  - Tailwind class: `font-brand`, `font-display`, `font-body`, `font-thai`
+  - Provider: Fontcraft Studio (fontcraftstudio.com)
+- **Fallback:** Inter (สำหรับ Latin characters)
+- **Mono:** JetBrains Mono (สำหรับ Code เท่านั้น)
+
+### Logo Assets
+- Logo (B&W): `public/images/brand/logo-bw.png` — กระต่าย + Hibi 日々 + Chasen + Chawan
+- Logo (Green): `public/images/brand/logo-green.png` — ใช้กับ Background สีอ่อน
+- Logo (White): `public/images/brand/logo-white.png` — ใช้กับ Background สีเข้ม
+- Icon only: `public/images/brand/logo-icon.png` — ไอคอน Favicon/App
 
 ### Tailwind Classes ที่ใช้บ่อย
 ```
