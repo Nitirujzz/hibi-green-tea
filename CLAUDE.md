@@ -156,6 +156,7 @@ animate-float | animate-fade-in-up
 | `MARKETING-PLAN.md` | แผนการตลาดครบรูปแบบ 2026–2027 |
 | `MARKETING-AGENTS.md` | โครงสร้าง AI Agents + JD ทุกตำแหน่ง |
 | `MARKETING-AI-LEARNING-SYSTEM.md` | CDP + AI Audit + Learning System |
+| `HIBI-MENU-KNOWLEDGE.md` | **เมนูครบทุกรายการ** — รหัส, ราคา, สายพันธุ์, ตัวเลือก, ผงมัทฉะ Retail |
 | `mcp-google/` | MCP Server สำหรับ Google Docs & Drive |
 | `prisma/schema.prisma` | Database schema (Products, Orders, Bookings) |
 | `src/types/index.ts` | TypeScript types ทั้งหมด |
@@ -210,7 +211,40 @@ import { Z } from "@/types/..."        // src/types/
 3. **งาน Design:** ใช้สีและ class จาก `HIBI-BRAND-GUIDE.md` เท่านั้น
 4. **งาน Strategy:** อ้างอิง `MARKETING-PLAN.md` และ `MARKETING-AGENTS.md`
 5. **งาน Google Drive/Docs:** ใช้ MCP Tools `mcp__859ca1d4-5fd2-44fc-aea0-4c59cd3a34c2__*`
+6. **งานเมนู / ราคา / สายพันธุ์:** อ่าน `HIBI-MENU-KNOWLEDGE.md` ก่อนเสมอ — มีข้อมูลครบ 138 เมนู Delivery + 116 เมนูสาขา + 33 สายพันธุ์มัทฉะ + 37 กลุ่มตัวเลือก
 
 ---
 
-*อัปเดตล่าสุด: มิถุนายน 2026 | เวอร์ชัน: 1.0*
+---
+
+## 11. Menu Quick Reference (สรุปเมนูสำหรับ AI)
+
+ข้อมูลเมนูทั้งหมดอยู่ใน `HIBI-MENU-KNOWLEDGE.md` — ดูรายละเอียดครบที่ไฟล์นั้น
+
+### สรุปจำนวนเมนู
+- **Delivery Menu:** 138 รายการ (9 หมวดหมู่)
+- **สาขา Nak Niwat 48:** 116 รายการ (9 หมวดหมู่)
+- **สายพันธุ์มัทฉะ:** 33 สายพันธุ์ (M01–M33)
+- **ตัวเลือกเพิ่มเติม:** 37 กลุ่ม (A1–F2+)
+- **ผงมัทฉะ Retail:** 8 รายการ (Tea for Home)
+
+### หมวดหมู่เมนูหลัก
+| หมวด | ความหมาย |
+|------|---------|
+| Matcha Classic | เมนูคลาสสิก เลือกสายพันธุ์ได้ (Clear / Latte) |
+| Matcha Refreshers | เครื่องดื่มสดชื่น มีส่วนผสมพิเศษ |
+| Matcha Milk & Rich | เมนูนมครีมมี่ (Milk Whisk, Cloud, Latte) |
+| Fixed Recipe Menu | เมนูสูตรตายตัว เปลี่ยนนมไม่ได้ |
+| Hibi Crafted Matcha (Signature) | สูตรพิเศษของ Hibi |
+| Non Matcha | เมนูไม่มีมัทฉะ (Hojicha, Genmaicha ฯลฯ) |
+| Fusion Dessert | ขนมหวานฟิวชัน |
+| Pink is Fine | เมนูพิเศษ Pink Series |
+
+### สายพันธุ์ยอดนิยม (Top Picks)
+- **M08 Gyokuro Yame** — Premium Ceremonial, Yame Fukuoka | ราคาเพิ่ม Clear ฿255, Latte ฿340
+- **M04 Uji Samidori** — Premium Ceremonial, Kyoto | Clear ฿244, Latte ฿325
+- **M06 Uji Okumidori** — Ceremonial, Kyoto (หายาก) | Latte ฿235
+- **M01 Kagoshima Asanoka** — Ceremonial Organic | Clear ฿90+base, Latte ฿195
+- **M02 Kagoshima Shinju** — Ceremonial, First Harvest | Clear ฿120, Latte ฿155
+
+*อัปเดตล่าสุด: มิถุนายน 2026 | เวอร์ชัน: 1.1 (เพิ่ม Menu Knowledge Base)*
