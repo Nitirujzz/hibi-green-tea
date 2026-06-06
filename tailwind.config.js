@@ -82,9 +82,11 @@ module.exports = {
         },
       },
       fontFamily: {
-        'brand': ['Inter', 'sans-serif'],
-        'display': ['Inter', 'sans-serif'],
-        'body': ['Inter', 'sans-serif'],
+        'brand': ['FC Minimal', 'Inter', 'sans-serif'],
+        'display': ['FC Minimal', 'Inter', 'sans-serif'],
+        'body': ['FC Minimal', 'Inter', 'sans-serif'],
+        'thai': ['FC Minimal', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
       },
       spacing: {
         '18': '4.5rem',

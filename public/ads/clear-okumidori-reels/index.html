@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<script src="../../../node_modules/gsap/dist/gsap.min.js"></script>
+<style>
+/* Barlow Condensed — local via fontsource */
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-200-normal.woff2') format('woff2');
+  font-weight: 200; font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-200-italic.woff2') format('woff2');
+  font-weight: 200; font-style: italic;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-300-normal.woff2') format('woff2');
+  font-weight: 300; font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2') format('woff2');
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2') format('woff2');
+  font-weight: 800; font-style: normal;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('../../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-900-normal.woff2') format('woff2');
+  font-weight: 900; font-style: normal;
+}
+/* JetBrains Mono — local via fontsource */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-300-normal.woff2') format('woff2');
+  font-weight: 300; font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal;
+}
+/* FC Minimal — local brand font */
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('../../fonts/fc-minimal/FCMinimal-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('../../fonts/fc-minimal/FCMinimal-Bold.ttf') format('truetype');
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('../../fonts/fc-minimal/FCMinimal-Italic.ttf') format('truetype');
+  font-weight: 400; font-style: italic;
+}
+@font-face {
+  font-family: 'FC Minimal';
+  src: url('../../fonts/fc-minimal/FCMinimal-BoldItalic.ttf') format('truetype');
+  font-weight: 700; font-style: italic;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #060f07; }
+
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+.scene {
+  position: absolute; top: 0; left: 0;
+  width: 1080px; height: 1920px;
+  overflow: hidden; background-color: #060f07;
+}
+
+/* ── REG MARKS ── */
+.reg-mark {
+  position: absolute; width: 32px; height: 32px;
+  border-color: rgba(34,197,94,0.38); border-style: solid;
+}
+.reg-mark.tl { top: 60px; left: 60px; border-width: 2px 0 0 2px; }
+.reg-mark.tr { top: 60px; right: 60px; border-width: 2px 2px 0 0; }
+.reg-mark.bl { bottom: 60px; left: 60px; border-width: 0 0 2px 2px; }
+.reg-mark.br { bottom: 60px; right: 60px; border-width: 0 2px 2px 0; }
+
+/* ══════════════════════════════════════
+   SCENE 1 — BRAND INTRO
+══════════════════════════════════════ */
+#s1 { z-index: 1; }
+
+.s1-glow {
+  position: absolute; width: 720px; height: 720px;
+  top: 50%; left: 50%; transform: translate(-50%, -60%);
+  background: radial-gradient(ellipse, rgba(34,197,94,0.16) 0%, rgba(34,197,94,0) 68%);
+  border-radius: 50%;
+}
+
+.s1-ghost {
+  position: absolute; font-family: serif;
+  font-size: 380px; font-weight: 900; color: rgba(34,197,94,0.07);
+  top: 44%; left: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap; pointer-events: none; user-select: none; line-height: 1;
+}
+
+.s1-grain {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.s1-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%);
+  display: flex; flex-direction: column; align-items: center; gap: 32px;
+}
+
+#s1-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 76px; font-weight: 700; letter-spacing: 0.22em;
+  color: #f5faf6; text-align: center;
+}
+
+#s1-rule {
+  width: 340px; height: 1.5px; background: #22c55e; transform-origin: center;
+}
+
+#s1-tagline {
+  font-family: serif;
+  font-size: 54px; font-weight: 400; color: rgba(34,197,94,0.82); letter-spacing: 0.35em;
+}
+
+.s1-dot-row {
+  display: flex; gap: 14px; align-items: center;
+}
+.s1-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: rgba(34,197,94,0.45);
+}
+.s1-dot.center { background: #22c55e; width: 8px; height: 8px; }
+
+#s1-meta {
+  position: absolute; bottom: 108px; left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 300;
+  color: rgba(245,250,246,0.28); letter-spacing: 0.18em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.s1-side-line {
+  position: absolute; width: 1.5px; height: 220px;
+  background: linear-gradient(to bottom, rgba(34,197,94,0), rgba(34,197,94,0.35), rgba(34,197,94,0));
+}
+.s1-side-line.left { left: 80px; top: 50%; transform: translateY(-50%); }
+.s1-side-line.right { right: 80px; top: 50%; transform: translateY(-50%); }
+
+/* ══════════════════════════════════════
+   SCENE 2 — HERO PRODUCT
+══════════════════════════════════════ */
+#s2 { z-index: 2; }
+
+.s2-glow {
+  position: absolute; width: 900px; height: 900px;
+  bottom: -180px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(34,197,94,0.2) 0%, rgba(34,197,94,0) 65%);
+  border-radius: 50%;
+}
+
+.s2-glow-top {
+  position: absolute; width: 600px; height: 400px;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0) 70%);
+}
+
+#s2-frame-h {
+  position: absolute; top: 204px; left: 0; right: 0; height: 1.5px;
+  background: rgba(34,197,94,0.28); transform-origin: left center;
+}
+#s2-frame-v {
+  position: absolute; left: 80px; top: 0; bottom: 0; width: 1.5px;
+  background: rgba(34,197,94,0.18); transform-origin: top center;
+}
+
+.s2-text-zone {
+  position: absolute; left: 98px; top: 236px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+#s2-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 19px; font-weight: 400;
+  color: #22c55e; letter-spacing: 0.22em; text-transform: uppercase;
+  border: 1.5px solid rgba(34,197,94,0.5); display: inline-block;
+  padding: 7px 18px; width: fit-content;
+}
+
+#s2-clear {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 230px; font-weight: 900;
+  line-height: 0.84; color: #f5faf6; letter-spacing: -0.025em;
+  text-shadow: 0 0 80px rgba(34,197,94,0.25);
+}
+
+#s2-oku {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 88px; font-weight: 200;
+  color: #22c55e; letter-spacing: 0.1em; font-style: italic;
+}
+
+.s2-glass-outer {
+  position: absolute; right: 48px; bottom: 260px; width: 390px; height: 700px;
+}
+.s2-glass-inner { width: 100%; height: 100%; }
+
+#s2-origin {
+  position: absolute; bottom: 188px; left: 0; right: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 300;
+  color: rgba(245,250,246,0.42); letter-spacing: 0.35em; text-align: center;
+  text-transform: uppercase;
+}
+
+.s2-leaf { position: absolute; font-size: 38px; pointer-events: none; line-height: 1; }
+.s2-leaf.l1 { right: 448px; top: 560px; font-size: 30px; }
+.s2-leaf.l2 { right: 108px; top: 400px; font-size: 26px; opacity: 0; }
+.s2-leaf.l3 { left: 82px; bottom: 320px; font-size: 22px; opacity: 0; }
+
+/* ══════════════════════════════════════
+   SCENE 3 — INFO REVEAL
+══════════════════════════════════════ */
+#s3 { z-index: 3; }
+
+.s3-glow {
+  position: absolute; width: 700px; height: 700px;
+  top: 100px; left: -120px;
+  background: radial-gradient(ellipse, rgba(34,197,94,0.14) 0%, rgba(34,197,94,0) 70%);
+  border-radius: 50%;
+}
+.s3-glow-r {
+  position: absolute; width: 500px; height: 500px;
+  bottom: 200px; right: -80px;
+  background: radial-gradient(ellipse, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0) 70%);
+  border-radius: 50%;
+}
+
+#s3-sect-lbl {
+  position: absolute; top: 148px; left: 90px;
+  font-family: 'JetBrains Mono', monospace; font-size: 19px; font-weight: 400;
+  color: rgba(34,197,94,0.7); letter-spacing: 0.3em; text-transform: uppercase;
+}
+
+.s3-tag-wrap { position: absolute; left: 90px; display: flex; flex-direction: column; gap: 0; }
+.s3-tag-wrap { top: 210px; }
+
+.s3-tag {
+  display: flex; align-items: center; gap: 16px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 50px; font-weight: 700;
+  color: #f5faf6; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 18px 0; border-bottom: 1.5px solid rgba(34,197,94,0.22); width: 900px;
+}
+.s3-tag-dot { width: 12px; height: 12px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+#s3-divider {
+  position: absolute; left: 90px; right: 90px; top: 600px; height: 1.5px;
+  background: rgba(34,197,94,0.32); transform-origin: left;
+}
+
+.s3-msg-block { position: absolute; top: 630px; left: 90px; right: 90px; }
+#s3-msg-th {
+  font-family: 'FC Minimal', sans-serif; font-size: 54px; font-weight: 700;
+  color: #f5faf6; line-height: 1.4; margin-bottom: 16px;
+}
+#s3-msg-en {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 300;
+  color: rgba(245,250,246,0.5); letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+.s3-details { position: absolute; top: 960px; left: 90px; right: 90px; display: flex; flex-direction: column; gap: 20px; }
+.s3-detail {
+  display: flex; align-items: center; gap: 18px;
+  font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 300;
+  color: rgba(245,250,246,0.55); letter-spacing: 0.1em;
+}
+.s3-detail-dash { width: 24px; height: 1.5px; background: #22c55e; flex-shrink: 0; }
+
+#s3-cert {
+  position: absolute; top: 1120px; left: 90px;
+  border: 1.5px solid rgba(34,197,94,0.45); padding: 18px 30px; width: fit-content;
+}
+.s3-cert-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700;
+  color: #f5faf6; letter-spacing: 0.08em;
+}
+.s3-cert-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 300;
+  color: rgba(34,197,94,0.65); letter-spacing: 0.2em; text-transform: uppercase;
+  margin-top: 4px;
+}
+
+#s3-scroll-meta {
+  position: absolute; bottom: 148px; left: 0; right: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 300;
+  color: rgba(245,250,246,0.15); letter-spacing: 0.32em; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden;
+}
+
+/* ══════════════════════════════════════
+   SCENE 4 — PRICE REVEAL
+══════════════════════════════════════ */
+#s4 { z-index: 4; }
+
+.s4-glow {
+  position: absolute; width: 800px; height: 800px;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(251,191,36,0.13) 0%, rgba(34,197,94,0.08) 45%, rgba(34,197,94,0) 70%);
+  border-radius: 50%;
+}
+
+.s4-content {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 0 80px;
+}
+
+#s4-avail {
+  font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 400;
+  color: rgba(34,197,94,0.75); letter-spacing: 0.32em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.s4-price-row {
+  display: flex; align-items: flex-start; justify-content: center; gap: 0; line-height: 1;
+}
+#s4-currency {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 80px; font-weight: 700;
+  color: rgba(245,250,246,0.65); margin-top: 32px;
+}
+#s4-price {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 280px; font-weight: 900;
+  color: #f5faf6; letter-spacing: -0.03em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 100px rgba(34,197,94,0.3);
+}
+
+#s4-label {
+  font-family: 'FC Minimal', sans-serif; font-size: 28px; font-weight: 400;
+  color: rgba(245,250,246,0.5); letter-spacing: 0.1em; text-align: center;
+}
+
+#s4-gold-bar {
+  width: 480px; height: 3px; background: #fbbf24; transform-origin: left;
+  margin: 8px 0 4px;
+}
+
+.s4-delivery-row {
+  display: flex; align-items: baseline; gap: 14px;
+}
+#s4-del-price {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 70px; font-weight: 700;
+  color: rgba(245,250,246,0.55); font-variant-numeric: tabular-nums;
+}
+#s4-del-label {
+  font-family: 'FC Minimal', sans-serif; font-size: 26px; font-weight: 400;
+  color: rgba(245,250,246,0.38); letter-spacing: 0.1em;
+}
+
+#s4-platforms {
+  margin-top: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 19px; font-weight: 300;
+  color: rgba(245,250,246,0.22); letter-spacing: 0.22em; text-transform: uppercase;
+  text-align: center;
+}
+
+/* ══════════════════════════════════════
+   SCENE 5 — CTA
+══════════════════════════════════════ */
+#s5 { z-index: 5; background-color: #071409; }
+
+.s5-glow {
+  position: absolute; width: 1100px; height: 1100px;
+  top: 50%; left: 50%; transform: translate(-50%, -55%);
+  background: radial-gradient(ellipse, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0.06) 50%, rgba(34,197,94,0) 72%);
+  border-radius: 50%;
+}
+
+.s5-content {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px; padding: 0 80px;
+}
+
+#s5-brand {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 94px; font-weight: 800;
+  letter-spacing: 0.18em; color: #f5faf6; text-align: center;
+}
+#s5-brand-jp {
+  font-family: serif;
+  font-size: 38px; font-weight: 400; color: rgba(34,197,94,0.6); letter-spacing: 0.42em;
+  margin-top: -18px;
+}
+
+#s5-cta-line { width: 300px; height: 2px; background: #22c55e; transform-origin: center; }
+
+#s5-cta {
+  font-family: 'FC Minimal', sans-serif; font-size: 66px; font-weight: 700;
+  color: #22c55e; text-align: center;
+}
+
+#s5-platforms {
+  display: flex; align-items: center; gap: 24px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 600;
+  color: rgba(245,250,246,0.65); letter-spacing: 0.1em;
+}
+.s5-sep { font-size: 10px; color: #22c55e; }
+
+#s5-url {
+  font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 300;
+  color: rgba(34,197,94,0.55); letter-spacing: 0.1em;
+}
+
+#s5-tags {
+  font-family: 'FC Minimal', sans-serif; font-size: 24px; font-weight: 400;
+  color: rgba(245,250,246,0.3); letter-spacing: 0.06em; text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="root" data-width="1080" data-height="1920" data-start="0" data-duration="15">
+
+<!-- ════════ SCENE 1: BRAND INTRO 0–2.5s ════════ -->
+<div id="s1" class="scene">
+  <div class="s1-glow"></div>
+  <div class="s1-grain"></div>
+  <div class="s1-ghost">日々</div>
+  <div class="reg-mark tl"></div>
+  <div class="reg-mark tr"></div>
+  <div class="reg-mark bl"></div>
+  <div class="reg-mark br"></div>
+  <div class="s1-side-line left"></div>
+  <div class="s1-side-line right"></div>
+  <div class="s1-center">
+    <div id="s1-brand">HIBI MATCHA</div>
+    <div id="s1-rule"></div>
+    <div id="s1-tagline">日々 抹茶</div>
+    <div class="s1-dot-row">
+      <div class="s1-dot"></div>
+      <div class="s1-dot center"></div>
+      <div class="s1-dot"></div>
+    </div>
+  </div>
+  <div id="s1-meta">Authentic Japanese Tea · Thailand</div>
+</div>
+
+<!-- ════════ SCENE 2: HERO PRODUCT 2.5–6.5s ════════ -->
+<div id="s2" class="scene" style="opacity:0">
+  <div class="s2-glow"></div>
+  <div class="s2-glow-top"></div>
+  <div id="s2-frame-h"></div>
+  <div id="s2-frame-v"></div>
+
+  <div class="s2-text-zone">
+    <div id="s2-badge">Ceremonial Grade</div>
+    <div id="s2-clear">Clear</div>
+    <div id="s2-oku">Okumidori</div>
+  </div>
+
+  <!-- Glass: outer for entrance (opacity/y), inner for float (y only) -->
+  <div id="s2-glass-outer" class="s2-glass-outer">
+    <div id="s2-glass-inner" class="s2-glass-inner">
+      <svg viewBox="0 0 390 700" xmlns="http://www.w3.org/2000/svg" width="390" height="700">
+        <defs>
+          <linearGradient id="gbody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(34,197,94,0.32)"/>
+            <stop offset="28%" stop-color="rgba(34,197,94,0.06)"/>
+            <stop offset="72%" stop-color="rgba(34,197,94,0.04)"/>
+            <stop offset="100%" stop-color="rgba(34,197,94,0.28)"/>
+          </linearGradient>
+          <linearGradient id="gdrink" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(34,197,94,0.72)"/>
+            <stop offset="100%" stop-color="rgba(8,55,22,0.96)"/>
+          </linearGradient>
+          <linearGradient id="gice" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="rgba(205,238,255,0.78)"/>
+            <stop offset="100%" stop-color="rgba(155,215,255,0.44)"/>
+          </linearGradient>
+          <clipPath id="gc">
+            <path d="M 54 85 L 116 648 Q 134 672 195 672 Q 256 672 274 648 L 336 85 Z"/>
+          </clipPath>
+          <filter id="gfx">
+            <feGaussianBlur stdDeviation="10" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- bottom glow -->
+        <ellipse cx="195" cy="668" rx="108" ry="22" fill="rgba(34,197,94,0.18)" filter="url(#gfx)"/>
+        <!-- drink fill -->
+        <g clip-path="url(#gc)">
+          <rect x="0" y="288" width="390" height="420" fill="url(#gdrink)"/>
+          <ellipse cx="195" cy="288" rx="122" ry="11" fill="rgba(34,197,94,0.45)"/>
+        </g>
+        <!-- ice cubes -->
+        <g clip-path="url(#gc)">
+          <rect x="104" y="300" width="74" height="62" rx="9" fill="url(#gice)"/>
+          <rect x="186" y="290" width="78" height="66" rx="9" fill="url(#gice)" opacity="0.88"/>
+          <rect x="118" y="368" width="70" height="58" rx="9" fill="url(#gice)" opacity="0.78"/>
+          <rect x="200" y="360" width="72" height="60" rx="9" fill="url(#gice)" opacity="0.72"/>
+          <rect x="148" y="426" width="68" height="54" rx="9" fill="url(#gice)" opacity="0.6"/>
+          <!-- ice highlights -->
+          <rect x="108" y="303" width="28" height="7" rx="3.5" fill="rgba(255,255,255,0.55)"/>
+          <rect x="190" y="293" width="32" height="7" rx="3.5" fill="rgba(255,255,255,0.55)"/>
+        </g>
+        <!-- glass body -->
+        <path d="M 54 85 L 116 648 Q 134 672 195 672 Q 256 672 274 648 L 336 85 Z"
+              fill="url(#gbody)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+        <!-- rim -->
+        <ellipse cx="195" cy="85" rx="141" ry="19"
+                 fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.35)" stroke-width="2.5"/>
+        <!-- straw -->
+        <rect x="240" y="-8" width="15" height="498" rx="7.5" transform="rotate(-2 240 250)" fill="rgba(34,197,94,0.92)"/>
+        <rect x="244" y="-6" width="5" height="494" rx="2.5" transform="rotate(-2 240 250)" fill="rgba(255,255,255,0.22)"/>
+        <!-- condensation -->
+        <circle cx="118" cy="368" r="3" fill="rgba(255,255,255,0.38)"/>
+        <circle cx="114" cy="398" r="2.5" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="120" cy="420" r="2" fill="rgba(255,255,255,0.22)"/>
+        <circle cx="284" cy="385" r="3" fill="rgba(255,255,255,0.33)"/>
+        <circle cx="279" cy="422" r="2.5" fill="rgba(255,255,255,0.26)"/>
+        <circle cx="286" cy="456" r="2" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="132" cy="498" r="2.5" fill="rgba(255,255,255,0.2)"/>
+        <!-- left highlight streak -->
+        <path d="M 70 96 Q 74 308 78 565" stroke="rgba(255,255,255,0.11)" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M 82 96 Q 86 308 90 540" stroke="rgba(255,255,255,0.05)" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- brand mark inside -->
+        <text x="195" y="610" text-anchor="middle" font-family="sans-serif" font-size="22" fill="rgba(34,197,94,0.22)" letter-spacing="8">HIBI</text>
+      </svg>
+    </div>
+  </div>
+
+  <div id="s2-origin">宇治 · UJI KYOTO · JAPAN</div>
+  <div class="s2-leaf l1">🍃</div>
+  <div class="s2-leaf l2">🍃</div>
+  <div class="s2-leaf l3">🍵</div>
+</div>
+
+<!-- ════════ SCENE 3: INFO REVEAL 6.5–10.5s ════════ -->
+<div id="s3" class="scene" style="opacity:0">
+  <div class="s3-glow"></div>
+  <div class="s3-glow-r"></div>
+  <div class="reg-mark tl" style="border-color:rgba(34,197,94,0.22)"></div>
+
+  <div id="s3-sect-lbl">รสชาติ · Flavor Notes</div>
+
+  <div class="s3-tag-wrap">
+    <div id="s3-t1" class="s3-tag"><div class="s3-tag-dot"></div>Umami-Sweet</div>
+    <div id="s3-t2" class="s3-tag"><div class="s3-tag-dot"></div>Floral Finish</div>
+    <div id="s3-t3" class="s3-tag"><div class="s3-tag-dot"></div>Cold Brew Aroma</div>
+  </div>
+
+  <div id="s3-divider"></div>
+
+  <div class="s3-msg-block">
+    <div id="s3-msg-th">รสมัทฉะแท้จาก Uji<br>สดชื่น อ่อนโยน ลึกซึ้ง</div>
+    <div id="s3-msg-en">Pure Uji Matcha · Refreshing · Elegant</div>
+  </div>
+
+  <div class="s3-details">
+    <div id="s3-d1" class="s3-detail">
+      <div class="s3-detail-dash"></div>Single-Origin · Uji, Kyoto Prefecture
+    </div>
+    <div id="s3-d2" class="s3-detail">
+      <div class="s3-detail-dash"></div>Ceremonial Grade · Cold Brew Infusion
+    </div>
+  </div>
+
+  <div id="s3-cert">
+    <div class="s3-cert-title">Premium Matcha</div>
+    <div class="s3-cert-sub">Authentic · Japan Origin</div>
+  </div>
+
+  <div id="s3-scroll-meta">HIBI MATCHA · CLEAR OKUMIDORI · CEREMONIAL GRADE · UJI KYOTO · JAPAN · HIBI MATCHA · CLEAR OKUMIDORI ·</div>
+</div>
+
+<!-- ════════ SCENE 4: PRICE REVEAL 10.5–13s ════════ -->
+<div id="s4" class="scene" style="opacity:0">
+  <div class="s4-glow"></div>
+  <div class="reg-mark br" style="border-color:rgba(34,197,94,0.22)"></div>
+  <div class="reg-mark tl" style="border-color:rgba(34,197,94,0.22)"></div>
+
+  <div class="s4-content">
+    <div id="s4-avail">Available Now</div>
+    <div class="s4-price-row">
+      <span id="s4-currency">฿</span>
+      <span id="s4-price">235</span>
+    </div>
+    <div id="s4-label">ราคาที่ร้าน · Dine-in</div>
+    <div id="s4-gold-bar"></div>
+    <div class="s4-delivery-row">
+      <span id="s4-del-price">฿255</span>
+      <span id="s4-del-label">Delivery</span>
+    </div>
+    <div id="s4-platforms">Grab · LINE MAN · Shopee Food</div>
+  </div>
+</div>
+
+<!-- ════════ SCENE 5: CTA 13–15s ════════ -->
+<div id="s5" class="scene" style="opacity:0">
+  <div class="s5-glow"></div>
+  <div class="reg-mark tl" style="border-color:rgba(34,197,94,0.28)"></div>
+  <div class="reg-mark br" style="border-color:rgba(34,197,94,0.28)"></div>
+
+  <div class="s5-content">
+    <div id="s5-brand">HIBI MATCHA</div>
+    <div id="s5-brand-jp">日々 抹茶</div>
+    <div id="s5-cta-line"></div>
+    <div id="s5-cta">สั่งได้เลยวันนี้</div>
+    <div id="s5-platforms">
+      <span>LINE</span><span class="s5-sep">●</span>
+      <span>Shopee</span><span class="s5-sep">●</span>
+      <span>Grab</span>
+    </div>
+    <div id="s5-url">hibimatcha.com</div>
+    <div id="s5-tags">#HibiMatcha · #มัทฉะไทย · #ชาญี่ปุ่น</div>
+  </div>
+</div>
+
+</div><!-- #root -->
+
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+
+// ════════ S1: BRAND INTRO (0–2.5s) ════════
+tl.fromTo(".s1-glow",
+  { scale: 0.8, opacity: 0.2 },
+  { scale: 1.12, opacity: 0.55, duration: 2.5, ease: "sine.inOut" }, 0);
+
+tl.fromTo(".s1-ghost",
+  { opacity: 0, y: 0 },
+  { opacity: 0.08, y: -22, duration: 2.5, ease: "none" }, 0);
+
+tl.fromTo("#s1 .reg-mark.tl, #s1 .reg-mark.tr",
+  { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(2)" }, 0.12);
+tl.fromTo("#s1 .reg-mark.bl, #s1 .reg-mark.br",
+  { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(2)" }, 0.22);
+
+tl.fromTo(".s1-side-line.left",
+  { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.18);
+tl.fromTo(".s1-side-line.right",
+  { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.28);
+
+tl.fromTo("#s1-brand",
+  { opacity: 0, letterSpacing: "0.32em" },
+  { opacity: 1, letterSpacing: "0.22em", duration: 0.75, ease: "power3.out" }, 0.22);
+tl.fromTo("#s1-rule",
+  { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.72);
+tl.fromTo("#s1-tagline",
+  { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 0.95);
+tl.fromTo(".s1-dot-row",
+  { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 1.2);
+tl.fromTo("#s1-meta",
+  { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 1.35);
+
+// ── Crossfade S1→S2 at 2.2s ──
+tl.to("#s1", { opacity: 0, duration: 0.45, ease: "power2.in" }, 2.18);
+tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 2.15);
+
+// ════════ S2: HERO PRODUCT (2.5–6.5s) ════════
+var s2 = 2.5;
+tl.fromTo(".s2-glow",
+  { scale: 0.9, opacity: 0.3 },
+  { scale: 1.1, opacity: 0.65, duration: 2.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, s2);
+
+tl.fromTo("#s2-frame-h",
+  { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.out" }, s2 + 0.3);
+tl.fromTo("#s2-frame-v",
+  { scaleY: 0 }, { scaleY: 1, duration: 0.65, ease: "power2.out" }, s2 + 0.32);
+
+tl.fromTo("#s2-badge",
+  { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" }, s2 + 0.15);
+tl.fromTo("#s2-clear",
+  { opacity: 0, y: 70, filter: "blur(10px)" },
+  { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "expo.out" }, s2 + 0.25);
+tl.fromTo("#s2-oku",
+  { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, s2 + 0.6);
+
+// Glass: entrance on outer (opacity+y), float on inner (y only — separate element)
+tl.fromTo("#s2-glass-outer",
+  { opacity: 0, y: 45 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, s2 + 0.38);
+tl.fromTo("#s2-glass-inner",
+  { y: 0 }, { y: -18, duration: 2.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, s2 + 0.9);
+
+tl.fromTo("#s2-origin",
+  { opacity: 0, x: 28 }, { opacity: 1, x: 0, duration: 0.48, ease: "power2.out" }, s2 + 0.88);
+
+// Leaf particles drift
+tl.fromTo(".s2-leaf.l1",
+  { opacity: 0, x: 0, y: 0, rotation: 0 },
+  { opacity: 0.65, x: -22, y: -35, rotation: 18, duration: 2.8, ease: "none" }, s2 + 0.55);
+tl.fromTo(".s2-leaf.l2",
+  { opacity: 0, x: 0, y: 0, rotation: 0 },
+  { opacity: 0.45, x: 14, y: -55, rotation: -25, duration: 3.2, ease: "sine.inOut" }, s2 + 0.9);
+tl.fromTo(".s2-leaf.l3",
+  { opacity: 0, x: 0, y: 0, rotation: 0 },
+  { opacity: 0.38, x: -12, y: -24, rotation: 12, duration: 2.2, ease: "sine.inOut" }, s2 + 1.2);
+
+// ── Crossfade S2→S3 at 6.3s ──
+tl.to("#s2", { opacity: 0, duration: 0.42, ease: "power1.in" }, 6.28);
+tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 0.52, ease: "power2.out" }, 6.25);
+
+// ════════ S3: INFO REVEAL (6.5–10.5s) ════════
+var s3 = 6.5;
+tl.fromTo(".s3-glow",
+  { scale: 0.85, opacity: 0.25 },
+  { scale: 1.12, opacity: 0.52, duration: 2.0, ease: "sine.inOut", yoyo: true, repeat: 1 }, s3);
+tl.fromTo(".s3-glow-r",
+  { scale: 1.0, opacity: 0.2 },
+  { scale: 1.15, opacity: 0.45, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, s3 + 0.4);
+
+tl.fromTo("#s3-sect-lbl",
+  { opacity: 0, x: -22 }, { opacity: 1, x: 0, duration: 0.42, ease: "power3.out" }, s3 + 0.12);
+
+tl.fromTo("#s3-t1",
+  { opacity: 0, x: -55 }, { opacity: 1, x: 0, duration: 0.48, ease: "expo.out" }, s3 + 0.22);
+tl.fromTo("#s3-t2",
+  { opacity: 0, x: -55 }, { opacity: 1, x: 0, duration: 0.48, ease: "power3.out" }, s3 + 0.38);
+tl.fromTo("#s3-t3",
+  { opacity: 0, x: -55 }, { opacity: 1, x: 0, duration: 0.48, ease: "power2.out" }, s3 + 0.54);
+
+tl.fromTo("#s3-divider",
+  { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power3.out" }, s3 + 0.72);
+
+tl.fromTo("#s3-msg-th",
+  { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, s3 + 0.85);
+tl.fromTo("#s3-msg-en",
+  { opacity: 0 }, { opacity: 1, duration: 0.42, ease: "power1.out" }, s3 + 1.12);
+
+tl.fromTo("#s3-d1",
+  { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, s3 + 1.18);
+tl.fromTo("#s3-d2",
+  { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, s3 + 1.35);
+
+tl.fromTo("#s3-cert",
+  { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.48, ease: "back.out(1.4)" }, s3 + 1.55);
+
+// Scrolling meta ticker
+tl.fromTo("#s3-scroll-meta",
+  { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, s3 + 0.2);
+tl.fromTo("#s3-scroll-meta",
+  { x: 0 }, { x: -540, duration: 4.0, ease: "none" }, s3 + 0.3);
+
+// ── Blur crossfade S3→S4 at 10.2s ──
+tl.to("#s3", { opacity: 0, filter: "blur(18px)", duration: 0.45, ease: "power2.in" }, 10.18);
+tl.fromTo("#s4",
+  { opacity: 0, filter: "blur(18px)" },
+  { opacity: 1, filter: "blur(0px)", duration: 0.48, ease: "power2.out" }, 10.18);
+
+// ════════ S4: PRICE REVEAL (10.5–13s) ════════
+var s4 = 10.5;
+tl.fromTo(".s4-glow",
+  { scale: 0.8, opacity: 0.3 },
+  { scale: 1.15, opacity: 0.65, duration: 1.25, ease: "sine.inOut", yoyo: true, repeat: 1 }, s4);
+
+tl.fromTo("#s4-avail",
+  { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, s4 + 0.12);
+
+// ฿ currency: subtle y drop
+tl.fromTo("#s4-currency",
+  { opacity: 0, y: -22 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, s4 + 0.18);
+// Price: strong drop with impact
+tl.fromTo("#s4-price",
+  { opacity: 0, y: -65, scale: 1.06 },
+  { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power4.out" }, s4 + 0.18);
+
+tl.fromTo("#s4-label",
+  { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.32, ease: "power2.out" }, s4 + 0.48);
+tl.fromTo("#s4-gold-bar",
+  { scaleX: 0 }, { scaleX: 1, duration: 0.52, ease: "power3.out" }, s4 + 0.55);
+
+tl.fromTo("#s4-del-price",
+  { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.38, ease: "expo.out" }, s4 + 0.68);
+tl.fromTo("#s4-del-label",
+  { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, s4 + 0.85);
+tl.fromTo("#s4-platforms",
+  { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power1.out" }, s4 + 1.0);
+
+// Price pulse for attention
+tl.to("#s4-price", { scale: 1.04, duration: 0.28, ease: "sine.inOut", yoyo: true, repeat: 1 }, s4 + 1.5);
+
+// ── Crossfade S4→S5 at 12.7s ──
+tl.to("#s4", { opacity: 0, duration: 0.42, ease: "power2.in" }, 12.68);
+tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 12.65);
+
+// ════════ S5: CTA (13–15s) — FINAL SCENE ════════
+var s5 = 13.0;
+tl.fromTo(".s5-glow",
+  { scale: 0.85, opacity: 0.4 },
+  { scale: 1.08, opacity: 0.7, duration: 1.6, ease: "sine.inOut" }, s5);
+
+tl.fromTo("#s5-brand",
+  { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, s5 + 0.22);
+tl.fromTo("#s5-brand-jp",
+  { opacity: 0 }, { opacity: 1, duration: 0.38, ease: "power1.out" }, s5 + 0.55);
+tl.fromTo("#s5-cta-line",
+  { scaleX: 0 }, { scaleX: 1, duration: 0.42, ease: "power2.out" }, s5 + 0.6);
+tl.fromTo("#s5-cta",
+  { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, s5 + 0.65);
+tl.fromTo("#s5-platforms",
+  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, s5 + 0.9);
+tl.fromTo("#s5-url",
+  { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.38, ease: "power1.out" }, s5 + 1.1);
+tl.fromTo("#s5-tags",
+  { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out" }, s5 + 1.28);
+
+// Brand breathe
+tl.to("#s5-brand", { scale: 1.025, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 0 }, s5 + 1.0);
+
+// Final fade to black (allowed — final scene only)
+tl.to("#s5", { opacity: 0, duration: 0.65, ease: "power2.in" }, 14.35);
+
+window.__timelines["root"] = tl;
+</script>
+</body>
+</html>

@@ -110,15 +110,18 @@ model ProductCategory {
 
 model Product {
   id             String          @id @default(cuid())
+  sku            String?         @unique
   name           String
   nameEn         String?
   description    String
   descriptionEn  String?
   price          Float
+  deliveryPrice  Float?
   discountPrice  Float?
   image          String
   images         String          @default("[]")
   categoryId     String
+  cultivarId     String?
   stock          Int             @default(0)
   isActive       Boolean         @default(true)
   tags           String          @default("[]")
@@ -128,9 +131,81 @@ model Product {
   cartItems      CartItem[]
   orderItems     OrderItem[]
   category       ProductCategory @relation(fields: [categoryId], references: [id])
+  cultivar       TeaCultivar?    @relation(fields: [cultivarId], references: [id])
   reviews        Review[]
+  branchProducts BranchProduct[]
+  productOptions ProductOption[]
 
   @@map("products")
+}
+
+model TeaCultivar {
+  id           String    @id @default(cuid())
+  code         String    @unique
+  name         String
+  nameTh       String?
+  supplierName String?
+  grade        TeaGrade
+  origin       String?
+  region       String?
+  flavorNotes  String?
+  isOrganic    Boolean   @default(false)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     Product[]
+
+  @@map("tea_cultivars")
+}
+
+model Branch {
+  id             String          @id @default(cuid())
+  name           String
+  nameEn         String?
+  slug           String          @unique
+  address        String?
+  district       String?
+  isActive       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  branchProducts BranchProduct[]
+
+  @@map("branches")
+}
+
+model BranchProduct {
+  id          String  @id @default(cuid())
+  branchId    String
+  productId   String
+  isAvailable Boolean @default(true)
+  branch      Branch  @relation(fields: [branchId], references: [id])
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@unique([branchId, productId])
+  @@map("branch_products")
+}
+
+model MenuOption {
+  id             String          @id @default(cuid())
+  code           String          @unique
+  name           String
+  nameTh         String?
+  groupName      String?
+  priceAdjust    Float           @default(0)
+  isActive       Boolean         @default(true)
+  productOptions ProductOption[]
+
+  @@map("menu_options")
+}
+
+model ProductOption {
+  productId String
+  optionId  String
+  product   Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  option    MenuOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@id([productId, optionId])
+  @@map("product_options")
 }
 
 model Review {
@@ -300,4 +375,12 @@ enum BookingStatus {
   CONFIRMED
   CANCELLED
   COMPLETED
+}
+
+enum TeaGrade {
+  CEREMONIAL
+  CEREMONIAL_ORGANIC
+  PREMIUM
+  PREMIUM_LATTE
+  CULINARY
 }

@@ -1,0 +1,6 @@
+node_modules/
+.env
+.env.local
+.token.json
+.folder-ids.json
+service-account-key.json
