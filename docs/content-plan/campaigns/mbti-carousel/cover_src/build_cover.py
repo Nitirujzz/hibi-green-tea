@@ -15,7 +15,7 @@ h1 em{{font-style:normal;color:#4e7c3a}}
 .team{{position:absolute;top:1188px;font-family:'Prompt';font-weight:600;font-size:23px;padding:7px 18px;border-radius:30px;background:rgba(255,255,255,.88);color:#243e1b;box-shadow:0 4px 14px rgba(36,62,27,.12)}}
 .team b{{color:#4e7c3a}}
 </style></head><body>
-<div class="top"><span>HIBI MATCHA CAFE 日々</span><span class="pg">1/7</span></div>
+<div class="top"><span>HIBI MATCHA CAFE 日々</span><span class="pg">1/8</span></div>
 <div class="wrap">
  <span class="chip">16 บุคลิก × Hibi &amp; Capy</span>
  <h1>มัทฉะแก้วไหน<br><em>คือคุณ?</em></h1>

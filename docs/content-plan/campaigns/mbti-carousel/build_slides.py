@@ -1,7 +1,7 @@
 import os, subprocess, base64, io
 from PIL import Image
 D = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(D, "out2"); os.makedirs(OUT, exist_ok=True)
+OUT = os.path.join(D, "out3"); os.makedirs(OUT, exist_ok=True)
 _cache = {}
 def img(name, folder="cut", maxh=900):
     k = (name, folder)
@@ -53,165 +53,193 @@ def avatar(kind, size):
     k, f = ("h", "hibi_face") if kind == "H" else ("c", "capy_face")
     return f'<span class="av {k}" style="width:{size}px;height:{size}px"><img src="{img(f, "assets")}"></span>'
 
-def page(n, body, css="", swipe=True):
-    sw = ""
-    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{CSS}{css}</style></head><body>
-<div class="top"><span>HIBI MATCHA CAFE 日々</span><span class="pg">{n}/7</span></div>{body}{sw}
+TOTAL = 8
+ART = lambda n: img(n, "art", maxh=1100)
+
+def page(n, body, css=""):
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{CSS}
+body{{background:#f3f8ec url('{img("bg_paper", "assets", maxh=1350)}') center/cover}}
+.art{{position:absolute;filter:drop-shadow(0 14px 18px rgba(36,62,27,.14))}}
+{css}</style></head><body>
+<div class="top"><span>HIBI MATCHA CAFE 日々</span><span class="pg">{n}/{TOTAL}</span></div>{body}
 <div class="foot"><span>มัทฉะแก้วไหนคือคุณ?</span><span class="r">@hibimatchacafe</span></div></body></html>"""
 
-# ---------- data (เมนูจริงจากร้าน) ----------
+# ---------- data: เมนูจริง + รายละเอียด MBTI ----------
+# (MBTI, ฉายา TH, ฉายา EN, [นิสัย 3 คำ], ไฟล์ภาพแก้ว, ชื่อเมนู EN, TH, ราคา, ความหวาน, หนึ่งบรรทัด)
 GROUPS = [
-    ("NT", "นักวิเคราะห์", "ขอของแท้ ไม่ต้องปรุงเยอะ", "#243e1b", "#e3eedb", [
-        ("INTJ", "clear_matcha", "Clear Matcha", "มัทฉะใส", "59.-", "0g", "วางแผนมาแล้ว ขอมัทฉะแท้ ๆ ไม่ต้องหวาน"),
-        ("INTP", "kirei_yuzu", "Kirei Yuzu Matcha", "มัทฉะยูซุคิเรอิ", "79.-", "3g", "ยูซุ + มัทฉะ เข้ากันได้ไง… ขอทดลองก่อน"),
-        ("ENTJ", "velvet_whisk", "Velvet Matcha Whisk Latte", "ท็อปโฟมนมเย็น", "129.-", "5g", "เลือกตัวท็อปของร้าน ไม่เสียเวลาลังเล"),
-        ("ENTP", "thai_matcha", "Jasmine Thai Tea × Matcha", "ชาไทยมะลิ × มัทฉะ", "109.-", "สูตรคงที่", "ชาไทยกับมัทฉะเข้ากันไม่ได้? ขอเถียง!"),
+    ("NT", "นักวิเคราะห์", "Analysts", "ใช้เหตุผล · ชอบเรียนรู้ · อยากรู้ว่า “ทำไม”", "ขอของแท้ ไม่ต้องปรุงเยอะ", "#243e1b", "#e3eedb", "nt", [
+        ("INTJ", "นักวางแผน", "Architect", ["วางแผนล่วงหน้า", "มีเหตุผล", "ชอบของแท้"], "clear_matcha", "Clear Matcha", "มัทฉะใส", "59.-", "0g", "วางแผนมาแล้ว ขอมัทฉะแท้ ๆ ไม่ต้องหวาน"),
+        ("INTP", "นักตรรกะ", "Logician", ["ช่างสงสัย", "ชอบทดลอง", "คิดลึก"], "kirei_yuzu", "Kirei Yuzu Matcha", "มัทฉะยูซุคิเรอิ", "79.-", "3g", "ยูซุ + มัทฉะ เข้ากันได้ไง… ขอทดลองก่อน"),
+        ("ENTJ", "ผู้บัญชาการ", "Commander", ["ตัดสินใจไว", "ผู้นำโดยธรรมชาติ", "ขอของดีสุด"], "velvet_whisk", "Velvet Matcha Whisk Latte", "ท็อปโฟมนมเย็น", "129.-", "5g", "เลือกตัวท็อปของร้าน ไม่เสียเวลาลังเล"),
+        ("ENTP", "นักโต้วาที", "Debater", ["ไอเดียเยอะ", "ชอบถกเถียง", "กล้าลองของแปลก"], "thai_matcha", "Jasmine Thai Tea × Matcha", "ชาไทยมะลิ × มัทฉะ", "109.-", "สูตรคงที่", "ชาไทยกับมัทฉะเข้ากันไม่ได้? ขอเถียง!"),
     ]),
-    ("NF", "นักการทูต", "หอม ละมุน มีเรื่องราว", "#4e7c3a", "#e6f1dc", [
-        ("INFJ", "coconut_jasmine", "Clear Matcha Coconut Jasmine", "มัทฉะใสมะพร้าวมะลิ", "79.-", "3g", "หอมมะลิบาง ๆ ลึกหลายชั้น เหมือนใจเรา"),
-        ("INFP", "osmanthus", "Osmanthus Honey Coconut", "หอมหมื่นลี้ น้ำผึ้ง มะพร้าว", "เมนูแนะนำ", "ไม่หวานเกิน", "นั่งริมหน้าต่าง ฝันกลางวันได้ทั้งบ่าย"),
-        ("ENFJ", "cloud_latte", "Matcha Cloud Latte", "มัทฉะคลาวด์ลาเต้", "79.-", "สูตรคงที่", "นุ่มเหมือนเมฆ อุ่นเหมือนคนที่ดูแลทุกคน"),
-        ("ENFP", "pink_cloud", "Pink Coconut Cloud", "Pink is Fine Collection", "79.-", "10g", "สีชมพู! ถ่าย 30 รูปก่อนจิบคำแรก"),
+    ("NF", "นักการทูต", "Diplomats", "ใช้หัวใจ · เข้าใจคน · มีโลกในแบบตัวเอง", "หอม ละมุน มีเรื่องราว", "#4e7c3a", "#e6f1dc", "nf", [
+        ("INFJ", "ผู้แนะแนว", "Advocate", ["ลึกซึ้ง", "อ่านใจคนเก่ง", "มีอุดมการณ์"], "coconut_jasmine", "Clear Matcha Coconut Jasmine", "มัทฉะใสมะพร้าวมะลิ", "79.-", "3g", "หอมมะลิบาง ๆ ลึกหลายชั้น เหมือนใจเรา"),
+        ("INFP", "ผู้ไกล่เกลี่ย", "Mediator", ["ช่างฝัน", "อ่อนโยน", "มีโลกส่วนตัว"], "osmanthus", "Osmanthus Honey Coconut", "หอมหมื่นลี้ น้ำผึ้ง มะพร้าว", "เมนูแนะนำ", "ไม่หวานเกิน", "นั่งริมหน้าต่าง ฝันกลางวันได้ทั้งบ่าย"),
+        ("ENFJ", "ตัวเอก", "Protagonist", ["ใจดี", "ดูแลทุกคน", "สร้างแรงบันดาลใจ"], "cloud_latte", "Matcha Cloud Latte", "มัทฉะคลาวด์ลาเต้", "79.-", "สูตรคงที่", "นุ่มเหมือนเมฆ อุ่นเหมือนคนที่ดูแลทุกคน"),
+        ("ENFP", "นักรณรงค์", "Campaigner", ["สดใส", "ขี้เล่น", "พลังบวกล้น"], "pink_cloud", "Pink Coconut Cloud", "Pink is Fine Collection", "79.-", "10g", "สีชมพู! ถ่าย 30 รูปก่อนจิบคำแรก"),
     ]),
-    ("SJ", "ผู้พิทักษ์", "คลาสสิก ไว้ใจได้ทุกวัน", "#5d7a2a", "#ebf0db", [
-        ("ISTJ", "matcha_latte", "Matcha Latte (Whisked Milk)", "มัทฉะลาเต้ตีนมราดนม", "79.-", "8g", "เมนูเดิม หวานเดิม สาขาเดิม ทุกวัน"),
-        ("ISFJ", "hojicha_latte", "Hojicha Latte", "โฮจิฉะลาเต้ ตีนมราดนม", "79.-", "5g", "ซื้อแก้วตัวเองแล้ว ต้องซื้อฝากที่บ้านด้วย"),
-        ("ESTJ", "cold_whisked", "Cold Whisked Latte", "มัทฉะตีน้ำสไตล์ญี่ปุ่น", "59.-", "5g", "ตีสด เร็ว คุ้ม แล้วไปทำงานต่อ"),
-        ("ESFJ", "strawberry", "Matcha Strawberry Latte", "มัทฉะลาเต้สตรอว์เบอร์รีสด", "89.-", "10g", "แก้วที่ทั้งแก๊งชอบ จำได้ว่าใครหวานเท่าไหร่"),
+    ("SJ", "ผู้พิทักษ์", "Sentinels", "เป็นระเบียบ · ไว้ใจได้ · ใส่ใจคนรอบตัว", "คลาสสิก ไว้ใจได้ทุกวัน", "#5d7a2a", "#ebf0db", "sj", [
+        ("ISTJ", "นักจัดการ", "Logistician", ["เป๊ะ", "ตรงต่อเวลา", "ซื่อสัตย์"], "matcha_latte", "Matcha Latte (Whisked Milk)", "มัทฉะลาเต้ตีนมราดนม", "79.-", "8g", "เมนูเดิม หวานเดิม สาขาเดิม ทุกวัน"),
+        ("ISFJ", "ผู้ปกป้อง", "Defender", ["ใส่ใจรายละเอียด", "ขี้เกรงใจ", "ดูแลคนที่รัก"], "hojicha_latte", "Hojicha Latte", "โฮจิฉะลาเต้ ตีนมราดนม", "79.-", "5g", "ซื้อแก้วตัวเองแล้ว ต้องซื้อฝากที่บ้านด้วย"),
+        ("ESTJ", "ผู้บริหาร", "Executive", ["เป็นระเบียบ", "ตรงไปตรงมา", "ทำงานไว"], "cold_whisked", "Cold Whisked Latte", "มัทฉะตีน้ำสไตล์ญี่ปุ่น", "59.-", "5g", "ตีสด เร็ว คุ้ม แล้วไปทำงานต่อ"),
+        ("ESFJ", "ผู้ใส่ใจ", "Consul", ["เข้าสังคมเก่ง", "อบอุ่น", "จำทุกคนได้"], "strawberry", "Matcha Strawberry Latte", "มัทฉะลาเต้สตรอว์เบอร์รีสด", "89.-", "10g", "แก้วที่ทั้งแก๊งชอบ จำได้ว่าใครหวานเท่าไหร่"),
     ]),
-    ("SP", "นักสำรวจ", "ของใหม่ ต้องได้ลองก่อน", "#a06b17", "#f5ecd8", [
-        ("ISTP", "kokoro_honeycomb", "Kokoro Hojicha Honeycomb Velvet", "โฮจิฉะฮันนี่คอมบ์", "159.-", "5g", "กรุบ ๆ honeycomb เคี้ยวไปคิดไป สาย texture"),
-        ("ISFP", "mango_pandan", "Matcha Mango Pandan Cloud", "มัทฉะมะม่วงใบเตย", "Signature", "8g", "เลือกแก้วจากสี เลือกโต๊ะจากแสง"),
-        ("ESTP", "pistachio", "Pistachio Kunafeh Matcha Luxe", "พิสตาชิโอคูนาเฟห์", "Signature", "8g", "เห็นเมนูใหม่ปุ๊บ สั่งปั๊บ ไม่อ่านต่อ"),
-        ("ESFP", "kokoro_cheesecake", "Kokoro Hojicha Cheesecake Mochi", "โฮจิฉะชีสเค้กโมจิ", "179.-", "10g", "มีโมจิเสียบไม้! ไลฟ์ก่อนกิน"),
+    ("SP", "นักสำรวจ", "Explorers", "ลงมือก่อน · ชอบของใหม่ · ใช้ชีวิตตอนนี้", "ของใหม่ ต้องได้ลองก่อน", "#a06b17", "#f5ecd8", "sp", [
+        ("ISTP", "ช่างฝีมือ", "Virtuoso", ["ใจเย็น", "ชอบลงมือทำ", "สาย texture"], "kokoro_honeycomb", "Kokoro Hojicha Honeycomb Velvet", "โฮจิฉะฮันนี่คอมบ์", "159.-", "5g", "กรุบ ๆ honeycomb เคี้ยวไปคิดไป"),
+        ("ISFP", "ศิลปิน", "Adventurer", ["มีสไตล์", "รักความสวยงาม", "ตามใจตัวเอง"], "mango_pandan", "Matcha Mango Pandan Cloud", "มัทฉะมะม่วงใบเตย", "Signature", "8g", "เลือกแก้วจากสี เลือกโต๊ะจากแสง"),
+        ("ESTP", "นักผจญภัย", "Entrepreneur", ["กล้าเสี่ยง", "ลุยก่อนคิด", "พลังเยอะ"], "pistachio", "Pistachio Kunafeh Matcha Luxe", "พิสตาชิโอคูนาเฟห์", "Signature", "8g", "เห็นเมนูใหม่ปุ๊บ สั่งปั๊บ ไม่อ่านต่อ"),
+        ("ESFP", "ดาวเด่น", "Entertainer", ["สายปาร์ตี้", "ชอบเป็นจุดสนใจ", "สนุกทุกโมเมนต์"], "kokoro_cheesecake", "Kokoro Hojicha Cheesecake Mochi", "โฮจิฉะชีสเค้กโมจิ", "179.-", "10g", "มีโมจิเสียบไม้! ไลฟ์ก่อนกิน"),
     ]),
 ]
 
 GCSS = """
-.hd{position:absolute;top:96px;left:56px;right:56px;height:140px;display:flex;align-items:center;gap:26px}
-.hd .code{font-family:'Prompt';font-weight:700;font-size:120px;line-height:1;letter-spacing:-2px}
-.hd .nm{font-family:'Prompt';font-weight:600;font-size:46px;line-height:1.1}
-.hd .tg{font-size:26px;color:#4a5a43;margin-top:6px}
-.list{position:absolute;top:256px;left:56px;right:56px;display:flex;flex-direction:column;gap:18px}
-.row{height:230px;border-radius:30px;background:#fff;position:relative;display:flex;align-items:center;overflow:visible;box-shadow:0 8px 24px rgba(36,62,27,.07)}
-.row .pic{width:250px;height:230px;position:relative;flex:none;border-radius:30px 0 0 30px;display:flex;align-items:center;justify-content:center}
-.row .pic img{max-height:212px;max-width:220px}
-.row .wm{position:absolute;left:14px;top:6px;font-family:'Prompt';font-weight:700;font-size:64px;opacity:.10;letter-spacing:-1px}
-.row .tx{flex:1;padding:18px 24px 16px 26px;min-width:0}
-.row .l1{display:flex;align-items:center;gap:14px}
-.row .mb{font-family:'Prompt';font-weight:700;font-size:48px;line-height:1}
-.team{display:inline-flex;align-items:center;gap:8px;font-family:'Prompt';font-weight:500;font-size:19px;padding:3px 14px 3px 4px;border-radius:24px}
-.row .en{font-family:'Prompt';font-weight:600;font-size:25px;line-height:1.2;margin-top:8px;color:#1d2b18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row .th{font-size:19px;color:#66745e;margin-top:1px}
-.row .q{font-size:22px;line-height:1.35;margin-top:8px;color:#1d2b18}
-.row .tags{position:absolute;right:20px;top:18px;display:flex;gap:8px}
-.price{font-family:'Prompt';font-weight:600;font-size:24px;color:#fff;border-radius:22px;padding:4px 16px}
-.sweet{font-family:'Prompt';font-weight:500;font-size:19px;border-radius:22px;padding:6px 14px;color:#243e1b}
+.hd{position:absolute;top:92px;left:56px;width:610px}
+.hd .code{font-family:'Prompt';font-weight:700;font-size:118px;line-height:.95;letter-spacing:-3px}
+.hd .nm{font-family:'Prompt';font-weight:600;font-size:46px;line-height:1.1;margin-top:6px}
+.hd .nm small{font-size:24px;font-weight:500;opacity:.6;margin-left:10px;letter-spacing:.5px}
+.hd .kw{display:inline-block;margin-top:12px;font-family:'Prompt';font-weight:500;font-size:22px;padding:6px 16px;border-radius:24px}
+.hd .tg{font-size:23px;color:#4a5a43;margin-top:10px}
+.list{position:absolute;top:404px;left:48px;right:48px;display:flex;flex-direction:column;gap:14px}
+.row{height:200px;border-radius:30px;background:rgba(255,255,255,.94);position:relative;display:flex;align-items:center;box-shadow:0 10px 26px rgba(36,62,27,.08)}
+.row .pic{width:190px;height:200px;flex:none;border-radius:30px 0 0 30px;display:flex;align-items:center;justify-content:center;position:relative}
+.row .pic img{max-height:184px;max-width:170px}
+.row .tx{flex:1;padding:14px 22px 12px 22px;min-width:0}
+.row .l1{display:flex;align-items:baseline;gap:12px}
+.row .mb{font-family:'Prompt';font-weight:700;font-size:44px;line-height:1;letter-spacing:-.5px}
+.row .nick{font-family:'Prompt';font-weight:600;font-size:25px;color:#1d2b18}
+.row .nick small{font-weight:400;font-size:18px;color:#7b8a72;margin-left:4px}
+.row .tr{display:flex;gap:6px;margin-top:9px}
+.row .tr span{font-family:'Prompt';font-size:16.5px;font-weight:500;padding:3px 11px;border-radius:14px}
+.row .en{font-family:'Prompt';font-weight:600;font-size:22px;line-height:1.2;margin-top:10px;color:#1d2b18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .en small{font-family:'Plex';font-weight:400;font-size:17px;color:#66745e;margin-left:8px}
+.row .q{font-size:19px;line-height:1.3;margin-top:5px;color:#3a4a33}
+.row .tags{position:absolute;right:18px;top:16px;display:flex;gap:7px}
+.team{position:absolute;right:16px;bottom:14px;display:inline-flex;align-items:center;gap:7px;font-family:'Prompt';font-weight:500;font-size:17px;padding:3px 13px 3px 3px;border-radius:24px}
+.price{font-family:'Prompt';font-weight:600;font-size:22px;color:#fff;border-radius:22px;padding:3px 14px}
+.sweet{font-family:'Prompt';font-weight:500;font-size:17px;border-radius:22px;padding:5px 12px;color:#243e1b}
 """
 
 def group_slide(n, g):
-    code, name, tag, col, tint, items = g
+    code, name, ename, kw, tag, col, tint, art, items = g
     rows = ""
-    for t, a, en, th, price, sw, q in items:
-        team = (f'<span class="team" style="background:#e3eedb;color:#243e1b">{avatar("H",34)}ทีม Hibi</span>' if t[0] == "E"
-                else f'<span class="team" style="background:#f4ead9;color:#6f4529">{avatar("C",34)}ทีม Capy</span>')
+    for t, nick, enick, traits, a, en, th, price, sw, q in items:
+        team = (f'<span class="team" style="background:#e3eedb;color:#243e1b">{avatar("H",30)}ทีม Hibi</span>' if t[0] == "E"
+                else f'<span class="team" style="background:#f4ead9;color:#6f4529">{avatar("C",30)}ทีม Capy</span>')
         swtxt = sw if not sw.endswith("g") else f"หวาน {sw}"
-        rows += f"""<div class="row"><div class="pic" style="background:{tint}">
-<img class="cut" src="{img(a)}"></div>
-<div class="tx"><div class="l1"><span class="mb" style="color:{col}">{t}</span>{team}</div>
-<div class="en">{en}</div><div class="th">{th}</div><div class="q">“{q}”</div></div>
-<div class="tags"><span class="sweet" style="background:{tint}">{swtxt}</span><span class="price" style="background:{col};{'font-size:19px;padding:6px 14px' if not price.endswith('.-') else ''}">{price}</span></div></div>"""
+        trs = "".join(f'<span style="background:{tint};color:{col}">{x}</span>' for x in traits)
+        rows += f"""<div class="row"><div class="pic" style="background:{tint}"><img class="cut" src="{img(a)}"></div>
+<div class="tx"><div class="l1"><span class="mb" style="color:{col}">{t}</span><span class="nick">{nick}<small>{enick}</small></span></div>
+<div class="tr">{trs}</div>
+<div class="en">{en}<small>{th}</small></div><div class="q">“{q}”</div></div>
+<div class="tags"><span class="sweet" style="background:{tint}">{swtxt}</span><span class="price" style="background:{col};{'font-size:17px;padding:5px 12px' if not price.endswith('.-') else ''}">{price}</span></div>{team}</div>"""
     body = f"""<div class="hd"><div class="code" style="color:{col}">{code}</div>
-<div><div class="nm" style="color:{col}">{name}</div><div class="tg">{tag}</div></div></div>
+<div class="nm" style="color:{col}">{name}<small>{ename}</small></div>
+<div class="kw" style="background:{col};color:#fff">{kw}</div>
+<div class="tg">🍵 สายมัทฉะแบบนี้: {tag}</div></div>
+<img class="art" src="{ART(art)}" style="right:34px;top:64px;width:350px;height:350px;object-fit:contain">
 <div class="list">{rows}</div>"""
     return page(n, body, GCSS)
 
-COVER = """
-.chip{position:absolute;top:110px;left:56px;display:flex;gap:10px}
-.chip span{font-family:'Prompt';font-weight:500;font-size:24px;padding:8px 20px;border-radius:30px}
-.ttl{position:absolute;top:178px;left:56px;right:56px;font-family:'Prompt';font-weight:700;font-size:132px;line-height:1.02;color:#243e1b;letter-spacing:-2px}
-.ttl em{font-style:normal;color:#4e7c3a}
-.sub{position:absolute;top:470px;left:60px;font-size:30px;color:#3f5236}
-.blob{position:absolute;left:-60px;right:-60px;top:640px;height:640px;background:radial-gradient(ellipse at 50% 60%,#cfe6bd 0%,#e4f1d8 45%,rgba(242,249,234,0) 70%)}
-.disk{position:absolute;left:140px;right:140px;top:1080px;height:90px;border-radius:50%;background:#4e7c3a;opacity:.9}
-.d{position:absolute;bottom:200px}
-.tm{position:absolute;top:1100px;display:flex;align-items:center;gap:10px;font-family:'Prompt';font-weight:600;font-size:22px;background:#fff;border-radius:40px;padding:6px 18px 6px 6px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-.cta{position:absolute;left:56px;top:1196px;font-family:'Prompt';font-weight:600;font-size:26px;color:#243e1b}
+XCSS = """
+.h1{position:absolute;top:92px;left:0;right:0;text-align:center;font-family:'Prompt';font-weight:700;font-size:84px;color:#243e1b;line-height:1.05}
+.h2{position:absolute;top:196px;left:0;right:0;text-align:center;font-size:27px;color:#3f5236}
+.lab{position:absolute;top:470px;font-family:'Prompt';font-weight:600;font-size:22px;padding:6px 16px;border-radius:24px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.pairs{position:absolute;top:540px;left:48px;right:48px;display:flex;flex-direction:column;gap:12px}
+.pr{height:118px;background:rgba(255,255,255,.94);border-radius:26px;display:flex;align-items:center;padding:0 22px;box-shadow:0 8px 22px rgba(36,62,27,.07)}
+.pr .s{flex:1;display:flex;align-items:center;gap:14px}
+.pr .s.r{flex-direction:row-reverse;text-align:right}
+.pr .L{width:74px;height:74px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:'Prompt';font-weight:700;font-size:40px;color:#fff}
+.pr .w{font-family:'Prompt';font-weight:600;font-size:24px;color:#1d2b18;line-height:1.15}
+.pr .d{font-size:18px;color:#5b6a53;line-height:1.3;margin-top:2px}
+.pr .vs{font-family:'Prompt';font-weight:600;font-size:18px;color:#9aa892;padding:0 10px}
+.grp{position:absolute;top:1080px;left:48px;right:48px}
+.grp .t{font-family:'Prompt';font-weight:600;font-size:22px;color:#243e1b;margin-bottom:10px}
+.grp .g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grp .c{border-radius:20px;padding:12px 14px;color:#fff;font-family:'Prompt'}
+.grp .c b{font-size:30px;font-weight:700;display:block;line-height:1}
+.grp .c span{font-size:17px;opacity:.95}
 """
 
-def cover():
-    drinks = [("pink_cloud", 64, 350, -7), ("velvet_whisk", 262, 415, -2), ("osmanthus", 528, 415, 3), ("kokoro_cheesecake", 742, 375, 7)]
-    ds = "".join(f'<img class="d cut" src="{img(a)}" style="left:{x}px;height:{h}px;transform:rotate({r}deg);bottom:{218 if h>400 else 226}px">' for a, x, h, r in drinks)
-    body = f"""<div class="chip"><span style="background:#243e1b;color:#fff">16 บุคลิก</span><span style="background:#fff;color:#243e1b">16 แก้วจริงจากเมนู</span></div>
-<div class="ttl">มัทฉะแก้วไหน<br><em>คือคุณ?</em></div>
-<div class="sub">ทาย MBTI จากแก้วโปรด · หาตัวเองแล้วแท็กเพื่อน</div>
-<div class="blob"></div><div class="disk"></div>{ds}
-<div class="tm" style="left:56px">{avatar("H",52)}ทีม Hibi = สาย E</div>
-<div class="tm" style="right:56px">{avatar("C",52)}ทีม Capy = สาย I</div>
-<div class="cta">ปัดหาแก้วของคุณ 👉</div>"""
-    return page(1, body, COVER, swipe=False)
+def explain():
+    pairs = [("E", "Extrovert · ชาร์จพลังจากคน", "เจอเพื่อนแล้วสดชื่น", "#4e7c3a", "I", "Introvert · ชาร์จพลังคนเดียว", "ขออยู่เงียบ ๆ กับแก้วโปรด", "#a8744a"),
+             ("S", "Sensing · ดูของจริงตรงหน้า", "เชื่อสิ่งที่เห็นและลองแล้ว", "#5d7a2a", "N", "Intuition · มองภาพรวม/อนาคต", "ชอบไอเดียใหม่ ๆ", "#243e1b"),
+             ("T", "Thinking · ใช้เหตุผล", "ตัดสินจากข้อมูล", "#243e1b", "F", "Feeling · ใช้ความรู้สึก", "ตัดสินจากใจและคนรอบตัว", "#4e7c3a"),
+             ("J", "Judging · ชอบวางแผน", "รู้แล้วว่าจะสั่งอะไร", "#5d7a2a", "P", "Perceiving · ยืดหยุ่น", "ไปถึงร้านค่อยเลือก", "#a06b17")]
+    rows = "".join(f"""<div class="pr"><div class="s"><div class="L" style="background:{c1}">{a}</div><div><div class="w">{w1}</div><div class="d">{d1}</div></div></div>
+<div class="vs">VS</div><div class="s r"><div class="L" style="background:{c2}">{b}</div><div><div class="w">{w2}</div><div class="d">{d2}</div></div></div></div>"""
+                   for a, w1, d1, c1, b, w2, d2, c2 in pairs)
+    gs = "".join(f'<div class="c" style="background:{c}"><b>{k}</b><span>{t} · สไลด์ {i}</span></div>'
+                 for k, t, c, i in [("NT", "นักวิเคราะห์", "#243e1b", 3), ("NF", "นักการทูต", "#4e7c3a", 4), ("SJ", "ผู้พิทักษ์", "#5d7a2a", 5), ("SP", "นักสำรวจ", "#a06b17", 6)])
+    body = f"""<div class="h1">MBTI อ่านยังไง?</div><div class="h2">4 ตัวอักษร = 4 คู่นิสัย · เลือกฝั่งที่ “ใช่” ที่สุดของแต่ละคู่</div>
+<img class="art" src="{ART('explain')}" style="left:190px;top:240px;width:700px;height:300px;object-fit:contain">
+<div class="lab" style="left:120px;background:#e3eedb;color:#243e1b">E = ทีม Hibi 🐰</div>
+<div class="lab" style="right:120px;background:#f4ead9;color:#6f4529">I = ทีม Capy 🍊</div>
+<div class="pairs">{rows}</div>
+<div class="grp"><div class="t">รวมเป็น 4 กลุ่มใหญ่ (ปัดไปหาของคุณ 👉)</div><div class="g">{gs}</div></div>"""
+    return page(2, body, XCSS)
 
 SWEET = """
-.h1{position:absolute;top:104px;left:56px;font-family:'Prompt';font-weight:700;font-size:86px;color:#243e1b;line-height:1.05}
-.h2{position:absolute;top:212px;left:58px;font-size:28px;color:#3f5236}
-.bar{position:absolute;top:290px;left:56px;right:56px;background:#fff;border-radius:32px;padding:34px 30px 28px}
-.track{height:18px;border-radius:9px;background:linear-gradient(90deg,#d9ebcb,#243e1b);margin:0 46px 18px}
+.h1{position:absolute;top:100px;left:56px;font-family:'Prompt';font-weight:700;font-size:80px;color:#243e1b;line-height:1.05}
+.h2{position:absolute;top:200px;left:58px;width:640px;font-size:25px;color:#3f5236;line-height:1.35}
+.bar{position:absolute;top:330px;left:48px;right:48px;background:rgba(255,255,255,.95);border-radius:32px;padding:30px 26px 24px;box-shadow:0 10px 26px rgba(36,62,27,.08)}
+.track{height:16px;border-radius:8px;background:linear-gradient(90deg,#d9ebcb,#243e1b);margin:0 50px 16px}
 .dots{display:flex;justify-content:space-between}
-.dt{width:150px;text-align:center}
-.dt .c{width:92px;height:92px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-family:'Prompt';font-weight:600;font-size:30px;color:#fff;box-shadow:0 6px 14px rgba(36,62,27,.15)}
-.dt .l{font-family:'Prompt';font-weight:500;font-size:20px;margin-top:12px}
-.dt .m{font-size:18px;color:#4e7c3a;margin-top:4px;line-height:1.3}
-.cards{position:absolute;top:640px;left:56px;right:56px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.cd{background:#fff;border-radius:30px;padding:28px 30px;height:420px}
-.cd h3{font-family:'Prompt';font-weight:600;font-size:32px;color:#243e1b;margin-bottom:12px}
-.cd .r{display:flex;justify-content:space-between;font-size:24px;padding:11px 0;border-bottom:1px solid #edf3e7}
-.cd.dk{background:#243e1b;color:#fff;position:relative}.cd.dk h3{color:#fff;display:flex;align-items:center;gap:12px}
-.cd.dk p{font-size:22px;line-height:1.45;margin-bottom:12px}
-.save{position:absolute;top:1100px;left:56px;right:56px;height:78px;border-radius:24px;border:3px dashed #4e7c3a;display:flex;align-items:center;justify-content:center;font-family:'Prompt';font-weight:600;font-size:30px;color:#243e1b}
+.dt{width:155px;text-align:center}
+.dt .c{width:88px;height:88px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-family:'Prompt';font-weight:600;font-size:29px;color:#fff;box-shadow:0 6px 14px rgba(36,62,27,.15)}
+.dt .l{font-family:'Prompt';font-weight:500;font-size:19px;margin-top:10px}
+.dt .m{font-size:17px;color:#4e7c3a;margin-top:4px;line-height:1.3}
+.cards{position:absolute;top:670px;left:48px;right:48px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cd{background:rgba(255,255,255,.95);border-radius:30px;padding:26px 28px;height:410px;box-shadow:0 10px 26px rgba(36,62,27,.08)}
+.cd h3{font-family:'Prompt';font-weight:600;font-size:30px;color:#243e1b;margin-bottom:10px}
+.cd .r{display:flex;justify-content:space-between;font-size:23px;padding:11px 0;border-bottom:1px solid #edf3e7}
+.cd.dk{background:#243e1b;color:#fff}.cd.dk h3{color:#fff;display:flex;align-items:center;gap:12px}
+.cd.dk p{font-size:21px;line-height:1.45;margin-bottom:12px}
+.save{position:absolute;top:1104px;left:48px;right:48px;height:76px;border-radius:24px;border:3px dashed #4e7c3a;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-family:'Prompt';font-weight:600;font-size:29px;color:#243e1b}
 """
 
 def sweet():
     lv = [("0g", "ไม่หวานเลย", "INTJ", "#bcd9a6"), ("3g", "หวานถึงรสชาติ", "INTP · INFJ", "#9cc683"), ("5g", "หวานเล็กน้อย", "ISFJ · ESTJ\nENTJ · ISTP", "#7fb064"),
-          ("8g", "หวานปกติ", "ISTJ · ISFP\nESTP", "#619447"), ("10g", "หวานชื่นใจ", "ENFP · ESFJ\nESFP", "#467334"), ("15g", "หวานในเกิน100", "สายหวานจัด", "#243e1b")]
+          ("8g", "หวานปกติ", "ISTJ · ISFP\nESTP", "#619447"), ("10g", "หวานชื่นใจ", "ENFP · ESFJ\nESFP", "#467334"), ("15g", "หวานจัดเต็ม", "สายหวานจัด", "#243e1b")]
     dots = "".join(f'<div class="dt"><div class="c" style="background:{c}">{g}</div><div class="l">{l}</div><div class="m">{m.replace(chr(10),"<br>")}</div></div>' for g, l, m, c in lv)
     milk = "".join(f'<div class="r"><span>{a}</span><b class="P" style="font-weight:600">{b}</b></div>' for a, b in [("นมสด", "ฟรี"), ("Lactose Free", "+10.-"), ("Oat Milk", "+20.-"), ("Almond Milk", "+25.-")])
-    body = f"""<div class="h1">สั่งหวานแค่ไหนดี?</div><div class="h2">ระดับความหวานของ Hibi เลือกได้ทุกแก้ว (ยกเว้นเมนูสูตรคงที่)</div>
+    body = f"""<div class="h1">สั่งหวานแค่ไหนดี?</div><div class="h2">ระดับความหวานของ Hibi เลือกได้ทุกแก้ว<br>(ยกเว้นเมนูสูตรคงที่) · ดู MBTI ของคุณใต้แต่ละระดับ</div>
+<img class="art" src="{ART('sweet')}" style="right:40px;top:70px;width:290px;height:290px;object-fit:contain">
 <div class="bar"><div class="track"></div><div class="dots">{dots}</div></div>
-<div class="cards"><div class="cd"><h3>เปลี่ยนนมได้</h3>{milk}</div>
-<div class="cd dk"><h3>{avatar("C",48)}Capy แนะนำ</h3><p>🍵 มือใหม่เริ่ม 5–8g จะได้กลิ่นมัทฉะชัด</p><p>☁️ Cloud Latte / Cream Cheese / Thai Tea × Matcha เป็นสูตรคงที่</p><p>✨ อยากนุ่มขึ้น เพิ่ม Velvet Milk Foam หรือ Milk Mochi</p></div></div>
+<div class="cards"><div class="cd"><h3>🥛 เปลี่ยนนมได้</h3>{milk}</div>
+<div class="cd dk"><h3>{avatar("C",46)}Capy แนะนำ</h3><p>🍵 มือใหม่เริ่ม 5–8g จะได้กลิ่นมัทฉะชัด</p><p>☁️ Cloud Latte / Cream Cheese / Thai Tea × Matcha เป็นสูตรคงที่</p><p>✨ อยากนุ่มขึ้น เพิ่ม Velvet Milk Foam หรือ Milk Mochi</p></div></div>
 <div class="save">📌 เซฟสไลด์นี้ไว้ ก่อนสั่งครั้งหน้า</div>"""
-    return page(6, body, SWEET)
+    return page(7, body, SWEET)
 
 END = """
-.h1{position:absolute;top:120px;left:0;right:0;text-align:center;font-family:'Prompt';font-weight:700;font-size:100px;color:#243e1b;line-height:1.05}
-.h2{position:absolute;top:240px;left:0;right:0;text-align:center;font-size:30px;color:#3f5236}
-.duo{position:absolute;top:320px;left:0;right:0;display:flex;justify-content:center;gap:40px}
-.duo .w{text-align:center;font-family:'Prompt';font-weight:600;font-size:26px}
-.box{position:absolute;top:640px;left:120px;right:120px;background:#fff;border-radius:30px;padding:30px 36px;box-shadow:0 8px 24px rgba(36,62,27,.08)}
-.box .k{font-size:22px;color:#66745e}
-.box .v{font-family:'Prompt';font-weight:600;font-size:40px;color:#243e1b;margin-top:6px}
-.tag{position:absolute;top:850px;left:0;right:0;text-align:center;font-family:'Prompt';font-weight:600;font-size:32px;color:#4e7c3a}
-.br{position:absolute;top:940px;left:56px;right:56px;background:#243e1b;color:#fff;border-radius:30px;padding:26px 30px;text-align:center}
+.h1{position:absolute;top:96px;left:0;right:0;text-align:center;font-family:'Prompt';font-weight:700;font-size:96px;color:#243e1b;line-height:1.05}
+.h2{position:absolute;top:212px;left:0;right:0;text-align:center;font-size:29px;color:#3f5236}
+.box{position:absolute;top:640px;left:110px;right:110px;background:#fff;border-radius:30px;padding:26px 34px;box-shadow:0 10px 26px rgba(36,62,27,.09)}
+.box .k{font-size:21px;color:#66745e}
+.box .v{font-family:'Prompt';font-weight:600;font-size:38px;color:#243e1b;margin-top:4px}
+.tag{position:absolute;top:830px;left:0;right:0;text-align:center;font-family:'Prompt';font-weight:600;font-size:31px;color:#4e7c3a}
+.br{position:absolute;top:915px;left:48px;right:48px;background:#243e1b;color:#fff;border-radius:30px;padding:26px 30px;text-align:center}
 .br .t{font-family:'Prompt';font-weight:600;font-size:28px}
-.br .l{font-size:23px;margin-top:8px;line-height:1.5;opacity:.95}
-.br .d{font-size:21px;margin-top:8px;color:#cfe6bd}
-.disc{position:absolute;top:1218px;left:0;right:0;text-align:center;font-size:18px;color:#7b8a72}
+.br .l{font-size:22px;margin-top:8px;line-height:1.5;opacity:.95}
+.br .d{font-size:20px;margin-top:8px;color:#cfe6bd}
+.disc{position:absolute;top:1214px;left:0;right:0;text-align:center;font-size:17px;color:#7b8a72}
 """
 
 def end():
     body = f"""<div class="h1">คุณคือ MBTI ไหน?</div><div class="h2">บอก Hibi &amp; Capy ในคอมเมนต์หน่อย 👇</div>
-<div class="duo"><div class="w">{avatar("H",250)}<div style="margin-top:12px;color:#4e7c3a">ทีม Hibi</div></div>
-<div class="w">{avatar("C",250)}<div style="margin-top:12px;color:#6f4529">ทีม Capy</div></div></div>
+<img class="art" src="{ART('end')}" style="left:170px;top:268px;width:740px;height:360px;object-fit:contain">
 <div class="box"><div class="k">พิมพ์แบบนี้เลย</div><div class="v">“INFP · ทีม Capy · Osmanthus”</div></div>
 <div class="tag">แท็กเพื่อนที่เป็น ENFP ตัวจริง 😆</div>
 <div class="br"><div class="t">📍 Hibi Matcha Cafe 5 สาขา</div>
 <div class="l">ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน (จุฬาฯ 11)</div>
 <div class="d">สั่ง Delivery: LINE MAN · Grab · ShopeeFood</div></div>
 <div class="disc">*เพื่อความสนุก ไม่ใช่แบบทดสอบบุคลิกภาพจริง · เมนูและราคาอาจต่างกันในแต่ละสาขา</div>"""
-    return page(7, body, END, swipe=False)
+    return page(8, body, END)
 
-slides = [cover()] + [group_slide(i + 2, g) for i, g in enumerate(GROUPS)] + [sweet(), end()]
-for n, html in enumerate(slides, 1):
+# slide 1 (ปก) สร้างด้วย cover_src/build_cover.py
+slides = {2: explain(), 3: group_slide(3, GROUPS[0]), 4: group_slide(4, GROUPS[1]), 5: group_slide(5, GROUPS[2]),
+          6: group_slide(6, GROUPS[3]), 7: sweet(), 8: end()}
+for n, html in slides.items():
     p = f"{OUT}/s{n}.html"; open(p, "w").write(html)
     png = f"{OUT}/HIBI_MBTI_{n:02d}.png"
     subprocess.run(["/opt/pw-browsers/chromium", "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars",
@@ -219,8 +247,4 @@ for n, html in enumerate(slides, 1):
                     f"--screenshot={png}", "--window-size=1080,1500", "file://" + p], check=True, capture_output=True)
     Image.open(png).crop((0, 0, 1080, 1350)).convert("RGB").save(png.replace(".png", ".jpg"), quality=95)
     os.remove(png)
-ims = [Image.open(f"{OUT}/HIBI_MBTI_{i:02d}.jpg") for i in range(1, 8)]
-sh = Image.new("RGB", (540 * 4, 675 * 2), "white")
-for i, im in enumerate(ims): sh.paste(im.resize((540, 675)), ((i % 4) * 540, (i // 4) * 675))
-sh.save(f"{OUT}/overview.jpg", quality=90)
 print("done")
