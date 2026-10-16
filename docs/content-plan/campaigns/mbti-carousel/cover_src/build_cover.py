@@ -4,7 +4,7 @@ src = open("build2.py").read()
 ns = {"__file__": __import__("os").path.abspath("build2.py")}
 exec(src.split("def avatar")[0], ns)
 CSS = ns["CSS"]
-Image.open("hf/d04a928f-dedc-4486-9a30-481666ba2d6a.png").resize((1080,1350), Image.LANCZOS).save("hf/bg.jpg", quality=95)
+Image.open("hf/v2a.png").resize((1080,1350), Image.LANCZOS).save("hf/bg.jpg", quality=95)
 html = f"""<!doctype html><html><head><meta charset="utf-8"><style>{CSS}
 body{{background:url('file://{__import__('os').getcwd()}/hf/bg.jpg') center/cover}}
 .wrap{{position:absolute;top:96px;left:0;right:0;text-align:center}}

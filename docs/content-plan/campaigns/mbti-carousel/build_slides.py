@@ -43,14 +43,15 @@ body{overflow:hidden;background:#f2f9ea;font-family:'Plex',sans-serif;color:#1d2
 .foot .r{opacity:.85}
 .swipe{position:absolute;right:56px;top:1205px;font-family:'Prompt';font-weight:500;font-size:22px;color:#4e7c3a}
 .av{border-radius:50%;overflow:hidden;display:inline-block;vertical-align:middle}
-.av.h{background:#4e7c3a;padding:3px}.av.h img{width:100%;height:100%;border-radius:50%;display:block}
-.av.c{background:#f1e4d1;padding:2px}.av.c svg{width:100%;height:100%;display:block}
+.av{padding:3px}.av img{width:100%;height:100%;border-radius:50%;display:block;object-fit:cover}
+.av.h{background:#4e7c3a}.av.c{background:#a8744a}
 .cut{filter:drop-shadow(0 18px 16px rgba(36,62,27,.20))}
 """
 
 def avatar(kind, size):
-    if kind == "H": return f'<span class="av h" style="width:{size}px;height:{size}px"><img src="{LOGO()}"></span>'
-    return f'<span class="av c" style="width:{size}px;height:{size}px">{CAPY}</span>'
+    # official character art (characters/*_sheet.png) cropped to faces
+    k, f = ("h", "hibi_face") if kind == "H" else ("c", "capy_face")
+    return f'<span class="av {k}" style="width:{size}px;height:{size}px"><img src="{img(f, "assets")}"></span>'
 
 def page(n, body, css="", swipe=True):
     sw = ""
