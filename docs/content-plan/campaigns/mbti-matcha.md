@@ -1,3 +1,5 @@
+> ⚠️ v1 (เมนูสมมติ) — ดูเวอร์ชันเมนูจริง + mockup ที่ [mbti-carousel/README.md](./mbti-carousel/README.md)
+
 # มัทฉะแก้วไหนคือคุณ? (16 บุคลิก × Hibi)
 
 > Content piece สาย **แชร์ + คอมเมนต์ + แท็กเพื่อน** · อ้างอิง [01 Strategy](../01-content-strategy.md) · [04 Prompts](../04-ai-vs-graphics-and-prompts.md) · [05 Brief](../05-detailed-ads-brief.md)
