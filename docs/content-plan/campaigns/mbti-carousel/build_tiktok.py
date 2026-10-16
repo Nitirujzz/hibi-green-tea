@@ -7,7 +7,7 @@ ns = {"__file__": f"{D}/build3.py"}; exec(src, ns)
 img, avatar, GROUPS, FONTS = ns["img"], ns["avatar"], ns["GROUPS"], ns["FONTS"]
 ART = lambda n: img(n, "art", maxh=1100)
 OUT = f"{D}/out_tk"; os.makedirs(OUT, exist_ok=True)
-TOTAL = 12
+TOTAL = 10  # TikTok photo posts: max 10 images
 W, H = 1080, 1920
 
 BASE = FONTS + """
@@ -100,7 +100,7 @@ GCSS = """
 .price{font-family:'Prompt';font-weight:600;font-size:24px;color:#fff;border-radius:22px;padding:3px 14px}
 .sweet{font-family:'Prompt';font-weight:500;font-size:19px;border-radius:22px;padding:5px 12px;color:#243e1b}
 """
-def group_page(n, g, part):
+def group_page(n, g, part, last=False):
     code, name, ename, kw, tag, col, tint, art, items = g
     cards = ""
     for t, nick, enick, traits, a, en, th, price, sw, q in items[part*2:part*2+2]:
@@ -118,7 +118,7 @@ def group_page(n, g, part):
 <div class="kw" style="background:{col}">{kw}</div></div>
 <img class="art" src="{ART(art)}" style="left:680px;top:250px;width:270px;height:270px;object-fit:contain">
 <div class="cards">{cards}</div>"""
-    return page(n, body, GCSS)
+    return page(n, body, GCSS, swipe="คอมเมนต์ MBTI + ทีมของคุณ 👇" if last else "ปัดต่อ 👉")
 
 SCSS = """
 .h1{position:absolute;top:262px;left:70px;font-family:'Prompt';font-weight:700;font-size:84px;color:#243e1b;line-height:1.05}
@@ -170,8 +170,7 @@ def end():
 
 slides = [cover(), explain()]
 for g in GROUPS:
-    slides += [group_page(len(slides) + 1, g, 0), group_page(len(slides) + 2, g, 1)]
-slides += [sweet(), end()]
+    slides += [group_page(len(slides) + 1, g, 0), group_page(len(slides) + 2, g, 1, last=g is GROUPS[-1])]
 for n, html in enumerate(slides, 1):
     p = f"{OUT}/t{n}.html"; open(p, "w").write(html)
     png = f"{OUT}/HIBI_MBTI_TT_{n:02d}.png"
