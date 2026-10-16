@@ -7,12 +7,12 @@
 
 | หัวข้อ | รายละเอียด |
 |---|---|
-| Big Theme | **"ตุลาฯ ชวนชิล — Meet Hibi-Capy"** วอร์มคาแรกเตอร์ก่อนแคมเปญ พ.ย. + รับลมหนาวด้วยมัทฉะร้อน |
+| Big Theme | **"ตุลาฯ ชวนชิล — Meet Capy"** วอร์มคาแรกเตอร์ก่อนแคมเปญ พ.ย. + รับลมหนาวด้วยมัทฉะร้อน |
 | ช่วงเวลา | ส. 17 – ส. 31 ต.ค. 2026 (15 วัน) · เวลาไทย (Asia/Bangkok) |
 | Buffer | Organization **My Organization** · 3 ช่อง: Facebook *Hibi Matcha Cafe* · Instagram *@hibimatchacafe* · TikTok *@hibimatchacafebywarin* |
 | จำนวนโพสต์ | **36 โพสต์** จาก 15 ชิ้นงานหลัก — FB 15 · IG 10 · TikTok 11 |
 | วันสำคัญ | 23 ต.ค. วันปิยมหาราช (งดโพสต์ขาย/มีม) · 25–31 ต.ค. ช่วงเงินเดือนออก · 31 ต.ค. Halloween |
-| สถานะ | พร้อมส่งเมื่อสื่อเสร็จ **16** โพสต์ · ต้องเติมข้อมูลก่อน **20** โพสต์ (ดูข้อ 5) |
+| สถานะ | พร้อมส่งเมื่อสื่อเสร็จ **18** โพสต์ · ต้องเติมข้อมูลก่อน **18** โพสต์ (ดูข้อ 5) |
 
 **สัดส่วนจริง (นับต่อชิ้นงานหลัก ไม่รวมโพสต์วันปิยมหาราช)**
 
@@ -31,21 +31,21 @@
 
 | วันที่ | วัน | Theme | ชิ้นงาน | Pillar / Funnel | FB | IG | TikTok | ผู้ผลิตหลัก |
 |---|---|---|---|---|---|---|---|---|
-| 17 ต.ค. | ส. | #HibiMoments | **U01** Meet Hibi-Capy — Capy ทักทายครั้งแรก | P1 Hibi-Capy / TOFU | 19:30 video | 19:00 reel | 18:00 video | 🔀 |
+| 17 ต.ค. | ส. | #HibiMoments | **U01** Meet Capy — Capy ทักทายครั้งแรก | P1 Capy / TOFU | 19:30 video | 19:00 reel | 18:00 video | 🔀 |
 | 18 ต.ค. | อา. | #SlowSunday | **U02** ทำไมชื่อ Hibi (日々) | P5 Branding / MOFU | 12:00 album | 11:00 carousel |  | 🎨 |
-| 19 ต.ค. | จ. | #CapyMonday | **U03** POV: วันจันทร์ ก่อน vs หลังมัทฉะ | P1 Hibi-Capy / TOFU | 08:00 video |  | 07:30 video | 🔀 |
+| 19 ต.ค. | จ. | #CapyMonday | **U03** POV: วันจันทร์ ก่อน vs หลังมัทฉะ | P1 Capy / TOFU | 08:00 video |  | 07:30 video | 🔀 |
 | 20 ต.ค. | อ. | #MatchaClass | **U04** มัทฉะ vs ชาเขียวทั่วไป ต่างกันยังไง | P3 Matcha Knowledge / MOFU | 19:30 album | 12:00 carousel | 18:00 photo_carousel | 🔀 |
-| 21 ต.ค. | พ. | #HibiBranch | **U05** Branch Spotlight: สาขา 1 Flagship | P4 Branch / BOFU | 19:30 video | 12:00 reel | 18:00 video | 📷 |
+| 21 ต.ค. | พ. | #HibiBranch | **U05** Branch Spotlight: สาขาสามย่าน (จุฬาฯ 11) | P4 Branch / BOFU | 19:30 video | 12:00 reel | 18:00 video | 📷 |
 | 22 ต.ค. | พฤ. | #AskHibi | **U06** มัทฉะมีคาเฟอีนเท่ากาแฟไหม? | P6 Customer Curiosity / MOFU | 12:00 image | 19:00 reel | 18:00 video | 🤖 |
 | 23 ต.ค. | ศ. | วันปิยมหาราช (ไม่โพสต์ขายของ) | **U07** วันปิยมหาราช — โพสต์น้อมรำลึก (ไม่บังคับ) | — / — | 08:00 image |  |  | 🎨 |
 | 24 ต.ค. | ส. | #HibiMenu | **U08** ASMR ตีมัทฉะ — ต้อนรับลมหนาวด้วยมัทฉะร้อน | P2 Menu / TOFU | 19:30 video | 19:00 reel | 12:00 video | 📷 |
-| 25 ต.ค. | อา. | #SlowSunday | **U09** Capy Onsen — วันอาทิตย์ขอแช่มัทฉะ | P1 Hibi-Capy / TOFU | 10:30 image | 10:00 post |  | 🔀 |
-| 26 ต.ค. | จ. | #CapyMonday | **U10** Capy Mood Meter วันจันทร์ | P1 Hibi-Capy / TOFU | 08:00 image |  |  | 🔀 |
+| 25 ต.ค. | อา. | #SlowSunday | **U09** Capy Onsen — วันอาทิตย์ขอแช่มัทฉะ | P1 Capy / TOFU | 10:30 image | 10:00 post |  | 🔀 |
+| 26 ต.ค. | จ. | #CapyMonday | **U10** Capy Mood Meter วันจันทร์ | P1 Capy / TOFU | 08:00 image |  |  | 🔀 |
 | 27 ต.ค. | อ. | #MatchaClass | **U11** สั่งหวานกี่ % ดี? (0/25/50/75/100) | P2 Menu / P3 Knowledge / MOFU | 12:00 album |  | 18:00 video | 📷 |
-| 28 ต.ค. | พ. | #HibiBranch | **U12** 5 สาขา 5 ฟีล — วันนี้คุณอยากไปสาขาไหน? | P4 Branch / BOFU | 19:30 album | 12:00 carousel | 18:00 photo_carousel | 📷 |
+| 28 ต.ค. | พ. | #HibiBranch | **U12** Hibi 5 สาขา — สาขาไหนใกล้คุณที่สุด? | P4 Branch / BOFU | 19:30 album | 12:00 carousel | 18:00 photo_carousel | 📷 |
 | 29 ต.ค. | พฤ. | #AskHibi | **U13** เบื้องหลัง: ทำไมต้องร่อนผงมัทฉะก่อนตี? | P6 Customer Curiosity / MOFU | 12:00 video | 19:00 reel | 18:00 video | 📷 |
-| 30 ต.ค. | ศ. | #HibiMenu (สิ้นเดือน) | **U14** Top 3 เมนูขายดี — สิ้นเดือนให้รางวัลตัวเอง | P2 Menu / BOFU | 12:00 album |  | 18:00 video | 📷 |
-| 31 ต.ค. | ส. | Halloween × #HibiMoments | **U15** Capy Halloween + ชวนลูกค้าถ่ายรูปแท็ก | P1 Hibi-Capy / P6 UGC / LOYALTY | 19:30 image | 19:00 reel | 12:00 video | 🔀 |
+| 30 ต.ค. | ศ. | #HibiMenu (สิ้นเดือน) | **U14** ของคู่มัทฉะ — สิ้นเดือนให้รางวัลตัวเอง | P2 Menu / BOFU | 12:00 album |  | 18:00 video | 📷 |
+| 31 ต.ค. | ส. | Halloween × #HibiMoments | **U15** Capy Halloween + ชวนลูกค้าถ่ายรูปแท็ก | P1 Capy / P6 UGC / LOYALTY | 19:30 image | 19:00 reel | 12:00 video | 🔀 |
 
 ## 3. ตารางผลิต (Deadline สื่อ = 2 วันก่อนโพสต์)
 
@@ -55,26 +55,26 @@
 | U02 | 18 ต.ค. | 16 ต.ค. ⚠️ วันนี้ | `HIBI_U02_Carousel45_S01-S05.png` | 🎨 Layout + ตัวอักษร · 📷 ภาพแก้ว · 🔀 Capy | I2-①, T5 |
 | U03 | 19 ต.ค. | 17 ต.ค. | `HIBI_U03_Video916_v1.mp4` | 🔀 Capy animation (AI) + 🎨 ข้อความ/เสียง | I2-③, I2-⑤, I2-②, V3 |
 | U04 | 20 ต.ค. | 18 ต.ค. | `HIBI_U04_Carousel45_S01-S06.png` | 🔀 Illustration (AI→vector) + 🎨 Layout/ข้อความ | I6, T5 |
-| U05 | 21 ต.ค. | 19 ต.ค. | `HIBI_U05_BR1_Reel916_v1.mp4` | 📷 ฟุตเทจสาขา (P5/P6/P7) + 🔀 สติกเกอร์ Capy Sensei + 🎨 ตัดต่อ | I3 (BR1), T9 |
+| U05 | 21 ต.ค. | 19 ต.ค. | `HIBI_U05_SamYan_Reel916_v1.mp4` | 📷 ฟุตเทจสาขา (P5/P6/P7) + 🔀 สติกเกอร์ Capy + 🎨 ตัดต่อ | I3, T9 |
 | U06 | 22 ต.ค. | 20 ต.ค. | `HIBI_U06_Video916_v1.mp4 · HIBI_U06_FB45_v1.png` | 🤖 ร่างสคริปต์ (T9) + 🔀 Capy + 🎨 กราฟ/ข้อความ | I2-⑦, T9 |
 | U07 | 23 ต.ค. | 21 ต.ค. | `HIBI_U07_FB45_v1.png` | 🎨 กราฟิก (ตรวจถ้อยคำโดยผู้บริหาร) | — |
 | U08 | 24 ต.ค. | 22 ต.ค. | `HIBI_U08_Reel916_v1.mp4` | 📷 ฟุตเทจจริง (P2/P3/P4) + 🎨 ตัดต่อ + 🤖 SFX ถ้าเสียงจริงไม่ชัด | A2 (SFX) |
 | U09 | 25 ต.ค. | 23 ต.ค. | `HIBI_U09_Feed45_v1.png` | 🔀 Capy (AI) + 🤖 ฉาก + 🎨 ประกอบ | I2-⑥, I1 |
 | U10 | 26 ต.ค. | 24 ต.ค. | `HIBI_U10_FB45_v1.png` | 🔀 Capy (ไลบรารี I2) + 🎨 Layout | I2 |
 | U11 | 27 ต.ค. | 25 ต.ค. | `HIBI_U11_Video916_v1.mp4 · HIBI_U11_FB45_S01-S03.png` | 📷 ถ่ายแก้วจริง + 🔀 Capy + 🎨 ข้อความ | I2-⑦, T9 |
-| U12 | 28 ต.ค. | 26 ต.ค. | `HIBI_U12_Carousel45_S01-S07.png` | 📷 ภาพ 5 สาขา + 🔀 Capy 5 ชุด (I3) + 🎨 Layout | I3, T5 |
+| U12 | 28 ต.ค. | 26 ต.ค. | `HIBI_U12_Carousel45_S01-S07.png` | 📷 ภาพหน้าร้าน 5 สาขา + 🔀 Capy + 🎨 Layout/แผนที่ | I2-⑦, T5 |
 | U13 | 29 ต.ค. | 27 ต.ค. | `HIBI_U13_Reel916_v1.mp4` | 📷 ฟุตเทจบาริสต้าจริง + 🔀 สติกเกอร์ Capy + 🎨 ตัดต่อ | I2-④, T9 |
-| U14 | 30 ต.ค. | 28 ต.ค. | `HIBI_U14_Video916_v1.mp4 · HIBI_U14_FB45_S01-S03.png` | 📷 ภาพเมนูจริง + 🔀 Capy + 🎨 ข้อความ/ราคา | I2-②, T9 |
+| U14 | 30 ต.ค. | 28 ต.ค. | `HIBI_U14_Video916_v1.mp4 · HIBI_U14_FB45_S01-S03.png` | 📷 ภาพขนมจริง + 🔀 Capy + 🎨 ข้อความ/ราคา | I2-②, T9 |
 | U15 | 31 ต.ค. | 29 ต.ค. | `HIBI_U15_Reel916_v1.mp4 · HIBI_U15_FB45_v1.png` | 🔀 Capy ชุด Halloween (AI→กราฟิก redraw) + 🎨 ประกอบ | [CAPY] + 'wearing a cute cream-colored bedsheet ghost costume with eye holes, matcha cup still on top of head, peeking from behind a matcha latte glass, tiny pumpkin beside, soft cream and green palette, no text' |
 
 ## 4. รายละเอียดรายชิ้น + แคปชัน
 
-### U01 · 17 ต.ค. (ส.) · Meet Hibi-Capy — Capy ทักทายครั้งแรก
+### U01 · 17 ต.ค. (ส.) · Meet Capy — Capy ทักทายครั้งแรก
 
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #HibiMoments |
-| Pillar / Funnel | P1 Hibi-Capy / TOFU |
+| Pillar / Funnel | P1 Capy / TOFU |
 | Objective | เปิดตัว/รีเฟรชคาแรกเตอร์ ให้คนจำ Capy = Hibi |
 | Format | Reels/TikTok 9:16 · 10–12s |
 | ภาพ / ลำดับ | 0–2s Capy (Chill) โผล่จากขอบจอ โบกมือ → 2–6s ฟุตเทจหน้าร้าน+ตีมัทฉะจริง → 6–10s Capy (Onsen) แช่แก้วมัทฉะ → End card โลโก้ |
@@ -86,7 +86,7 @@
 **TT · 2026-10-17 18:00 น. · video**
 ```
 สวัสดีเพื่อน ๆ Capy เองนะ~ ♨️ จากนี้จะมาชวนชิลกับมัทฉะทุกวันเลย
-#HibiMatchaCafe #HibiCapy #คาปิบาร่า #มัทฉะ #คาเฟ่มัทฉะ
+#HibiMatcha #HibiAndCapy #คาปิบาร่า #มัทฉะ #คาเฟ่มัทฉะ
 ```
 **IG · 2026-10-17 19:00 น. · reel**
 ```
@@ -98,13 +98,13 @@
 
 กดติดตามไว้ จะได้ไม่พลาดกันน้า 💚
 
-#HibiMatchaCafe #HibiCapy #มัทฉะ #matcha #คาเฟ่มัทฉะ #คาปิบาร่า #capybara
+#HibiMatcha #HibiAndCapy #มัทฉะ #matcha #คาเฟ่มัทฉะ #คาปิบาร่า #capybara
 ```
 **FB · 2026-10-17 19:30 น. · video**
 ```
 สวัสดีเพื่อน ๆ ชาว Hibi 👋🍵
 
-ขอแนะนำตัวอย่างเป็นทางการ… “Hibi-Capy” คาปิบาร่าใจเย็นประจำร้านเรา ☁️
+ขอแนะนำตัวอย่างเป็นทางการ… “Capy” คาปิบาร่าใจเย็น เพื่อนซี้ของ Hibi ประจำร้านเรา ☁️
 
 Capy ชอบอะไร?
 🍵 มัทฉะแก้วโปรด
@@ -114,7 +114,7 @@ Capy ชอบอะไร?
 จากนี้ Capy จะมาชวนคุยเรื่องมัทฉะ แนะนำเมนู และพาไปรู้จักทั้ง 5 สาขาของ Hibi
 ฝากกดติดตามเพจไว้ด้วยนะ~ 💚
 
-#HibiMatchaCafe #HibiCapy #มัทฉะ #คาเฟ่มัทฉะ
+#HibiMatcha #HibiAndCapy #มัทฉะ #คาเฟ่มัทฉะ
 ```
 
 ### U02 · 18 ต.ค. (อา.) · ทำไมชื่อ Hibi (日々)
@@ -140,7 +140,7 @@ Hibi แปลว่าอะไร? 🍃
 
 วันนี้ชิลกันหรือยัง? 💚
 
-#HibiMatchaCafe #HibiCapy #SlowSunday #มัทฉะ #matcha #คาเฟ่มัทฉะ
+#HibiMatcha #HibiAndCapy #SlowSunday #มัทฉะ #matcha #คาเฟ่มัทฉะ
 ```
 **FB · 2026-10-18 12:00 น. · album**
 ```
@@ -155,7 +155,7 @@ Hibi แปลว่าอะไร? 🍃
 
 วันอาทิตย์แบบนี้ ขอให้ทุกคนได้ช้าลงสักนิดนะ~ 💚
 
-#HibiMatchaCafe #HibiCapy #SlowSunday #มัทฉะ
+#HibiMatcha #HibiAndCapy #SlowSunday #มัทฉะ
 ```
 
 ### U03 · 19 ต.ค. (จ.) · POV: วันจันทร์ ก่อน vs หลังมัทฉะ
@@ -163,7 +163,7 @@ Hibi แปลว่าอะไร? 🍃
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #CapyMonday |
-| Pillar / Funnel | P1 Hibi-Capy / TOFU |
+| Pillar / Funnel | P1 Capy / TOFU |
 | Objective | มีมเข้าถึงง่าย สร้าง Reach/Share |
 | Format | TikTok/Reels 9:16 · 7–9s (Split before/after) |
 | ภาพ / ลำดับ | ครึ่งแรก Capy (Sleepy) กองเอกสาร สีหม่น → จิบมัทฉะ (Sip) → ครึ่งหลัง Capy (Happy) แสงสดใส มีประกาย |
@@ -175,7 +175,7 @@ Hibi แปลว่าอะไร? 🍃
 **TT · 2026-10-19 07:30 น. · video**
 ```
 Capy ฟื้นแล้ว ♨️ แก้วแรกของวันจันทร์ของคุณคืออะไร?
-#HibiMatchaCafe #HibiCapy #CapyMonday #มัทฉะ #วันจันทร์
+#HibiMatcha #HibiAndCapy #CapyMonday #มัทฉะ #วันจันทร์
 ```
 **FB · 2026-10-19 08:00 น. · video**
 ```
@@ -184,7 +184,7 @@ POV: วันจันทร์ 8 โมงเช้า 😵‍💫 → หล�
 ใครเป็นแบบ Capy บ้าง ยกมือ 🙋
 แท็กเพื่อนที่ต้องการมัทฉะด่วน ๆ เช้านี้มาเลย~ 🍵
 
-#HibiMatchaCafe #HibiCapy #CapyMonday #มัทฉะ
+#HibiMatcha #HibiAndCapy #CapyMonday #มัทฉะ
 ```
 
 ### U04 · 20 ต.ค. (อ.) · มัทฉะ vs ชาเขียวทั่วไป ต่างกันยังไง
@@ -212,12 +212,12 @@ Capy สรุปให้ใน 6 สไลด์ เซฟไว้ก่อ�
 
 ใครเพิ่งรู้ข้อไหน คอมเมนต์เลข 1–3 มาเลย 👇
 
-#HibiMatchaCafe #HibiCapy #MatchaClass #มัทฉะ #ความรู้มัทฉะ #matcha101
+#HibiMatcha #HibiAndCapy #MatchaClass #มัทฉะ #ความรู้มัทฉะ #matcha101
 ```
 **TT · 2026-10-20 18:00 น. · photo_carousel**
 ```
 มัทฉะไม่ใช่แค่ชาเขียวนะ! ปัดดู 3 ข้อที่ต่างกัน 🍃 เซฟไว้ก่อนไปสั่ง
-#HibiMatchaCafe #HibiCapy #MatchaClass #มัทฉะ #ความรู้มัทฉะ
+#HibiMatcha #HibiAndCapy #MatchaClass #มัทฉะ #ความรู้มัทฉะ
 ```
 **FB · 2026-10-20 19:30 น. · album**
 ```
@@ -231,57 +231,52 @@ Capy สรุปให้แบบเข้าใจง่าย ๆ
 แล้วมัทฉะดีดูยังไง? ดูสไลด์สุดท้ายได้เลย 👉
 มีคำถามเรื่องมัทฉะ ทิ้งไว้ในคอมเมนต์ Capy จะเลือกไปตอบใน #AskHibi นะ~ 💚
 
-#HibiMatchaCafe #HibiCapy #MatchaClass #มัทฉะ
+#HibiMatcha #HibiAndCapy #MatchaClass #มัทฉะ
 ```
 
-### U05 · 21 ต.ค. (พ.) · Branch Spotlight: สาขา 1 Flagship
+### U05 · 21 ต.ค. (พ.) · Branch Spotlight: สาขาสามย่าน (จุฬาฯ 11)
 
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #HibiBranch |
 | Pillar / Funnel | P4 Branch / BOFU |
-| Objective | พาคนเข้าสาขา Flagship (Direction clicks) |
+| Objective | พาคนย่านสามย่าน/จุฬาฯ เข้าสาขา (Direction clicks) |
 | Format | Reels/TikTok 9:16 · 15s (Capy พาทัวร์) |
-| ภาพ / ลำดับ | Capy Sensei (สติกเกอร์มุมจอ) พาทัวร์: หน้าร้าน → Matcha Bar → บาริสต้าตีมัทฉะ → มุมนั่ง → เมนูชูโรง → End card ชื่อสาขา+เวลาเปิด |
-| ข้อความบนภาพ (🎨 พิมพ์) | Capy พาทัวร์ Hibi สาขา [BR1] 📍 / Matcha Bar / มุมนั่งชิล / เมนูต้องลอง: [เมนูชูโรง BR1] / เปิด [เวลา] |
-| ผู้ผลิต | 📷 ฟุตเทจสาขา (P5/P6/P7) + 🔀 สติกเกอร์ Capy Sensei + 🎨 ตัดต่อ |
-| Prompt / Brief | I3 (BR1), T9 |
-| ไฟล์สื่อ | `HIBI_U05_BR1_Reel916_v1.mp4` |
-| ⚠️ ต้องเติมก่อนส่ง | ชื่อสาขา BR1 · เวลาเปิด · ที่จอดรถ · เมนูชูโรง BR1 · ลิงก์ Google Maps |
+| ภาพ / ลำดับ | สติกเกอร์ Capy มุมจอพาทัวร์: หน้าร้าน (ป้ายชัด) → บาริสต้าตีมัทฉะ → มุมนั่ง → เมนูแนะนำ → End card ชื่อสาขา + เวลาเปิด |
+| ข้อความบนภาพ (🎨 พิมพ์) | Capy พาทัวร์ Hibi สามย่าน 📍 / ซอยจุฬาฯ 11 / มุมนั่งชิล / แวะก่อน-หลังเรียน / เปิด [เวลา] |
+| ผู้ผลิต | 📷 ฟุตเทจสาขา (P5/P6/P7) + 🔀 สติกเกอร์ Capy + 🎨 ตัดต่อ |
+| Prompt / Brief | I3, T9 |
+| ไฟล์สื่อ | `HIBI_U05_SamYan_Reel916_v1.mp4` |
+| ⚠️ ต้องเติมก่อนส่ง | เวลาเปิดสาขาสามย่าน · ข้อมูลที่นั่ง/ปลั๊ก (ถ้าจะพูดถึง) · ลิงก์ Google Maps สาขาสามย่าน |
 
 **IG · 2026-10-21 12:00 น. · reel**
 ```
-Capy พาทัวร์ Hibi สาขา [BR1] 📍🍵
-มี Matcha Bar ให้นั่งดูบาริสต้าตีมัทฉะใกล้ ๆ ด้วยนะ~
+Capy พาทัวร์ Hibi สาขาสามย่าน (จุฬาฯ 11) 📍🍵
+แวะก่อนเรียน หลังเลิกงาน หรือนัดเพื่อนก็ชิลได้~
 
-เมนูต้องลอง: [เมนูชูโรง BR1]
 🕗 [เวลาเปิด]
 
-เซฟไว้ก่อนไปวันหยุดนี้ 📌
+เซฟไว้ก่อนไปนะ 📌
 
-#HibiMatchaCafe #HibiCapy #HibiBranch #Hibi[BR1] #คาเฟ่[ย่าน] #มัทฉะ
+#HibiMatcha #HibiAndCapy #HibiBranch #สามย่าน #คาเฟ่สามย่าน #คาเฟ่กรุงเทพ #มัทฉะ
 ```
 **TT · 2026-10-21 18:00 น. · video**
 ```
-คาเฟ่มัทฉะ [ย่าน] ที่มี Matcha Bar นั่งดูตีมัทฉะสด ๆ 🍵 📍Hibi สาขา [BR1]
-#Hibi[BR1] #คาเฟ่[ย่าน] #ร้านมัทฉะ #HibiMatchaCafe
+คาเฟ่มัทฉะใกล้จุฬาฯ ซอย 11 🍵 📍Hibi สาขาสามย่าน แวะก่อน-หลังเรียนได้เลย
+#คาเฟ่สามย่าน #คาเฟ่จุฬา #ร้านมัทฉะ #HibiMatcha
 ```
 **FB · 2026-10-21 19:30 น. · video**
 ```
-📍 Capy พาทัวร์ Hibi สาขา [BR1] 🍵
+📍 Capy พาทัวร์ Hibi สาขาสามย่าน (จุฬาฯ 11) 🍵
 
-สาขานี้มีอะไรดี?
-🍵 Matcha Bar นั่งดูบาริสต้าตีมัทฉะใกล้ ๆ
-🌿 มุมนั่งชิล แสงสวย
-⭐ เมนูต้องลอง: [เมนูชูโรง BR1]
+ใครเรียน/ทำงานแถวสามย่าน แวะมาพักใจกับมัทฉะแก้วโปรดได้เลย~
 
 🕗 เปิด [เวลาเปิด]
-🚗 [ข้อมูลที่จอดรถ]
 👉 ดูเส้นทาง: [ลิงก์ Google Maps]
 
-ใครเคยไปสาขานี้แล้ว คอมเมนต์บอกเมนูโปรดหน่อยน้า~ 💚
+ใครเคยมาสาขานี้แล้ว คอมเมนต์บอกเมนูโปรดหน่อยน้า~ 💚
 
-#HibiMatchaCafe #HibiCapy #HibiBranch #Hibi[BR1]
+#HibiMatcha #HibiAndCapy #HibiBranch #สามย่าน
 ```
 
 ### U06 · 22 ต.ค. (พฤ.) · มัทฉะมีคาเฟอีนเท่ากาแฟไหม?
@@ -302,7 +297,7 @@ Capy พาทัวร์ Hibi สาขา [BR1] 📍🍵
 **TT · 2026-10-22 18:00 น. · video**
 ```
 ตอบคำถามที่ถามกันบ่อยมาก! มัทฉะมีคาเฟอีนเท่ากาแฟไหม? 🍵☕ คุณดื่มแก้วไหนตอนบ่าย?
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ #คาเฟอีน
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ #คาเฟอีน
 ```
 **IG · 2026-10-22 19:00 น. · reel**
 ```
@@ -313,7 +308,7 @@ Capy พาทัวร์ Hibi สาขา [BR1] 📍🍵
 
 มีคำถามอะไรอีก ทิ้งไว้ในคอมเมนต์ Capy จะมาตอบ 👇
 
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ #matcha
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ #matcha
 ```
 **FB · 2026-10-22 12:00 น. · image**
 ```
@@ -325,7 +320,7 @@ Capy พาทัวร์ Hibi สาขา [BR1] 📍🍵
 
 สัปดาห์หน้าอยากให้ Capy ตอบเรื่องอะไร คอมเมนต์ไว้ได้เลย 👇
 
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ
 ```
 
 ### U07 · 23 ต.ค. (ศ.) · วันปิยมหาราช — โพสต์น้อมรำลึก (ไม่บังคับ)
@@ -369,7 +364,7 @@ Hibi Matcha Cafe
 **TT · 2026-10-24 12:00 น. · video**
 ```
 เสียงที่ Capy ฟังแล้วใจเย็นที่สุด 🔊🍵 ลมหนาวมา มัทฉะร้อนก็มา~
-#HibiMatchaCafe #HibiCapy #ASMR #มัทฉะ #matchatok #ร้านมัทฉะ
+#HibiMatcha #HibiAndCapy #ASMR #มัทฉะ #matchatok #ร้านมัทฉะ
 ```
 **IG · 2026-10-24 19:00 น. · reel**
 ```
@@ -379,7 +374,7 @@ Hibi Matcha Cafe
 🔊 เปิดเสียงด้วยนะ
 📍 Hibi ทั้ง 5 สาขา (ลิงก์ใน bio)
 
-#HibiMatchaCafe #HibiCapy #HibiMenu #matcha #matchalatte #มัทฉะ #ASMR
+#HibiMatcha #HibiAndCapy #HibiMenu #matcha #matchalatte #มัทฉะ #ASMR
 ```
 **FB · 2026-10-24 19:30 น. · video**
 ```
@@ -390,7 +385,7 @@ Hibi Matcha Cafe
 
 ทีมมัทฉะร้อน หรือ ทีมมัทฉะเย็น? คอมเมนต์มาเลย 👇
 
-#HibiMatchaCafe #HibiCapy #HibiMenu #มัทฉะ
+#HibiMatcha #HibiAndCapy #HibiMenu #มัทฉะ
 ```
 
 ### U09 · 25 ต.ค. (อา.) · Capy Onsen — วันอาทิตย์ขอแช่มัทฉะ
@@ -398,7 +393,7 @@ Hibi Matcha Cafe
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #SlowSunday |
-| Pillar / Funnel | P1 Hibi-Capy / TOFU |
+| Pillar / Funnel | P1 Capy / TOFU |
 | Objective | ภาพจำหลักของแบรนด์ (Capy + มัทฉะ + ชิล) |
 | Format | Single image 4:5 |
 | ภาพ / ลำดับ | Capy (Onsen) แช่ในถ้วยมัทฉะยักษ์ ไอน้ำลอย พื้นหลังหน้าต่างเช้าวันอาทิตย์ (ฉาก AI) ไม่มีข้อความบนภาพยกเว้นโลโก้เล็ก |
@@ -412,7 +407,7 @@ Hibi Matcha Cafe
 วันอาทิตย์แบบนี้ Capy ขอแช่มัทฉะอุ่น ๆ สักพักนะ ♨️🍵
 เพื่อน ๆ ชิลกันยังไงบ้าง? 💚
 
-#HibiMatchaCafe #HibiCapy #SlowSunday #มัทฉะ #capybara #คาปิบาร่า
+#HibiMatcha #HibiAndCapy #SlowSunday #มัทฉะ #capybara #คาปิบาร่า
 ```
 **FB · 2026-10-25 10:30 น. · image**
 ```
@@ -421,7 +416,7 @@ Hibi Matcha Cafe
 ใช้ 1 อีโมจิบอกมู้ดวันนี้ของคุณหน่อย 👇
 ☁️ ชิลมาก | 😴 ง่วง | 🔥 ต้องทำงาน
 
-#HibiMatchaCafe #HibiCapy #SlowSunday
+#HibiMatcha #HibiAndCapy #SlowSunday
 ```
 
 ### U10 · 26 ต.ค. (จ.) · Capy Mood Meter วันจันทร์
@@ -429,7 +424,7 @@ Hibi Matcha Cafe
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #CapyMonday |
-| Pillar / Funnel | P1 Hibi-Capy / TOFU |
+| Pillar / Funnel | P1 Capy / TOFU |
 | Objective | Engagement (คอมเมนต์/Poll) |
 | Format | FB single image 4:5 (Poll ด้วยอีโมจิ) |
 | ภาพ / ลำดับ | Capy 4 ท่าเรียงแถว: Sleepy / Chill / Happy / Onsen พร้อมเลข 1–4 |
@@ -449,7 +444,7 @@ Hibi Matcha Cafe
 
 คอมเมนต์ตัวเลขมาเลย 👇 Capy เป็นข้อ 4 ตลอดกาล 😌
 
-#HibiMatchaCafe #HibiCapy #CapyMonday
+#HibiMatcha #HibiAndCapy #CapyMonday
 ```
 
 ### U11 · 27 ต.ค. (อ.) · สั่งหวานกี่ % ดี? (0/25/50/75/100)
@@ -470,7 +465,7 @@ Hibi Matcha Cafe
 **TT · 2026-10-27 18:00 น. · video**
 ```
 มือใหม่อย่าเพิ่งสั่งหวาน 100%! ลองเริ่มที่ 50% จะได้กลิ่นมัทฉะเต็ม ๆ 🍃 คุณสั่งหวานเท่าไหร่?
-#HibiMatchaCafe #HibiCapy #MatchaClass #มัทฉะ #สั่งมัทฉะ
+#HibiMatcha #HibiAndCapy #MatchaClass #มัทฉะ #สั่งมัทฉะ
 ```
 **FB · 2026-10-27 12:00 น. · album**
 ```
@@ -484,10 +479,10 @@ Hibi Matcha Cafe
 
 คุณเป็นทีมกี่ %? คอมเมนต์บอกกันหน่อย 👇
 
-#HibiMatchaCafe #HibiCapy #MatchaClass #มัทฉะ
+#HibiMatcha #HibiAndCapy #MatchaClass #มัทฉะ
 ```
 
-### U12 · 28 ต.ค. (พ.) · 5 สาขา 5 ฟีล — วันนี้คุณอยากไปสาขาไหน?
+### U12 · 28 ต.ค. (พ.) · Hibi 5 สาขา — สาขาไหนใกล้คุณที่สุด?
 
 | หัวข้อ | รายละเอียด |
 |---|---|
@@ -495,45 +490,45 @@ Hibi Matcha Cafe
 | Pillar / Funnel | P4 Branch / BOFU |
 | Objective | ให้รู้จักครบ 5 สาขา + เลือกสาขาใกล้ตัว |
 | Format | Carousel 4:5 · 7 สไลด์ (TikTok = Photo mode) |
-| ภาพ / ลำดับ | S1 Cover: Capy 5 ชุดยืนเรียง 'มู้ดไหนไปสาขานั้น' · S2–S6 สาขาละ 1 สไลด์: ภาพสาขาจริง + Capy ประจำสาขา + มู้ด + ทำเล · S7 'เซฟไว้ + แท็กเพื่อนที่จะไปด้วย' |
-| ข้อความบนภาพ (🎨 พิมพ์) | อยากดื่มมัทฉะแท้ → [BR1] / พาครอบครัว → [BR2] / รีบไปทำงาน → [BR3] / นั่งอ่านหนังสือ → [BR4] / ถ่ายรูปสวย → [BR5] |
-| ผู้ผลิต | 📷 ภาพ 5 สาขา + 🔀 Capy 5 ชุด (I3) + 🎨 Layout |
-| Prompt / Brief | I3, T5 |
+| ภาพ / ลำดับ | S1 Cover: แผนที่กรุงเทพแบบน่ารัก หมุด 5 จุด + Capy ถือแผนที่ · S2–S6 สาขาละ 1 สไลด์: ภาพหน้าร้านจริง + ชื่อสาขา + ย่าน/จุดสังเกต · S7 'เซฟไว้ + แท็กเพื่อนที่บ้านใกล้' |
+| ข้อความบนภาพ (🎨 พิมพ์) | Hibi 5 สาขา ใกล้คุณที่ไหน? / ลาดพร้าว 107 / นาคนิวาส 48 / สะพานควาย / นวมินทร์ 111 / สามย่าน (จุฬาฯ 11) |
+| ผู้ผลิต | 📷 ภาพหน้าร้าน 5 สาขา + 🔀 Capy + 🎨 Layout/แผนที่ |
+| Prompt / Brief | I2-⑦, T5 |
 | ไฟล์สื่อ | `HIBI_U12_Carousel45_S01-S07.png` |
-| ⚠️ ต้องเติมก่อนส่ง | ชื่อ + ทำเลทั้ง 5 สาขา · ภาพบรรยากาศจริงทุกสาขา |
+| ⚠️ ต้องเติมก่อนส่ง | ภาพหน้าร้านจริงครบ 5 สาขา |
 
 **IG · 2026-10-28 12:00 น. · carousel**
 ```
-5 สาขา 5 ฟีล — วันนี้มู้ดไหน ไปสาขานั้น 📍🍵
+Hibi 5 สาขา — สาขาไหนใกล้คุณที่สุด? 📍🍵
 
-🍵 อยากดื่มมัทฉะแท้ → [BR1]
-👨‍👩‍👧 พาครอบครัว → [BR2]
-🏃 รีบไปทำงาน → [BR3]
-📚 นั่งอ่านหนังสือ → [BR4]
-📸 ถ่ายรูปสวย → [BR5]
+• ลาดพร้าว 107
+• นาคนิวาส 48
+• สะพานควาย
+• นวมินทร์ 111
+• สามย่าน (จุฬาฯ 11)
 
-เซฟไว้ แล้วแท็กเพื่อนที่จะไปด้วยกัน 📌
+เซฟไว้ แล้วแท็กเพื่อนที่บ้านใกล้สาขาเดียวกัน 📌
 
-#HibiMatchaCafe #HibiCapy #HibiBranch #คาเฟ่มัทฉะ #มัทฉะ
+#HibiMatcha #HibiAndCapy #HibiBranch #คาเฟ่กรุงเทพ #มัทฉะกรุงเทพ
 ```
 **TT · 2026-10-28 18:00 น. · photo_carousel**
 ```
-มู้ดไหนไปสาขานั้น! 5 สาขา 5 ฟีลของ Hibi 📍 ปัดดูว่าสาขาไหนเป็นคุณ
-#HibiMatchaCafe #HibiCapy #HibiBranch #คาเฟ่มัทฉะ #ร้านมัทฉะ
+Hibi มี 5 สาขาแล้วนะ! ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน 📍 ใกล้ใครสุด?
+#HibiMatcha #HibiAndCapy #คาเฟ่กรุงเทพ #ร้านมัทฉะ #มัทฉะกรุงเทพ
 ```
 **FB · 2026-10-28 19:30 น. · album**
 ```
-Hibi มี 5 สาขา แต่ละที่ฟีลไม่เหมือนกันนะ~ 📍
+Hibi Matcha มี 5 สาขาให้แวะชิลแล้วนะ~ 📍🍵
 
-🍵 [BR1] — Matcha Bar สำหรับสายมัทฉะแท้
-👨‍👩‍👧 [BR2] — พักขาตอนเดินห้างกับครอบครัว
-🏃 [BR3] — มัทฉะเช้าแบบไม่ต้องรอนาน
-📚 [BR4] — มุมนั่งอ่านหนังสือ/ทำงานยาว ๆ
-📸 [BR5] — มุมถ่ายรูปกับ Capy
+📍 ลาดพร้าว 107
+📍 นาคนิวาส 48
+📍 สะพานควาย
+📍 นวมินทร์ 111
+📍 สามย่าน (จุฬาฯ 11)
 
 บ้าน/ที่ทำงานใกล้สาขาไหนที่สุด คอมเมนต์บอก Capy หน่อย 👇
 
-#HibiMatchaCafe #HibiCapy #HibiBranch
+#HibiMatcha #HibiAndCapy #HibiBranch #คาเฟ่กรุงเทพ
 ```
 
 ### U13 · 29 ต.ค. (พฤ.) · เบื้องหลัง: ทำไมต้องร่อนผงมัทฉะก่อนตี?
@@ -553,7 +548,7 @@ Hibi มี 5 สาขา แต่ละที่ฟีลไม่เหม�
 **TT · 2026-10-29 18:00 น. · video**
 ```
 บาริสต้า Hibi ทำแบบนี้ทุกแก้ว! ทำไมต้องร่อนผงก่อนตี? ดูความต่างกัน 👀🍵
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ #เบื้องหลัง
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ #เบื้องหลัง
 ```
 **IG · 2026-10-29 19:00 น. · reel**
 ```
@@ -564,7 +559,7 @@ Hibi มี 5 สาขา แต่ละที่ฟีลไม่เหม�
 
 เรื่องเล็ก ๆ ที่ทำให้มัทฉะทั้งแก้วดีขึ้นนะ~ 💚
 
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ #matcha #baristalife
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ #matcha #baristalife
 ```
 **FB · 2026-10-29 12:00 น. · video**
 ```
@@ -576,44 +571,41 @@ Hibi มี 5 สาขา แต่ละที่ฟีลไม่เหม�
 
 อยากรู้เบื้องหลังเรื่องไหนอีก คอมเมนต์บอก Capy ได้เลย 👇
 
-#HibiMatchaCafe #HibiCapy #AskHibi #มัทฉะ
+#HibiMatcha #HibiAndCapy #AskHibi #มัทฉะ
 ```
 
-### U14 · 30 ต.ค. (ศ.) · Top 3 เมนูขายดี — สิ้นเดือนให้รางวัลตัวเอง
+### U14 · 30 ต.ค. (ศ.) · ของคู่มัทฉะ — สิ้นเดือนให้รางวัลตัวเอง
 
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | #HibiMenu (สิ้นเดือน) |
 | Pillar / Funnel | P2 Menu / BOFU |
-| Objective | ดันยอดช่วงเงินเดือนออก |
-| Format | TikTok 9:16 · 12s (นับ 3-2-1) / FB album 3 รูป |
-| ภาพ / ลำดับ | นับถอยหลัง 3→1 ภาพแก้วจริงทีละเมนู ชื่อ+ราคา → Capy (Happy) 'เงินเดือนออก ให้รางวัลตัวเองหน่อย' |
-| ข้อความบนภาพ (🎨 พิมพ์) | Top 3 เมนูขายดีของ Hibi / #3 [เมนู] / #2 [เมนู] / #1 [เมนู] 🏆 |
-| ผู้ผลิต | 📷 ภาพเมนูจริง + 🔀 Capy + 🎨 ข้อความ/ราคา |
+| Objective | ดันยอดขนมคู่เครื่องดื่มช่วงเงินเดือนออก |
+| Format | TikTok 9:16 · 12s / FB album 3 รูป |
+| ภาพ / ลำดับ | ภาพขนมจริงทีละชิ้น: Mochi Butter Bun (ฉีกเห็นเนื้อหนึบ) → Matcha Mochi Butter Bun → Tiramisu Matcha ตักคำแรก · ป้ายราคา · ปิดด้วย Capy (Happy) ถือแก้วมัทฉะ |
+| ข้อความบนภาพ (🎨 พิมพ์) | สิ้นเดือน ให้รางวัลตัวเอง 💚 / Mochi Butter Bun 39.- / Matcha Mochi Butter Bun 49.- / Tiramisu Matcha 69.- |
+| ผู้ผลิต | 📷 ภาพขนมจริง + 🔀 Capy + 🎨 ข้อความ/ราคา |
 | Prompt / Brief | I2-②, T9 |
 | ไฟล์สื่อ | `HIBI_U14_Video916_v1.mp4 · HIBI_U14_FB45_S01-S03.png` |
-| ⚠️ ต้องเติมก่อนส่ง | ยอดขาย Top 3 จริงจากระบบ POS · ราคา · โปรสิ้นเดือน (ถ้ามี) |
 
 **TT · 2026-10-30 18:00 น. · video**
 ```
-Top 3 เมนูขายดีของ Hibi! อันดับ 1 ใครเดาถูก? 🏆🍵 เงินเดือนออก ให้รางวัลตัวเองหน่อย~
-#HibiMatchaCafe #HibiCapy #HibiMenu #มัทฉะ #เมนูขายดี
+เงินเดือนออก ให้รางวัลตัวเองหน่อย~ 💸🍵 ขนมคู่มัทฉะของ Hibi เริ่ม 39.- คุณเลือกชิ้นไหน?
+#HibiMatcha #HibiAndCapy #มัทฉะ #ของหวาน #MochiButterBun #TiramisuMatcha
 ```
 **FB · 2026-10-30 12:00 น. · album**
 ```
 เงินเดือนออกแล้ว ให้รางวัลตัวเองหน่อยไหม? 💸🍵
-Capy เปิดอันดับ Top 3 เมนูขายดีของ Hibi เดือนนี้!
+Capy คัดของคู่มัทฉะมาให้ 3 ชิ้น
 
-🥉 #3 [เมนู] — [จุดเด่น 1 บรรทัด]
-🥈 #2 [เมนู] — [จุดเด่น 1 บรรทัด]
-🥇 #1 [เมนู] — [จุดเด่น 1 บรรทัด]
+🧈 Mochi Butter Bun 39.- — กรอบนอก หนึบใน
+💚 Matcha Mochi Butter Bun 49.- — หนึบหอมมัทฉะ
+🍰 Tiramisu Matcha (Homemade) 69.- — ครีมนุ่มเบา มัทฉะหอม
 
-[โปรสิ้นเดือน ถ้ามี]
 📍 มีทุกสาขา
+คุณเป็นทีมชิ้นไหน? 👇
 
-คุณเป็นทีมอันดับไหน? 👇
-
-#HibiMatchaCafe #HibiCapy #HibiMenu #มัทฉะ
+#HibiMatcha #HibiAndCapy #HibiMenu #คาเฟ่กรุงเทพ
 ```
 
 ### U15 · 31 ต.ค. (ส.) · Capy Halloween + ชวนลูกค้าถ่ายรูปแท็ก
@@ -621,7 +613,7 @@ Capy เปิดอันดับ Top 3 เมนูขายดีของ H
 | หัวข้อ | รายละเอียด |
 |---|---|
 | Theme | Halloween × #HibiMoments |
-| Pillar / Funnel | P1 Hibi-Capy / P6 UGC / LOYALTY |
+| Pillar / Funnel | P1 Capy / P6 UGC / LOYALTY |
 | Objective | สร้าง UGC + ความสนุกร่วม |
 | Format | Reels/TikTok 9:16 · 8–10s + FB image |
 | ภาพ / ลำดับ | Capy แต่งชุดผีน้อย (ผ้าคลุมสีครีม เจาะรูตา ถ้วยมัทฉะยังอยู่บนหัว) โผล่หลังแก้วมัทฉะ 'บู๊!' → ฟักทองเล็ก ๆ ข้างแก้ว · โทนยังคงครีม/เขียว ไม่ดำ-ส้มจัด |
@@ -634,7 +626,7 @@ Capy เปิดอันดับ Top 3 เมนูขายดีของ H
 **TT · 2026-10-31 12:00 น. · video**
 ```
 บู๊! 👻 Capy มาหลอกแล้ว แต่หลอกไม่สำเร็จเพราะมัวแต่จิบมัทฉะ 🍵 Happy Halloween!
-#HibiMatchaCafe #HibiCapy #Halloween #คาปิบาร่า #มัทฉะ
+#HibiMatcha #HibiAndCapy #Halloween #คาปิบาร่า #มัทฉะ
 ```
 **IG · 2026-10-31 19:00 น. · reel**
 ```
@@ -644,41 +636,35 @@ Capy เปิดอันดับ Top 3 เมนูขายดีของ H
 แล้วแท็ก #HibiMoments ให้ Capy ดูหน่อยน้า~
 [ของรางวัล/กิจกรรม ถ้ามี]
 
-#HibiMatchaCafe #HibiCapy #HibiMoments #Halloween #มัทฉะ #capybara
+#HibiMatcha #HibiAndCapy #HibiMoments #Halloween #มัทฉะ #capybara
 ```
 **FB · 2026-10-31 19:30 น. · image**
 ```
-บู๊! 👻 Happy Halloween จาก Hibi-Capy 🍵
+บู๊! 👻 Happy Halloween จาก Capy 🍵
 
 Capy พยายามแต่งผีมาหลอกทุกคน… แต่หลอกไม่สำเร็จเพราะมัวแต่จิบมัทฉะ 😌
 
 ใครแวะมาร้านวันนี้ ถ่ายรูปกับแก้วมัทฉะแล้วแท็ก #HibiMoments มาให้ดูกันหน่อยน้า~
 [ของรางวัล/กิจกรรม ถ้ามี]
 
-#HibiMatchaCafe #HibiCapy #HibiMoments #Halloween
+#HibiMatcha #HibiAndCapy #HibiMoments #Halloween
 ```
 
 ## 5. ข้อมูลที่ต้องเติม / ยืนยันก่อนส่ง Buffer
 
 | # | รายการ | ใช้ในชิ้น |
 |---|---|---|
-| 1 | ชื่อสาขา BR1 | U05 |
-| 2 | เวลาเปิด | U05 |
-| 3 | ที่จอดรถ | U05 |
-| 4 | เมนูชูโรง BR1 | U05 |
-| 5 | ลิงก์ Google Maps | U05 |
-| 6 | ยืนยันว่ามีเมนูโฮจิฉะ | U06 |
-| 7 | ปริมาณผงมัทฉะต่อแก้วของร้าน (ถ้าจะใส่ตัวเลข) | U06 |
-| 8 | ผู้บริหารอนุมัติว่าจะโพสต์หรือไม่ | U07 |
-| 9 | ชื่อเมนูมัทฉะร้อนที่จะดัน | U08 |
-| 10 | ยืนยันระดับความหวานที่ร้านมีจริง | U11 |
-| 11 | ชื่อ + ทำเลทั้ง 5 สาขา | U12 |
-| 12 | ภาพบรรยากาศจริงทุกสาขา | U12 |
-| 13 | ยอดขาย Top 3 จริงจากระบบ POS | U14 |
-| 14 | ราคา | U14 |
-| 15 | โปรสิ้นเดือน (ถ้ามี) | U14 |
-| 16 | ยืนยันว่าจะมีกิจกรรม/ของรางวัลสำหรับคนแท็กหรือไม่ (ถ้าไม่มี ให้ตัดบรรทัดรางวัลออก) | U15 |
-| 17 | ยืนยันข้อความเรื่องแบรนด์ที่ใช้ในแคปชัน: “ตีสดทุกแก้ว”, “ร่อนผงทุกแก้ว”, “5 สาขา”, มีลิงก์สาขาใน bio | U01, U08, U13 |
+| 1 | เวลาเปิดสาขาสามย่าน | U05 |
+| 2 | ข้อมูลที่นั่ง/ปลั๊ก (ถ้าจะพูดถึง) | U05 |
+| 3 | ลิงก์ Google Maps สาขาสามย่าน | U05 |
+| 4 | ยืนยันว่ามีเมนูโฮจิฉะ | U06 |
+| 5 | ปริมาณผงมัทฉะต่อแก้วของร้าน (ถ้าจะใส่ตัวเลข) | U06 |
+| 6 | ผู้บริหารอนุมัติว่าจะโพสต์หรือไม่ | U07 |
+| 7 | ชื่อเมนูมัทฉะร้อนที่จะดัน | U08 |
+| 8 | ยืนยันระดับความหวานที่ร้านมีจริง | U11 |
+| 9 | ภาพหน้าร้านจริงครบ 5 สาขา | U12 |
+| 10 | ยืนยันว่าจะมีกิจกรรม/ของรางวัลสำหรับคนแท็กหรือไม่ (ถ้าไม่มี ให้ตัดบรรทัดรางวัลออก) | U15 |
+| 11 | ยืนยันข้อความเรื่องแบรนด์ที่ใช้ในแคปชัน: “ตีสดทุกแก้ว”, “ร่อนผงทุกแก้ว”, มีลิงก์สาขาใน bio | U01, U08, U13 |
 
 ## 6. Checklist ก่อนกดส่ง Buffer
 
@@ -690,3 +676,24 @@ Capy พยายามแต่งผีมาหลอกทุกคน… �
 - [ ] แคปชันผ่าน Brand Checklist (01 §7) · ไม่มีคำกล่าวอ้างสุขภาพเกินจริง
 - [ ] ติดป้าย AI-generated ในแอป (IG/TikTok) สำหรับวิดีโอ/ภาพ AI ที่ดูสมจริง
 - [ ] แนะนำส่งเข้า Buffer แบบ **Draft/รออนุมัติ** ก่อน แล้วกด Schedule หลังตรวจพรีวิวในแอป
+
+## 7. สถานะใน Buffer (อัปเดต 16 ต.ค. 2026 16:30 น.)
+
+ล้าง Buffer แล้ว: ลบโพสต์ First Flush 3 ชิ้น (สำรองไว้ที่ [buffer-backup-2026-10-16.md](./buffer-backup-2026-10-16.md)) · Ideas 13 ชิ้นต้องลบเองในแอป (API ไม่รองรับการลบ Idea)
+
+**Draft ในตอนนี้ (10 ชิ้น · แท็ก 🤖 AI Generate · ยังไม่ตั้งเวลาโพสต์จริง)**
+
+| ชิ้นงาน | ช่อง | เวลาที่ตั้งไว้ | Post ID | สิ่งที่ต้องทำก่อนกด Schedule |
+|---|---|---|---|---|
+| U01 | TikTok | 17 ต.ค. 18:00 | `6ad1edada82f34dbe154f72d` | เปลี่ยนวิดีโอ (ตอนนี้ใช้คลิป First Flush ทดสอบไปก่อน) |
+| U01 | IG Reel | 17 ต.ค. 19:00 | `6ad1edb1a82f34dbe154f7f5` | เปลี่ยนวิดีโอ (ตอนนี้ใช้คลิป First Flush ทดสอบไปก่อน) |
+| U01 | Facebook | 17 ต.ค. 19:30 | `6ad1ee774ed7d375a4535bcb` | แนบวิดีโอ U01 |
+| U02 | Facebook | 18 ต.ค. 12:00 | `6ad1edb59597cd1662764c25` | แนบภาพ carousel U02 |
+| U03 | Facebook | 19 ต.ค. 08:00 | `6ad1ee7aa82f34dbe15522cf` | แนบวิดีโอ U03 |
+| U04 | Facebook | 20 ต.ค. 19:30 | `6ad1edbae991a49db3d7ef27` | แนบภาพ carousel U04 (แคปชันพูดถึง "สไลด์สุดท้าย") |
+| U09 | Facebook | 25 ต.ค. 10:30 | `6ad1ee7de991a49db3d81239` | แนบภาพ Capy Onsen |
+| U10 | Facebook | 26 ต.ค. 08:00 | `6ad1ee804ed7d375a453607b` | แนบภาพ Mood Meter |
+| U13 | Facebook | 29 ต.ค. 12:00 | `6ad1ee839597cd1662767d5f` | แนบวิดีโอเบื้องหลัง · ยืนยันว่าร่อนผงทุกแก้วจริง |
+| U14 | Facebook | 30 ต.ค. 12:00 | `6ad1ee87ee2c696029ca952d` | แนบภาพขนม 3 ชิ้น |
+
+ยังไม่ได้สร้างใน Buffer: โพสต์ IG/TikTok ที่เหลือ (ต้องมีไฟล์สื่อ) และโพสต์ที่ยังมีช่อง `[ ]` (U05, U06, U07, U08, U11, U12, U15)
