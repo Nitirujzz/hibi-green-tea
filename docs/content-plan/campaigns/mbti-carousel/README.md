@@ -19,25 +19,25 @@
 | MBTI | ฉายา | แก้ว | ราคา | ความหวานแนะนำ | ทีม | หนึ่งบรรทัด |
 |---|---|---|---|---|---|---|
 | **NT · นักวิเคราะห์** — ขอของแท้ ไม่ต้องปรุงเยอะ ||||||
-| INTJ | นักวางแผน (Architect) | Clear Matcha (มัทฉะใส) | 59.- | 0g | Capy | วางแผนมาแล้ว ขอรสมัทฉะแท้ ๆ ไม่ต้องหวาน |
+| INTJ | สถาปนิก (Architect) | Clear Matcha (มัทฉะใส) | 59.- | 0g | Capy | วางแผนมาแล้ว ขอรสมัทฉะแท้ ๆ ไม่ต้องหวาน |
 | INTP | นักตรรกะ (Logician) | Kirei Yuzu Matcha | 79.- | 3g | Capy | ยูซุ + มัทฉะ เข้ากันได้ไง… ขอทดลองก่อน |
 | ENTJ | ผู้บัญชาการ (Commander) | Velvet Matcha Whisk Latte (Cold Foam) | 129.- | 5g | Hibi | เลือกตัวท็อปของร้าน ไม่เสียเวลาลังเล |
 | ENTP | นักโต้วาที (Debater) | Jasmine Thai Tea × Matcha Latte | 109.- | สูตรคงที่ | Hibi | ชาไทยกับมัทฉะเข้ากันไม่ได้? ขอเถียง! |
 | **NF · นักการทูต** — หอม ละมุน มีเรื่องราว ||||||
-| INFJ | ผู้แนะแนว (Advocate) | Clear Matcha Coconut Jasmine | 79.- | 3g | Capy | หอมมะลิบาง ๆ ลึกหลายชั้น เหมือนใจเรา |
+| INFJ | ผู้สนับสนุน (Advocate) | Clear Matcha Coconut Jasmine | 79.- | 3g | Capy | หอมมะลิบาง ๆ ลึกหลายชั้น เหมือนใจเรา |
 | INFP | ผู้ไกล่เกลี่ย (Mediator) | Osmanthus Honey Coconut | `[ราคา]` | ไม่หวานเกิน | Capy | หอมหมื่นลี้ นั่งริมหน้าต่าง ฝันได้ทั้งบ่าย |
 | ENFJ | ตัวเอก (Protagonist) | Matcha Cloud Latte | 79.- | สูตรคงที่ | Hibi | นุ่มเหมือนเมฆ อุ่นเหมือนคนที่ดูแลทุกคน |
 | ENFP | นักรณรงค์ (Campaigner) | Pink Coconut Cloud | 79.- | 10g | Hibi | สีชมพู! ถ่าย 30 รูปก่อนจิบคำแรก |
 | **SJ · ผู้พิทักษ์** — คลาสสิก ไว้ใจได้ทุกวัน ||||||
-| ISTJ | นักจัดการ (Logistician) | Matcha Latte (Whisked Milk) | 79.- | 8g | Capy | เมนูเดิม หวานเดิม สาขาเดิม ทุกวัน |
+| ISTJ | นักคำนวณ (Logistician) | Matcha Latte (Whisked Milk) | 79.- | 8g | Capy | เมนูเดิม หวานเดิม สาขาเดิม ทุกวัน |
 | ISFJ | ผู้ปกป้อง (Defender) | Hojicha Latte | 79.- | 5g | Capy | ซื้อแก้วตัวเองแล้ว ต้องซื้อฝากที่บ้านด้วย |
 | ESTJ | ผู้บริหาร (Executive) | Cold Whisked Latte | 59.- | 5g | Hibi | ตีสด เร็ว คุ้ม แล้วไปทำงานต่อ |
-| ESFJ | ผู้ใส่ใจ (Consul) | Matcha Strawberry Latte | 89.- | 10g | Hibi | แก้วที่ทั้งแก๊งชอบ จำได้ว่าใครหวานเท่าไหร่ |
+| ESFJ | กงสุล (Consul) | Matcha Strawberry Latte | 89.- | 10g | Hibi | แก้วที่ทั้งแก๊งชอบ จำได้ว่าใครหวานเท่าไหร่ |
 | **SP · นักสำรวจ** — ของใหม่ ต้องได้ลองก่อน ||||||
 | ISTP | ช่างฝีมือ (Virtuoso) | Kokoro Hojicha Honeycomb Velvet | 159.- | 5g | Capy | กรุบ ๆ honeycomb เคี้ยวไปคิดไป สาย texture |
-| ISFP | ศิลปิน (Adventurer) | Matcha Mango Pandan Cloud | `[ราคา]` | 8g | Capy | เลือกแก้วจากสี เลือกโต๊ะจากแสง |
-| ESTP | นักผจญภัย (Entrepreneur) | Pistachio Kunafeh Matcha Luxe | `[ราคา]` | 8g | Hibi | เห็นเมนูใหม่ปุ๊บ สั่งปั๊บ ไม่อ่านต่อ |
-| ESFP | ดาวเด่น (Entertainer) | Kokoro Hojicha Cheesecake Mochi | 179.- | 10g | Hibi | มีโมจิเสียบไม้! ไลฟ์ก่อนกิน |
+| ISFP | นักผจญภัย (Adventurer) | Matcha Mango Pandan Cloud | `[ราคา]` | 8g | Capy | เลือกแก้วจากสี เลือกโต๊ะจากแสง |
+| ESTP | ผู้ประกอบการ (Entrepreneur) | Pistachio Kunafeh Matcha Luxe | `[ราคา]` | 8g | Hibi | เห็นเมนูใหม่ปุ๊บ สั่งปั๊บ ไม่อ่านต่อ |
+| ESFP | ผู้มอบความบันเทิง (Entertainer) | Kokoro Hojicha Cheesecake Mochi | 179.- | 10g | Hibi | มีโมจิเสียบไม้! ไลฟ์ก่อนกิน |
 
 ระดับความหวาน/นม/ท็อปปิ้ง อ้างอิงเมนูจริง (0/3/5/8/10/15g · Lactose Free +10 · Oat +20 · Almond +25) · Fixed Recipe (Cloud Latte, Thai Tea × Matcha) เปลี่ยนสูตรไม่ได้ จึงเขียนว่า “สูตรคงที่”
 
