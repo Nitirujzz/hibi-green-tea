@@ -16,14 +16,14 @@ CSS=FONTS+"""*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;h
 OV={
 "o1":"""<div class="box" style="top:250px"><span class="pill">เทรนด์ TikTok 2026 ☁️</span>
 <div class="big" style="margin-top:22px">Coconut Cloud<br><em>มีที่ Hibi แล้ว!</em></div></div>""",
-"o2":"""<div class="box" style="top:300px"><div class="mid">คลาวด์โฟมนุ่ม ๆ บนมัทฉะเย็น 🍵</div></div>""",
-"o3":"""<div class="box" style="top:250px"><div class="card"><div style="font-weight:700;font-size:64px;color:#243e1b;line-height:1.1">Pink Coconut Cloud</div>
-<div style="font-family:'Plex';font-weight:600;font-size:32px;color:#4e7c3a;margin-top:6px">มะพร้าวชมพู × มัทฉะ × คลาวด์โฟม</div>
-<div style="margin-top:14px"><span class="pill" style="font-size:40px">79.-</span></div></div></div>""",
+"o2":"""<div class="box" style="top:300px"><div class="mid">มัทฉะคลาวด์ ลอยบนน้ำมะพร้าวใส 🥥</div></div>""",
+"o3":"""<div class="box" style="top:1130px"><div class="card"><div style="font-weight:700;font-size:68px;color:#243e1b;line-height:1.1">Coconut Cloud</div>
+<div style="font-family:'Plex';font-weight:600;font-size:32px;color:#4e7c3a;margin-top:6px">น้ำมะพร้าวใส × มัทฉะคลาวด์โฟม</div>
+<div style="margin-top:14px"><span class="pill" style="font-size:30px">สดชื่น · ใส · เบา ๆ</span></div></div></div>""",
 }
 END=f"""<div style="position:absolute;inset:0;background:rgba(243,248,236,.82)"></div>
 <div class="box" style="top:300px"><div class="big" style="font-size:84px">ลองแก้ว Cloud<br><em>ของจริงที่ Hibi</em></div></div>
-<img src="{b64(D+'/end.png')}" style="position:absolute;left:215px;top:620px;width:650px;height:560px;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(36,62,27,.15))">
+<img src="{b64(D+'/art_end.png')}" style="position:absolute;left:215px;top:620px;width:650px;height:560px;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(36,62,27,.15))">
 <div class="box" style="top:1200px"><div class="card" style="background:#243e1b;color:#fff;width:880px">
 <div style="font-weight:600;font-size:38px">📍 Hibi Matcha Cafe 5 สาขา</div>
 <div style="font-family:'Plex';font-size:27px;margin-top:6px;opacity:.95">ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน</div>
