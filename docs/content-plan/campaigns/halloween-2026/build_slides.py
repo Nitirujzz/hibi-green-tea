@@ -74,20 +74,25 @@ def s4():
     css = f""".w{{position:absolute;top:96px;left:0;right:0;text-align:center}}
 .t{{font-size:66px;color:{CREAM}}}.t em{{font-style:normal;color:{ORANGE}}}
 .dt{{display:inline-block;margin-top:10px;font-family:'Prompt';font-weight:600;font-size:28px;color:{NIGHT};background:{LEAF};padding:6px 22px;border-radius:26px}}
-.pc{{position:absolute;top:290px;left:48px;right:48px;background:rgba(247,241,227,.97);color:#2b2219;border-radius:34px;padding:30px 34px 26px;box-shadow:0 14px 34px rgba(0,0,0,.3)}}
-.pc .gift{{text-align:center;font-family:'Prompt';font-weight:700;font-size:44px;color:#c4611b;line-height:1.15}}
-.pc .gift b{{display:block;font-size:58px;color:#243e1b}}
+.pc{{position:absolute;top:250px;left:48px;right:48px;background:rgba(247,241,227,.97);color:#2b2219;border-radius:34px;padding:30px 34px 26px;box-shadow:0 14px 34px rgba(0,0,0,.3)}}
+.gr{{display:flex;align-items:center;gap:18px}}
+.fi{{width:390px;flex:none;position:relative;text-align:center}}
+.fi img{{width:390px;filter:drop-shadow(0 12px 16px rgba(60,40,20,.25))}}
+.fi span{{position:absolute;left:0;bottom:-4px;font-size:16px;color:#9a8b7e}}
+.pc .gift{{flex:1;font-family:'Prompt';font-weight:700;font-size:38px;color:#c4611b;line-height:1.15}}
+.pc .gift b{{display:block;font-size:54px;color:#243e1b;margin-top:6px;line-height:1.05}}
 .st{{display:flex;gap:14px;margin-top:22px}}
 .st .i{{flex:1;background:#fbf3e4;border-radius:22px;padding:18px 14px;text-align:center}}
 .st .n{{width:54px;height:54px;margin:0 auto;border-radius:50%;background:{ORANGE};color:#fff;font-family:'Prompt';font-weight:700;font-size:28px;display:flex;align-items:center;justify-content:center}}
 .st .e{{font-size:46px;margin-top:8px}}.st .x{{font-family:'Prompt';font-weight:600;font-size:23px;margin-top:6px;line-height:1.25;color:#3f3229}}
-.ask{{position:absolute;top:812px;left:48px;right:48px;background:rgba(18,27,15,.85);border:2px solid {ORANGE};border-radius:26px;padding:18px 24px;text-align:center}}
+.ask{{position:absolute;top:872px;left:48px;right:48px;background:rgba(18,27,15,.85);border:2px solid {ORANGE};border-radius:26px;padding:18px 24px;text-align:center}}
 .ask .k{{font-size:21px;color:#e8e1cf}}.ask .v{{font-family:'Prompt';font-weight:700;font-size:34px;color:{CREAM};margin-top:2px}}
-.br{{position:absolute;top:972px;left:48px;right:48px;background:rgba(18,27,15,.85);border:2px solid #3d5530;border-radius:26px;padding:18px 24px;text-align:center}}
+.br{{position:absolute;top:1030px;left:48px;right:48px;background:rgba(18,27,15,.85);border:2px solid #3d5530;border-radius:26px;padding:18px 24px;text-align:center}}
 .br .t2{{font-family:'Prompt';font-weight:600;font-size:26px}}.br .l{{font-size:21px;margin-top:6px;line-height:1.5;color:#e8e1cf}}
 .note{{position:absolute;top:1170px;left:0;right:0;text-align:center;font-size:19px;color:#cfc6b2}}"""
     body = f"""<div class="w"><div class="h1 t">แต่งคอสตูมมา <em>รับขนมฟรี!</em> 🎁</div><span class="dt">📅 เสาร์ 31 ต.ค.</span></div>
-<div class="pc"><div class="gift">ถ่ายรูปคู่ชุดคอสตูมฮาโลวีน รับฟรี<b>Noisette Financier 1 ชิ้น</b></div>
+<div class="pc"><div class="gr"><div class="fi"><img src="{A('financier', 700)}"><span>*ภาพประกอบ</span></div>
+<div class="gift">ถ่ายรูปคู่ชุดคอสตูม<br>ฮาโลวีน รับฟรี<b>Noisette<br>Financier 1 ชิ้น</b></div></div>
 <div class="st"><div class="i"><div class="n">1</div><div class="e">🧙</div><div class="x">แต่งคอสตูม<br>ธีมฮาโลวีนมาร้าน</div></div>
 <div class="i"><div class="n">2</div><div class="e">📸</div><div class="x">ถ่ายรูปคู่<br>แก้ว Hibi</div></div>
 <div class="i"><div class="n">3</div><div class="e">🎁</div><div class="x">โชว์รูปกับพนักงาน<br>รับขนมฟรี</div></div></div></div>
