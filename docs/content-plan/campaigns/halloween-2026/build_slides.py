@@ -20,17 +20,21 @@ body{{background:{NIGHT} url('{A("bg_night", 1350)}') center/cover;color:{CREAM}
 .chip{{display:inline-block;background:{ORANGE};color:{NIGHT};font-family:'Prompt';font-weight:600;font-size:26px;padding:8px 22px;border-radius:30px}}
 {css}</style></head><body>
 <div class="top"><span>HIBI MATCHA CAFE 日々</span><span class="pg">{n}/{TOTAL}</span></div>{body}
-<div class="foot"><span>Happy Matcha-ween 🎃</span><span class="r">@hibimatchacafe</span></div></body></html>"""
+<div class="foot"><span>Hibi หรือ Capy? 🎃</span><span class="r">@hibimatchacafe</span></div></body></html>"""
 
 def s1():
-    css = f""".w{{position:absolute;top:104px;left:0;right:0;text-align:center}}
-.t{{font-size:90px;color:{CREAM};margin-top:16px;text-shadow:0 4px 18px rgba(0,0,0,.35)}}.t em{{font-style:normal;color:{LEAF}}}
-.s{{font-size:31px;color:#e8e1cf;margin-top:12px}}
-.sw{{position:absolute;right:56px;top:1206px;font-family:'Prompt';font-weight:600;font-size:25px;color:{ORANGE}}}"""
-    body = f"""<div class="w"><span class="chip">🎃 Halloween 2026</span>
-<div class="h1 t">Happy <em>Matcha</em>-ween!</div><div class="s">Hibi &amp; Capy แต่งตัวแล้ว · คุณจะแต่งเป็นอะไร?</div></div>
-<img class="art" src="{A('art_duo')}" style="left:110px;top:410px;width:860px;height:790px;object-fit:contain">
-<div class="sw">คอสตูมไหน แก้วไหน? ปัดดู 👉</div>"""
+    css = f""".w{{position:absolute;top:100px;left:0;right:0;text-align:center}}
+.t{{font-size:72px;color:{CREAM};margin-top:14px;text-shadow:0 4px 18px rgba(0,0,0,.35)}}
+.s{{font-size:31px;color:#e8e1cf;margin-top:10px}}.s b{{color:{LEAF}}}.s i{{font-style:normal;color:{ORANGE}}}
+.vs{{position:absolute;top:760px;left:490px;width:100px;height:100px;border-radius:50%;background:{ORANGE};color:{NIGHT};font-family:'Prompt';font-weight:700;font-size:40px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.35)}}
+.lb{{position:absolute;top:1120px;font-family:'Prompt';font-weight:700;font-size:34px;padding:10px 26px;border-radius:34px;box-shadow:0 8px 20px rgba(0,0,0,.3)}}
+.sw{{position:absolute;right:56px;top:1206px;font-family:'Prompt';font-weight:600;font-size:24px;color:{ORANGE}}}"""
+    body = f"""<div class="w"><span class="chip">🎃 Happy Matcha-ween</span>
+<div class="h1 t">Halloween นี้ แต่งแบบไหนดี?</div><div class="s">แต่งแบบ <b>Hibi</b> หรือแบบ <i>Capy</i>? ปัดดูแล้วเลือกเลย</div></div>
+<img class="art" src="{A('art_duo')}" style="left:90px;top:380px;width:900px;height:760px;object-fit:contain">
+<div class="vs">VS</div>
+<div class="lb" style="left:120px;background:{LEAF};color:{NIGHT}">🐰 แบบ Hibi</div>
+<div class="lb" style="right:120px;background:{ORANGE};color:{NIGHT}">🎃 แบบ Capy</div>"""
     return page(1, body, css)
 
 CARD = f""".hd{{position:absolute;top:96px;left:56px}}
@@ -49,17 +53,17 @@ CARD = f""".hd{{position:absolute;top:96px;left:56px}}
 
 def card(art, cos, menu, price, q, drink):
     return f"""<div class="cd"><div class="ar"><img src="{A(art, 900)}"></div>
-<div class="tx"><div class="cos">{cos}</div><div class="arrow">แก้วที่ใช่คือ 👉</div><div class="mn">{menu}</div><div class="q">“{q}”</div></div>
+<div class="tx"><div class="cos">{cos}</div><div class="arrow">แก้วคู่ชุดนี้ 👉</div><div class="mn">{menu}</div><div class="q">“{q}”</div></div>
 <div class="pr">{price}</div><img class="dk" src="{img(drink)}"></div>"""
 
 def s2():
-    body = f"""<div class="hd"><div class="h1 t">คอสตูมไหน · แก้วไหน?</div><div class="s">เลือกชุดแล้ว มาจับคู่แก้วที่เข้ากัน (1/2)</div></div>
+    body = f"""<div class="hd"><div class="h1 t">🐰 แต่งแบบ <span style="color:{LEAF}">Hibi</span></div><div class="s">สายสดใส ขี้เล่น ชอบเป็นจุดสนใจ · เลือกได้ 2 ชุด</div></div>
 <div class="cards">{card('hibi_ghost', '👻 ผีน้อย', 'Clear Matcha', '59.-', 'ใส ๆ ลอย ๆ แบบผีน้อย ไม่ต้องหวานก็ได้', 'clear_matcha')}
 {card('hibi_witch', '🧙 แม่มด', 'Matcha Latte', '79.-', 'น้ำยาวิเศษสีเขียว ตีสด ๆ ทุกแก้ว', 'matcha_latte')}</div>"""
     return page(2, body, CARD)
 
 def s3():
-    body = f"""<div class="hd"><div class="h1 t">คอสตูมไหน · แก้วไหน?</div><div class="s">ชุดไหนคือคุณ? (2/2)</div></div>
+    body = f"""<div class="hd"><div class="h1 t">🎃 แต่งแบบ <span style="color:{ORANGE}">Capy</span></div><div class="s">สายชิล ใจเย็น น่ากอด · เลือกได้ 2 ชุด</div></div>
 <div class="cards">{card('capy_pumpkin', '🎃 ฟักทอง', 'Hojicha Latte', '79.-', 'สีส้มน้ำตาลอุ่น ๆ หอมคั่วเหมือนขนมฟักทอง', 'hojicha_latte')}
 {card('capy_vampire', '🧛 แวมไพร์', 'Matcha Strawberry Latte', '89.-', 'สีแดงสด… สตรอว์เบอร์รีจริง ไม่ใช่เลือดนะ 🍓', 'strawberry')}</div>"""
     return page(3, body, CARD)
@@ -76,7 +80,7 @@ def s4():
     body = f"""<div class="w"><div class="h1 t">31 ต.ค. <em>แต่งตัว</em>มาร้านกัน! 🎃</div>
 <div class="s">ถ่ายรูปคู่แก้ว Hibi ในชุดคอสตูม แล้วแท็กเรา</div><span class="tag">@hibimatchacafe #HibiMatchaween</span></div>
 <img class="art" src="{A('art_duo')}" style="left:250px;top:390px;width:580px;height:480px;object-fit:contain">
-<div class="ask"><div class="k">คอมเมนต์บอกหน่อย 👇</div><div class="v">ปีนี้คุณจะแต่งเป็นอะไร? 👻🧙🎃🧛</div></div>
+<div class="ask"><div class="k">คอมเมนต์เลือกเลย 👇 เช่น “ทีม Capy · ชุดแวมไพร์ 🧛”</div><div class="v">แต่งแบบ Hibi 🐰 หรือ Capy 🎃?</div></div>
 <div class="br"><div class="t2">📍 Hibi Matcha Cafe 5 สาขา</div><div class="l">ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน (จุฬาฯ 11)<br>Delivery: LINE MAN · Grab · ShopeeFood</div></div>"""
     return page(4, body, css)
 
