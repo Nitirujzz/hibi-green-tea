@@ -32,6 +32,14 @@ OV["hook"]="""<div class="box" style="top:300px"><div class="card" style="paddin
 <div style="font-weight:700;font-size:92px;line-height:1.05;color:#243e1b">มัทฉะ<span style="color:#4e7c3a"> × </span>น้ำมะพร้าว</div>
 <div style="font-weight:600;font-size:46px;color:#4e7c3a;margin-top:10px">เคยลองแบบใส ๆ ยัง? ☁️🥥</div></div></div>"""
 OV["oreal"]="""<div class="box" style="top:1260px"><div class="card" style="font-weight:600;font-size:40px;color:#243e1b">มัทฉะคลาวด์ ลอยบนน้ำมะพร้าวใส 🥥</div></div>"""
+
+def hook(l1,l2):
+    return f"""<div class="box" style="top:300px"><div class="card" style="padding:26px 40px;background:rgba(255,255,255,.88)">
+<div style="font-weight:700;font-size:80px;line-height:1.08;color:#243e1b;white-space:nowrap">{l1}</div>
+<div style="font-weight:600;font-size:46px;color:#4e7c3a;margin-top:10px">{l2}</div></div></div>"""
+OV["hookB"]=hook('น้ำมะพร้าว <span style="color:#4e7c3a">+</span> มัทฉะ = ?','ดูจนจบแล้วจะอยากลอง 🥥☁️')
+OV["hookC"]=hook('ใส ๆ แบบนี้','ยังเป็นมัทฉะอยู่ไหม? 👀')
+OV["mid2"]="""<div class="box" style="top:1260px"><div class="card" style="font-weight:600;font-size:40px;color:#243e1b">คลาวด์นุ่ม ๆ × น้ำมะพร้าวเย็น ๆ ☁️</div></div>"""
 OV["end"]=END
 for k,body in OV.items():
     p=f"{D}/{k}.html"; open(p,"w").write(f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{body}</body></html>")
