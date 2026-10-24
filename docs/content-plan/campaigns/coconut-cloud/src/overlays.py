@@ -28,8 +28,10 @@ END=f"""<div style="position:absolute;inset:0;background:rgba(243,248,236,.82)">
 <div style="font-weight:600;font-size:38px">📍 Hibi Matcha Cafe 5 สาขา</div>
 <div style="font-family:'Plex';font-size:27px;margin-top:6px;opacity:.95">ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน</div>
 <div style="font-family:'Plex';font-size:25px;margin-top:6px;color:#cfe6bd">Delivery: LINE MAN · Grab · ShopeeFood</div></div></div>"""
-OV["oreal"]="""<div class="box" style="top:250px"><span class="pill" style="font-size:36px">🎥 คลิปจริงจากร้าน Hibi</span></div>
-<div class="box" style="top:1260px"><div class="card" style="font-weight:600;font-size:40px;color:#243e1b">มัทฉะคลาวด์ ลอยบนน้ำมะพร้าวใส 🥥</div></div>"""
+OV["hook"]="""<div class="box" style="top:300px"><div class="card" style="padding:26px 40px;background:rgba(255,255,255,.88)">
+<div style="font-weight:700;font-size:92px;line-height:1.05;color:#243e1b">มัทฉะ<span style="color:#4e7c3a"> × </span>น้ำมะพร้าว</div>
+<div style="font-weight:600;font-size:46px;color:#4e7c3a;margin-top:10px">เคยลองแบบใส ๆ ยัง? ☁️🥥</div></div></div>"""
+OV["oreal"]="""<div class="box" style="top:1260px"><div class="card" style="font-weight:600;font-size:40px;color:#243e1b">มัทฉะคลาวด์ ลอยบนน้ำมะพร้าวใส 🥥</div></div>"""
 OV["end"]=END
 for k,body in OV.items():
     p=f"{D}/{k}.html"; open(p,"w").write(f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{body}</body></html>")
