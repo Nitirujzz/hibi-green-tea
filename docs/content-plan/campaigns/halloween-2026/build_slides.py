@@ -32,7 +32,7 @@ def s1():
 .sw{{position:absolute;right:56px;top:1206px;font-family:'Prompt';font-weight:600;font-size:24px;color:{ORANGE}}}"""
     body = f"""<div class="w"><span class="chip">🎃 Happy Matcha-ween</span>
 <div class="h1 t">Halloween นี้ แต่งแบบไหนดี?</div><div class="s">แต่งแบบ <b>Hibi</b> หรือแบบ <i>Capy</i>? ปัดดูแล้วเลือกเลย</div>
-<div class="promo">🎁 แต่งคอสตูมมาถ่ายรูป รับ Noisette Financier ฟรี!</div></div>
+<div class="promo">🎁 แต่งคอสตูมมาถ่ายรูป รับ Noisette Financier ฟรี! (ทุกสาขา)</div></div>
 <img class="art" src="{A('art_duo')}" style="left:110px;top:430px;width:860px;height:720px;object-fit:contain">
 <div class="vs">VS</div>
 <div class="lb" style="left:120px;background:{LEAF};color:{NIGHT}">🐰 แบบ Hibi</div>
@@ -90,15 +90,15 @@ def s4():
 .br{{position:absolute;top:972px;left:48px;right:48px;background:rgba(18,27,15,.85);border:2px solid #3d5530;border-radius:26px;padding:18px 24px;text-align:center}}
 .br .t2{{font-family:'Prompt';font-weight:600;font-size:26px}}.br .l{{font-size:21px;margin-top:6px;line-height:1.5;color:#e8e1cf}}
 .note{{position:absolute;top:1170px;left:0;right:0;text-align:center;font-size:19px;color:#cfc6b2}}"""
-    body = f"""<div class="w"><div class="h1 t">แต่งคอสตูมมา <em>รับขนมฟรี!</em> 🎁</div><span class="dt">📅 เสาร์ 31 ต.ค.</span></div>
+    body = f"""<div class="w"><div class="h1 t">แต่งคอสตูมมา <em>รับขนมฟรี!</em> 🎁</div><span class="dt">📅 เสาร์ 31 ต.ค. · ทุกสาขา</span></div>
 <div class="pc"><div class="gr"><div class="fi"><img src="{A('financier', 700)}"></div>
 <div class="gift">ถ่ายรูปคู่ชุดคอสตูม<br>ฮาโลวีน รับฟรี<b>Noisette<br>Financier 1 ชิ้น</b></div></div>
-<div class="st"><div class="i"><div class="n">1</div><div class="e">🧙</div><div class="x">แต่งคอสตูม<br>ธีมฮาโลวีนมาร้าน</div></div>
-<div class="i"><div class="n">2</div><div class="e">📸</div><div class="x">ถ่ายรูปคู่<br>แก้ว Hibi</div></div>
-<div class="i"><div class="n">3</div><div class="e">🎁</div><div class="x">โชว์รูปกับพนักงาน<br>รับขนมฟรี</div></div></div></div>
-<div class="ask"><div class="k">แท็ก @hibimatchacafe #HibiMatchaween · คอมเมนต์โหวต 👇</div><div class="v">แต่งแบบ Hibi 🐰 หรือ Capy 🎃?</div></div>
+<div class="st"><div class="i"><div class="n">1</div><div class="e">🧙🥤</div><div class="x">แต่งคอสตูมมา<br>ซื้อเครื่องดื่มเมนูไหนก็ได้</div></div>
+<div class="i"><div class="n">2</div><div class="e">📸</div><div class="x">ถ่ายรูปคู่แก้ว<br>แท็ก @hibimatchacafe</div></div>
+<div class="i"><div class="n">3</div><div class="e">🎁</div><div class="x">โชว์โพสต์กับพนักงาน<br>รับขนมฟรี</div></div></div></div>
+<div class="ask"><div class="k">ใส่ #HibiMatchaween ด้วยนะ · คอมเมนต์โหวต 👇</div><div class="v">แต่งแบบ Hibi 🐰 หรือ Capy 🎃?</div></div>
 <div class="br"><div class="t2">📍 Hibi Matcha Cafe 5 สาขา</div><div class="l">ลาดพร้าว 107 · นาคนิวาส 48 · สะพานควาย · นวมินทร์ 111 · สามย่าน (จุฬาฯ 11)</div></div>
-<div class="note">*1 ท่าน / 1 ชิ้น · เงื่อนไขเป็นไปตามที่ร้านกำหนด</div>"""
+<div class="note">*รับฟรี 1 ชิ้น / 1 ท่าน เมื่อซื้อเครื่องดื่มเมนูใดก็ได้ · ร่วมรายการทุกสาขา</div>"""
     return page(4, body, css)
 
 for n, html in enumerate([s1(), s2(), s3(), s4()], 1):
