@@ -1,9 +1,9 @@
 """Motion-graphics layer (transparent 1080x1920 @30fps) for the VO reel.
 All cue times are ORIGINAL VO seconds, mapped through timing.m() onto the tightened VO."""
 import json, os
-from timing import m, plan
+from timing import m, total
 D=os.path.dirname(os.path.abspath(__file__))
-_,T=plan()
+T=total()
 FONTS="".join(f"@font-face{{font-family:'{fam}';font-weight:{w};src:url('file:///root/.fonts/{f}-{w}-{s}.woff2') format('woff2');}}"
   for fam,f in [("Prompt","Prompt"),("Plex","IBMPlexSansThai")] for w in ([400,500,600,700] if f=="Prompt" else [400,600]) for s in ["thai","latin"])
 X='<svg viewBox="0 0 24 24" width="{s}" height="{s}"><circle cx="12" cy="12" r="12" fill="#e5484d"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>'

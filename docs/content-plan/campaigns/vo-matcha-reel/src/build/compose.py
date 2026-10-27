@@ -1,10 +1,10 @@
 """VO reel '5 ความผิดพลาดที่ทำให้มัทฉะขม' — base picture cut to the tightened VO, then MG layer + SFX on top.
 Shots: AI = Higgsfield (gpt_image_2_5 stills / seedance_2_5 motion), real = in-store footage from the process reel."""
 import subprocess, os, sys
-from timing import m, plan
+from timing import m, total
 D=os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 AI="../ai"; FT="/home/user/hibi-green-tea/docs/content-plan/campaigns/matcha-process-reel/src"
-_,T=plan()
+T=total()
 def run(a): subprocess.run(["ffmpeg","-v","error","-y"]+a,check=True)
 def dur(f): return float(subprocess.check_output(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0",f]))
 VENC="-c:v libx264 -pix_fmt yuv420p -r 30 -preset medium -crf 18 -an".split()
@@ -55,7 +55,15 @@ add(111.4,None,f"{FT}/ai/hero.mp4", zoom="ramp",z0=1.25,amt=0.1,zy=0.62,maxslow=
 os.makedirs("segs",exist_ok=True); L=[]
 for i,(t0,t1,src,k) in enumerate(P):
     # frame-accurate lengths: round boundaries to frames
-    f0,f1=round(t0*30),round(t1*30); L.append(shot(src,f"segs/s{i:02d}.mp4",(f1-f0)/30,**k))
+    f0,f1=round(t0*30),round(t1*30)
+    # long shots get a jump-cut punch-in halfway so the picture never sits still > ~2.5 s
+    parts=[(f0,f1)] if f1-f0<=100 else [(f0,(f0+f1)//2),((f0+f1)//2,f1)]
+    for j,(g0,g1) in enumerate(parts):
+        kk=dict(k)
+        if j==1:
+            kk["z0"]=kk.get("z0",1.0)+0.18; kk["zoom"]="punch"; kk["amt"]=0.05
+            if not kk.get("still"): kk["ss"]=kk.get("ss",0)+(g0-f0)/30*0.9
+        L.append(shot(src,f"segs/s{i:02d}{j}.mp4",(g1-g0)/30,**kk))
 open("segs/list.txt","w").write("".join(f"file '{os.path.basename(s)}'\n" for s in L))
 run(["-f","concat","-safe","0","-i","segs/list.txt","-c","copy","base.mp4"])
 print("base",round(dur("base.mp4"),2),"T",round(T,2))
