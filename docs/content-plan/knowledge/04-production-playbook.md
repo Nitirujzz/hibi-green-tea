@@ -12,6 +12,8 @@
 - ทำภาพนิ่งก่อน (ถูก/เร็ว) ดูคอนแทกต์ชีต → เลือกเฉพาะช็อตสำคัญไปทำวิดีโอ ที่เหลือใช้ Ken Burns
 - Prompt ที่ได้ผล: ระบุ “bright minimal Japanese cafe counter, light oak wood, soft window daylight, white ceramic chawan, no text, no logos” → โทนตรงร้าน
 - นำไฟล์เข้า Higgsfield: รูปใช้ `raw.githubusercontent.com/.../<sha>/path` ได้ · **วิดีโอใช้ jsDelivr** `cdn.jsdelivr.net/gh/Nitirujzz/hibi-green-tea@<sha สั้น 7 ตัว>/path` (sha ยาวบางครั้ง 403 · ไฟล์ต้อง < 20 MB)
+- Seedance `generate_audio: true` + prompt “Audio: <ASMR ที่ต้องการ>. No music, no speech.” → ได้เสียง ASMR ตรงภาพแต่ละช็อต (คลิปตัวละคร Honey Lemon)
+- คลิปตัวละครจากสตอรีบอร์ด: สร้างเฟรมนิ่งก่อน (อ้างอิงชีต) → ใช้ job id ของเฟรมเป็น `start_image` → ตัวละครคงที่ทุกช็อต
 - ใช้ฟุตเทจจริงเป็น start_image เพื่อสร้าง **มุมกล้องใหม่** (มาโคร/มุมต่ำ) ที่ดูกลมกลืนกับของจริง
 
 ## 2) ตัดต่อวิดีโอ (ffmpeg)

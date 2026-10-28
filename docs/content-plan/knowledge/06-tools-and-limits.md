@@ -12,3 +12,6 @@
 | ทรานซิชัน AI เริ่มที่เฟรมเดิม ดูเหมือนย้อนขั้น | ตัดหัวคลิปทรานซิชัน (`ss 0.9`) |
 | Playwright/Chromium | มีติดตั้งแล้ว `require('playwright')` · `/opt/pw-browsers/chromium` · ห้าม `playwright install` |
 | ดิสก์ | งานคลิปใช้ ~1–2 GB ต่อชิ้นใน scratchpad (เฟรม PNG) — ลบ `frames/` หลังเสร็จได้ |
+| เครดิต Higgsfield หมดกลางงาน (วิดีโอ Seedance 4–5 วิ ใช้เครดิตมาก) | เช็ก `balance` ก่อนสั่งชุดใหญ่ · ช็อตที่ขาดใช้ภาพนิ่ง + zoompan + motion graphic แทนได้ |
+| Seedance ตอบ `ip_detected` (ปฏิเสธบางช็อตตัวละคร) | ใช้ภาพนิ่ง fallback หรือเขียน prompt ใหม่ให้เลี่ยงคำที่ไวต่อระบบ |
+| Seedance แนะนำ preset แทนการสร้าง (เช่น “Earth zoom out” เมื่อ prompt มีคำว่า zoom out) | ใส่ `declined_preset_id` ของ preset นั้น หรือเลี่ยงคำว่า zoom out |
