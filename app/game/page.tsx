@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { gameAudio, type Sfx } from './sound'
+import { buildCard, shareText, shareUrl, type ShareKind } from './share'
 
 type Move = 'rock' | 'paper' | 'scissors'
 type Opp = 'hibi' | 'capy'
@@ -73,6 +75,60 @@ function Bubble({ text }: { text: string }) {
 }
 
 const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms) } catch {} }
+const sfx = (name: Sfx, v?: number) => gameAudio().play(name, v)
+
+function shareKind(result: string | null): ShareKind {
+  return result === 'beat_both' ? 'grand' : result === 'beat_hibi' ? 'beat_hibi' : result === 'lost_capy' ? 'lost_capy' : 'lost_hibi'
+}
+
+/** "Share my result" - native share sheet with the story image when supported, else a sheet of links + download. */
+function ShareButton({ kind }: { kind: ShareKind }) {
+  const [open, setOpen] = useState(false)
+  const [img, setImg] = useState<string | null>(null)
+  const [blob, setBlob] = useState<Blob | null>(null)
+  const [copied, setCopied] = useState(false)
+  const url = typeof window !== 'undefined' ? shareUrl() : ''
+  const text = shareText(kind)
+
+  async function go() {
+    sfx('tap'); buzz(15)
+    const b = blob ?? await buildCard(kind)
+    setBlob(b); setImg(URL.createObjectURL(b))
+    const file = new File([b], 'hibi-capy-result.png', { type: 'image/png' })
+    if (navigator.canShare?.({ files: [file] })) {
+      try { await navigator.share({ files: [file], text: `${text} ${url}`, title: 'เป่ายิ้งฉุบกับ Hibi & Capy' }); return } catch (e) { if ((e as Error).name === 'AbortError') return }
+    }
+    setOpen(true)
+  }
+  const enc = encodeURIComponent
+  const links = [
+    { label: 'Facebook', bg: '#1877F2', href: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}` },
+    { label: 'LINE', bg: '#06C755', href: `https://line.me/R/share?text=${enc(text + ' ' + url)}` },
+    { label: 'X', bg: '#111', href: `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}` },
+  ]
+  return (
+    <>
+      <motion.button className="hg-btn mt-3 bg-[#ffd23f] text-[#3a2a00]" animate={{ rotate: [0, -2, 2, 0] }} transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 }} onClick={go}>
+        แชร์ผลให้เพื่อน 📣
+      </motion.button>
+      <AnimatePresence>
+        {open && (
+          <motion.div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)}>
+            <motion.div className="w-full max-w-[440px] rounded-t-[32px] bg-[#fffaf0] p-5 pb-8" initial={{ y: 400 }} animate={{ y: 0 }} exit={{ y: 400 }} transition={{ type: 'spring', damping: 24 }} onClick={e => e.stopPropagation()}>
+              <div className="display mb-3 text-center text-[20px] font-bold text-[#243e1b]">แชร์ผลการเล่น</div>
+              {img && <img src={img} alt="การ์ดผลการเล่น" className="mx-auto mb-4 h-[260px] rounded-2xl shadow-lg" />}
+              <a className="hg-btn hg-primary mb-3 block text-center" href={img ?? '#'} download="hibi-capy-result.png" onClick={() => sfx('tap')}>⬇️ บันทึกภาพ (ลง IG Story / TikTok)</a>
+              <div className="grid grid-cols-3 gap-2">
+                {links.map(l => <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="hg-btn block text-center text-white" style={{ background: l.bg, fontSize: 16 }} onClick={() => sfx('tap')}>{l.label}</a>)}
+              </div>
+              <button className="hg-btn hg-soft mt-3 w-full" onClick={async () => { try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true) } catch {} }}>{copied ? 'คัดลอกแล้ว ✓' : '🔗 คัดลอกลิงก์'}</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
 
 function Confetti() {
   const bits = useMemo(() => Array.from({ length: 46 }, (_, i) => ({ i, x: Math.random() * 100, d: 1.8 + Math.random() * 1.6, delay: Math.random() * 0.8,
@@ -118,6 +174,14 @@ export default function GamePage() {
   const [last, setLast] = useState<PlayRes | null>(null)
   const [beat, setBeat] = useState(0)
   const [prizes, setPrizes] = useState<State['prizes'] | null>(null)
+  const [muted, setMutedState] = useState(false)
+  useEffect(() => {
+    setMutedState(gameAudio().muted)
+    const unlock = () => gameAudio().unlock()
+    window.addEventListener('pointerdown', unlock, { once: true })
+    return () => window.removeEventListener('pointerdown', unlock)
+  }, [])
+  const toggleMute = () => { gameAudio().unlock(); const m = !gameAudio().muted; gameAudio().setMuted(m); setMutedState(m) }
 
   async function refresh() {
     const s = await api<{ loggedIn: boolean; phone?: string; state?: State; prizes?: State['prizes'] }>('/api/game/state')
@@ -132,10 +196,12 @@ export default function GamePage() {
   }
 
   const sendOtp = () => run(async () => {
+    sfx('tap')
     const r = await api<{ phone: string; demoCode?: string }>('/api/game/otp/request', { phone, consent })
     setDemoCode(r.demoCode ?? null); setCode(''); setScreen('otp')
   })
   const verify = () => run(async () => {
+    sfx('tap')
     await api('/api/game/otp/verify', { phone, code })
     await refresh()
   })
@@ -143,9 +209,13 @@ export default function GamePage() {
     setScreen('count'); setBeat(0)
     const res = api<PlayRes>('/api/game/play', { move: m })
     res.catch(() => {})   // handled after the countdown
-    buzz(30)
-    for (let i = 1; i <= 3; i++) { await new Promise(r => setTimeout(r, 650)); setBeat(i); buzz(i === 3 ? 60 : 30) }
-    try { const r = await res; setLast(r); setState(r.state); setScreen('reveal'); buzz(r.outcome === 'win' ? [40, 60, 120] : r.outcome === 'lose' ? 120 : [30, 40, 30]) } catch (e) { setScreen('lobby'); throw e }
+    buzz(30); sfx('beat')
+    for (let i = 1; i <= 3; i++) { await new Promise(r => setTimeout(r, 650)); setBeat(i); buzz(i === 3 ? 60 : 30); sfx(i === 1 ? 'beat2' : i === 2 ? 'beat' : 'shoot') }
+    try { const r = await res; setLast(r); setState(r.state); setScreen('reveal'); buzz(r.outcome === 'win' ? [40, 60, 120] : r.outcome === 'lose' ? 120 : [30, 40, 30])
+      sfx('clash', 0.7)
+      setTimeout(() => sfx(r.outcome === 'win' ? 'win' : r.outcome === 'lose' ? 'lose' : 'tie'), 380)
+      if (r.newCoupon?.percent === 50) setTimeout(() => { gameAudio().duck(); sfx('grand', 0.9) }, 900)
+      else if (r.newCoupon) setTimeout(() => sfx('coupon'), 1000) } catch (e) { setScreen('lobby'); throw e }
   })
 
   const opp: Opp = state?.stage === 'capy' ? 'capy' : (last?.opponent ?? 'hibi')
@@ -156,7 +226,10 @@ export default function GamePage() {
       <Floaties />
       <header className="mb-2 flex items-center justify-between">
         <div className="display text-[18px] font-bold text-[#243e1b]">Hibi Matcha Cafe</div>
-        {maskedPhone && <div className="text-[13px] text-[#9a9578]">📱 {maskedPhone}</div>}
+        <div className="flex items-center gap-3">
+          {maskedPhone && <div className="text-[13px] text-[#9a9578]">📱 {maskedPhone}</div>}
+          <button aria-label={muted ? 'เปิดเสียง' : 'ปิดเสียง'} onClick={toggleMute} className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[18px] shadow">{muted ? '🔇' : '🔊'}</button>
+        </div>
       </header>
 
       <AnimatePresence mode="wait">
@@ -179,7 +252,7 @@ export default function GamePage() {
               <div className="text-[14px] text-[#6b6a55]">เล่นได้วันละ 1 ครั้งต่อเบอร์ · เสมอเล่นใหม่ได้ · คูปองใช้ได้ทุกสาขา</div>
             </div>
             <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
-              onClick={() => { buzz(20); setScreen('phone') }}>เริ่มเล่นเลย! ✊✋✌️</motion.button>
+              onClick={() => { sfx('tap'); buzz(20); setScreen('phone') }}>เริ่มเล่นเลย! ✊✋✌️</motion.button>
           </>}
 
           {screen === 'phone' && <>
@@ -215,12 +288,13 @@ export default function GamePage() {
               {!state.grandAvailable && <p className="mt-2 rounded-2xl bg-[#fff3c4] p-2 text-center text-[14px]">รางวัลส่วนลด 50% ของวันนี้หมดแล้ว · ยังลุ้นรางวัลรอบแรกได้นะ</p>}
               {state.coupon && <p className="mt-2 text-center text-[14px] text-[#3f8f3a]">คุณได้ {state.coupon.label} แล้ว · ชนะ Capy อัปเกรดเป็นส่วนลด 50%!</p>}
               <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
-                onClick={() => { buzz(20); setScreen('pick') }}>พร้อมแล้ว! เป่า ยิ้ง ฉุบ</motion.button>
+                onClick={() => { sfx('tap'); buzz(20); setScreen('pick') }}>พร้อมแล้ว! เป่า ยิ้ง ฉุบ</motion.button>
             </> : <>
               {grand && <Confetti />}
               <h2 className="mt-2 text-center text-[28px] font-bold text-[#243e1b]">{grand ? 'ชนะทั้งคู่! 🎉' : state.coupon ? 'เก่งมาก! 🎉' : 'วันนี้ยังไม่ใช่วันของเรา'}</h2>
               <div className="flex justify-center"><Char who={grand ? 'both' : state.result === 'lost_capy' ? 'capy' : 'hibi'} mood="win" size={220} /></div>
               {state.coupon ? <CouponCard c={state.coupon} phone={maskedPhone} /> : <p className="hg-card p-5 text-center text-[16px]">พรุ่งนี้มาท้า Hibi & Capy ใหม่ได้นะ 💚<br />ระหว่างนี้แวะมาดื่มมัทฉะที่ร้านได้ทุกสาขา 🍵</p>}
+              <ShareButton kind={shareKind(state.result)} />
               <p className="mt-4 text-center text-[13px] text-[#9a9578]">เล่นได้วันละ 1 ครั้งต่อเบอร์</p>
             </>}
           </>}
@@ -233,7 +307,7 @@ export default function GamePage() {
               {(['rock', 'paper', 'scissors'] as Move[]).map((m, i) => (
                 <motion.button key={m} initial={{ y: 40, opacity: 0 }} animate={{ y: [0, -6, 0], opacity: 1, rotate: [0, -4, 4, 0] }}
                   transition={{ y: { duration: 1.6, repeat: Infinity, delay: i * 0.2 }, rotate: { duration: 1.6, repeat: Infinity, delay: i * 0.2 }, opacity: { duration: 0.3, delay: i * 0.08 } }}
-                  whileTap={{ scale: 0.85 }} className="hg-move" disabled={busy} onClick={() => { buzz(15); choose(m) }}>
+                  whileTap={{ scale: 0.85 }} className="hg-move" disabled={busy} onClick={() => { sfx('tap'); buzz(15); choose(m) }}>
                   {HAND[m]}<span>{NAME[m]}</span>
                 </motion.button>
               ))}
@@ -273,9 +347,9 @@ export default function GamePage() {
             {last.note && <p className="mt-1 text-center text-[14px] text-[#8a5a2a]">{last.note}</p>}
             {last.newCoupon && <div className="mt-3"><CouponCard c={last.newCoupon} phone={maskedPhone} /></div>}
             <div className="mt-5 flex flex-col gap-3">
-              {last.outcome === 'tie' && <button className="hg-btn hg-primary" onClick={() => setScreen('pick')}>เป่า ยิ้ง ฉุบ อีกครั้ง</button>}
-              {last.state.stage === 'capy' && last.outcome === 'win' && <button className="hg-btn hg-primary" onClick={() => setScreen('lobby')}>ท้า Capy ต่อ! ลุ้นส่วนลด 50% 🍊</button>}
-              {last.state.stage === 'done' && <button className="hg-btn hg-soft" onClick={() => setScreen('lobby')}>ดูผลของวันนี้</button>}
+              {last.outcome === 'tie' && <button className="hg-btn hg-primary" onClick={() => { sfx('tap'); setScreen('pick') }}>เป่า ยิ้ง ฉุบ อีกครั้ง</button>}
+              {last.state.stage === 'capy' && last.outcome === 'win' && <button className="hg-btn hg-primary" onClick={() => { sfx('tap'); setScreen('lobby') }}>ท้า Capy ต่อ! ลุ้นส่วนลด 50% 🍊</button>}
+              {last.state.stage === 'done' && <><ShareButton kind={shareKind(last.state.result)} /><button className="hg-btn hg-soft" onClick={() => { sfx('tap'); setScreen('lobby') }}>ดูผลของวันนี้</button></>}
             </div>
           </>}
         </motion.section>

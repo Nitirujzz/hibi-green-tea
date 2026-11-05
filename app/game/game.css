@@ -1,7 +1,11 @@
-@font-face{font-family:'Prompt';font-weight:600;src:url('/game/fonts/Prompt-600-thai.woff2') format('woff2'),url('/game/fonts/Prompt-600-latin.woff2') format('woff2');font-display:swap}
-@font-face{font-family:'Prompt';font-weight:700;src:url('/game/fonts/Prompt-700-thai.woff2') format('woff2'),url('/game/fonts/Prompt-700-latin.woff2') format('woff2');font-display:swap}
-@font-face{font-family:'Plex';font-weight:400;src:url('/game/fonts/IBMPlexSansThai-400-thai.woff2') format('woff2'),url('/game/fonts/IBMPlexSansThai-400-latin.woff2') format('woff2');font-display:swap}
-@font-face{font-family:'Plex';font-weight:600;src:url('/game/fonts/IBMPlexSansThai-600-thai.woff2') format('woff2'),url('/game/fonts/IBMPlexSansThai-600-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Prompt';font-weight:600;src:url('/game/fonts/Prompt-600-thai.woff2') format('woff2');unicode-range:U+0E00-0E7F, U+200C-200D, U+25CC;font-display:swap}
+@font-face{font-family:'Prompt';font-weight:600;src:url('/game/fonts/Prompt-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap}
+@font-face{font-family:'Prompt';font-weight:700;src:url('/game/fonts/Prompt-700-thai.woff2') format('woff2');unicode-range:U+0E00-0E7F, U+200C-200D, U+25CC;font-display:swap}
+@font-face{font-family:'Prompt';font-weight:700;src:url('/game/fonts/Prompt-700-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap}
+@font-face{font-family:'Plex';font-weight:400;src:url('/game/fonts/IBMPlexSansThai-400-thai.woff2') format('woff2');unicode-range:U+0E00-0E7F, U+200C-200D, U+25CC;font-display:swap}
+@font-face{font-family:'Plex';font-weight:400;src:url('/game/fonts/IBMPlexSansThai-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap}
+@font-face{font-family:'Plex';font-weight:600;src:url('/game/fonts/IBMPlexSansThai-600-thai.woff2') format('woff2');unicode-range:U+0E00-0E7F, U+200C-200D, U+25CC;font-display:swap}
+@font-face{font-family:'Plex';font-weight:600;src:url('/game/fonts/IBMPlexSansThai-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;font-display:swap}
 .hg{font-family:'Plex',sans-serif;color:#3b3a2e;min-height:100dvh;
   background:radial-gradient(circle at 15% 10%,#fff3c4 0,transparent 35%),radial-gradient(circle at 85% 90%,#ffe0ea 0,transparent 35%),#fffaf0}
 .hg h1,.hg h2,.hg .display{font-family:'Prompt',sans-serif}
