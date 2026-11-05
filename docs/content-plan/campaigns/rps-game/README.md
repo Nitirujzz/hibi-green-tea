@@ -1,7 +1,7 @@
 # เกม “เป่ายิ้งฉุบกับ Hibi & Capy” (เวอร์ชันทดลอง)
 
 > หน้าเกม: `/game` · หน้าพนักงาน: `/game/admin` · ภาพหน้าจอ: `screens_share.jpg`, `screens_animated.jpg`, `screens_flow.jpg`, `screens_win.jpg` · คลิปสาธิต: `demo_animated.mp4`
-> โค้ด: `app/game/` (หน้าเว็บ) · `app/api/game/` (API) · `src/lib/game/` (กติกา รางวัล OTP ฐานข้อมูล) · ภาพตัวละคร `public/game/*.webp` (Higgsfield อ้างอิงชีตทางการ)
+> โค้ด: `app/game/` (หน้าเว็บ) · `app/api/game/[...slug]/route.ts` (API ทั้งหมดรวมไว้ไฟล์เดียว — บน Vercel แบบไม่มีฐานข้อมูลจะได้แชร์หน่วยความจำเดียวกัน) · `src/lib/game/` (กติกา รางวัล OTP ฐานข้อมูล) · ภาพตัวละคร `public/game/*.webp` (Higgsfield อ้างอิงชีตทางการ)
 
 ## กติกา
 1. ลงทะเบียนด้วยเบอร์มือถือ + ยินยอม PDPA → รับ OTP 6 หลัก (หมดอายุ 5 นาที · ขอใหม่ได้ทุก 60 วิ · ไม่เกิน 5 ครั้ง/วัน · กรอกผิดได้ 5 ครั้ง)
