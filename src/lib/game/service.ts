@@ -73,7 +73,7 @@ export async function play(phone: string, move: Move) {
   const row: PlayRow = (await s.getPlay(phone, day)) ?? { phone, day, stage: 'hibi', result: null }
   if (row.stage === 'done') throw new GameError(409, 'วันนี้เล่นครบแล้ว พรุ่งนี้มาเล่นใหม่นะ')
   const opponent = row.stage as Opponent
-  const opp = opponentMove()
+  const opp = opponentMove(move, (opponent === 'hibi' ? GAME_CONFIG.win1 : GAME_CONFIG.win2).winChance, GAME_CONFIG.tieChance)
   const outcome: Outcome = judge(move, opp)
   let coupon: CouponRow | null = null, note: string | null = null
 

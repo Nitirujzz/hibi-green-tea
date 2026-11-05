@@ -7,6 +7,8 @@ export const GAME_CONFIG = {
     label: process.env.GAME_WIN1_LABEL ?? 'ส่วนลด 15%',
     percent: Number(process.env.GAME_WIN1_PERCENT ?? 15),
     dailyCap: Number(process.env.GAME_WIN1_DAILY_CAP ?? 200),
+    /** Chance the player wins a decided round against Hibi (ties are replayed). */
+    winChance: Number(process.env.GAME_HIBI_WIN_CHANCE ?? 0.66),
   },
   /** Beat Hibi and Capy (both rounds): the grand prize. */
   win2: {
@@ -14,6 +16,8 @@ export const GAME_CONFIG = {
     label: 'ส่วนลด 50%',
     percent: 50,
     dailyCap: Number(process.env.GAME_WIN2_DAILY_CAP ?? 20),
+    /** Chance the player wins a decided round against Capy (ties are replayed). */
+    winChance: Number(process.env.GAME_CAPY_WIN_CHANCE ?? 0.5),
   },
   playsPerPhonePerDay: 1,
   couponValidDays: Number(process.env.GAME_COUPON_DAYS ?? 14),
@@ -23,6 +27,8 @@ export const GAME_CONFIG = {
     maxRequestsPerDay: 5,
     maxVerifyAttempts: 5,
   },
+  /** Share of throws that come out as a tie (replayed), as in a real game. */
+  tieChance: 1 / 3,
   timeZone: 'Asia/Bangkok',
 } as const
 

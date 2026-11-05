@@ -73,7 +73,7 @@ def suite_main():
     check('beat both -> single 50% coupon (15% upgraded)', upgrade_ok)
     check('lose to Capy keeps 15% coupon; lose to Hibi gets none', keep_ok)
     n = sum(totals.values()); both = totals['beat_both'] / n; hibi = (totals['beat_both'] + totals['lost_capy'] + totals['beat_hibi']) / n
-    check('win rate vs Hibi about 50%', 0.40 <= hibi <= 0.60, f'{hibi:.0%}')
+    check('win rate vs Hibi about 66%', 0.56 <= hibi <= 0.76, f'{hibi:.0%}')
     capy_games = totals['beat_both'] + totals['lost_capy']
     capy = totals['beat_both'] / capy_games if capy_games else 0
     check('win rate vs Capy about 50% (while 50% prizes remain)', 0.38 <= capy <= 0.62, f'{capy:.0%} of {capy_games}')

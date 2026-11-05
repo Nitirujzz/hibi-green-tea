@@ -5,9 +5,17 @@ export type Outcome = 'win' | 'lose' | 'tie'
 
 const BEATS: Record<Move, Move> = { rock: 'scissors', paper: 'rock', scissors: 'paper' }
 
-/** The opponent's move is uniformly random and decided on the server only. */
-export function opponentMove(): Move {
-  return MOVES[randomInt(MOVES.length)]
+const LOSES_TO: Record<Move, Move> = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
+
+/**
+ * The opponent's move, decided on the server only. A third of throws tie (and are replayed);
+ * a decided round goes to the player with probability `winChance` (0..1).
+ */
+export function opponentMove(player: Move, winChance: number, tieChance = 1 / 3): Move {
+  const r = randomInt(1_000_000) / 1_000_000
+  if (r < tieChance) return player
+  const p = Math.min(1, Math.max(0, winChance))
+  return (r - tieChance) / (1 - tieChance) < p ? BEATS[player] : LOSES_TO[player]
 }
 
 /** Outcome from the player's point of view. */

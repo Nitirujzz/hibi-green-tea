@@ -82,25 +82,57 @@ function shareKind(result: string | null): ShareKind {
   return result === 'beat_both' ? 'grand' : result === 'beat_hibi' ? 'beat_hibi' : result === 'lost_capy' ? 'lost_capy' : 'lost_hibi'
 }
 
-/** "Share my result" - native share sheet with the story image when supported, else a sheet of links + download. */
+/** In-app browsers (IG, FB, LINE, TikTok) cannot hand files to other apps, so they get save-the-image steps. */
+function inAppBrowser(): boolean {
+  if (typeof navigator === 'undefined') return false
+  return /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|musical_ly|BytedanceWebview/i.test(navigator.userAgent)
+}
+
+/**
+ * "Share my result". The story card is built as soon as the result shows, so the tap calls
+ * navigator.share straight away (iOS Safari drops the share sheet if the tap waits on async work).
+ * Instagram needs the image on its own: sending text with the file hides IG or drops the image,
+ * so the caption + link go to the clipboard for a Link sticker instead.
+ */
 function ShareButton({ kind }: { kind: ShareKind }) {
   const [open, setOpen] = useState(false)
+  const [file, setFile] = useState<File | null>(null)
   const [img, setImg] = useState<string | null>(null)
-  const [blob, setBlob] = useState<Blob | null>(null)
   const [copied, setCopied] = useState(false)
+  const [inApp, setInApp] = useState(false)
   const url = typeof window !== 'undefined' ? shareUrl() : ''
   const text = shareText(kind)
 
-  async function go() {
+  useEffect(() => {
+    let alive = true, obj: string | null = null
+    setInApp(inAppBrowser())
+    buildCard(kind).then(b => {
+      if (!alive) return
+      obj = URL.createObjectURL(b); setImg(obj)
+      setFile(new File([b], 'hibi-capy-result.jpg', { type: b.type || 'image/jpeg' }))
+    }).catch(() => {})
+    return () => { alive = false; if (obj) URL.revokeObjectURL(obj) }
+  }, [kind])
+
+  async function copyCaption() {
+    try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true); return true } catch { return false }
+  }
+
+  async function shareImage() {
     sfx('tap'); buzz(15)
-    const b = blob ?? await buildCard(kind)
-    setBlob(b); setImg(URL.createObjectURL(b))
-    const file = new File([b], 'hibi-capy-result.png', { type: 'image/png' })
-    if (navigator.canShare?.({ files: [file] })) {
-      try { await navigator.share({ files: [file], text: `${text} ${url}`, title: 'เป่ายิ้งฉุบกับ Hibi & Capy' }); return } catch (e) { if ((e as Error).name === 'AbortError') return }
+    copyCaption()   // not awaited: keeps the tap's user activation for navigator.share
+    if (file && !inApp && navigator.canShare?.({ files: [file] })) {
+      try { await navigator.share({ files: [file] }); return } catch (e) { if ((e as Error).name === 'AbortError') return }
     }
     setOpen(true)
   }
+
+  async function shareLink() {
+    sfx('tap')
+    if (navigator.share) { try { await navigator.share({ text, url, title: 'เป่ายิ้งฉุบกับ Hibi & Capy' }); return } catch (e) { if ((e as Error).name === 'AbortError') return } }
+    setOpen(true)
+  }
+
   const enc = encodeURIComponent
   const links = [
     { label: 'Facebook', bg: '#1877F2', href: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}` },
@@ -109,20 +141,28 @@ function ShareButton({ kind }: { kind: ShareKind }) {
   ]
   return (
     <>
-      <motion.button className="hg-btn mt-3 bg-[#ffd23f] text-[#3a2a00]" animate={{ rotate: [0, -2, 2, 0] }} transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 }} onClick={go}>
-        แชร์ผลให้เพื่อน 📣
+      <motion.button className="hg-btn mt-3 bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white" animate={{ rotate: [0, -2, 2, 0] }} transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 }} onClick={shareImage} disabled={!file && !inApp}>
+        {file || inApp ? 'แชร์ลง IG Story 📸' : 'กำลังเตรียมภาพ…'}
       </motion.button>
+      <button className="hg-btn hg-soft mt-2" onClick={shareLink}>แชร์ลิงก์ให้เพื่อน 📣</button>
       <AnimatePresence>
         {open && (
           <motion.div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)}>
-            <motion.div className="w-full max-w-[440px] rounded-t-[32px] bg-[#fffaf0] p-5 pb-8" initial={{ y: 400 }} animate={{ y: 0 }} exit={{ y: 400 }} transition={{ type: 'spring', damping: 24 }} onClick={e => e.stopPropagation()}>
-              <div className="display mb-3 text-center text-[20px] font-bold text-[#243e1b]">แชร์ผลการเล่น</div>
-              {img && <img src={img} alt="การ์ดผลการเล่น" className="mx-auto mb-4 h-[260px] rounded-2xl shadow-lg" />}
-              <a className="hg-btn hg-primary mb-3 block text-center" href={img ?? '#'} download="hibi-capy-result.png" onClick={() => sfx('tap')}>⬇️ บันทึกภาพ (ลง IG Story / TikTok)</a>
+            <motion.div className="max-h-[92dvh] w-full max-w-[440px] overflow-y-auto rounded-t-[32px] bg-[#fffaf0] p-5 pb-8" initial={{ y: 400 }} animate={{ y: 0 }} exit={{ y: 400 }} transition={{ type: 'spring', damping: 24 }} onClick={e => e.stopPropagation()}>
+              <div className="display mb-1 text-center text-[20px] font-bold text-[#243e1b]">แชร์ลง IG Story</div>
+              <p className="mb-3 text-center text-[13px] text-[#6b6a55]">{inApp ? 'กดค้างที่ภาพ แล้วเลือก "บันทึกรูปภาพ"' : 'กดค้างที่ภาพ หรือกดปุ่มบันทึกด้านล่าง'}</p>
+              {img && <img src={img} alt="การ์ดผลการเล่น" className="mx-auto mb-3 h-[300px] rounded-2xl shadow-lg" style={{ WebkitTouchCallout: 'default' }} />}
+              {!inApp && <a className="hg-btn hg-primary mb-3 block text-center" href={img ?? '#'} download="hibi-capy-result.jpg" onClick={() => sfx('tap')}>⬇️ บันทึกภาพ</a>}
+              <ol className="hg-card mb-3 list-decimal space-y-1 p-4 pl-8 text-[14px] text-[#243e1b]">
+                <li>บันทึกภาพลงเครื่อง</li>
+                <li>เปิด Instagram → สร้าง Story → เลือกภาพนี้</li>
+                <li>กดสติกเกอร์ <b>Link</b> แล้ววางลิงก์ที่คัดลอกไว้ ให้เพื่อนกดมาเล่นได้</li>
+              </ol>
+              {inApp && <p className="mb-3 rounded-2xl bg-[#fff3c4] p-3 text-center text-[13px] text-[#6b5a00]">เปิดจากในแอปอยู่ ถ้าบันทึกภาพไม่ได้ กด ⋯ มุมขวาบน → &quot;เปิดในเบราว์เซอร์&quot;</p>}
+              <button className="hg-btn hg-soft mb-3 w-full" onClick={copyCaption}>{copied ? 'คัดลอกข้อความ + ลิงก์แล้ว ✓' : '🔗 คัดลอกข้อความ + ลิงก์'}</button>
               <div className="grid grid-cols-3 gap-2">
                 {links.map(l => <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="hg-btn block text-center text-white" style={{ background: l.bg, fontSize: 16 }} onClick={() => sfx('tap')}>{l.label}</a>)}
               </div>
-              <button className="hg-btn hg-soft mt-3 w-full" onClick={async () => { try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true) } catch {} }}>{copied ? 'คัดลอกแล้ว ✓' : '🔗 คัดลอกลิงก์'}</button>
             </motion.div>
           </motion.div>
         )}

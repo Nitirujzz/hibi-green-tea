@@ -47,9 +47,10 @@ const results = []; const check = (n, c, d = '') => { results.push([n, !!c]); co
       break
     }
     check(`[${tag}] countdown animation shown`, sawCount);
-    check(`[${tag}] game reaches a final result`, await p.locator('text=แชร์ผลให้เพื่อน').count() > 0);
-    await p.click('text=แชร์ผลให้เพื่อน', { force: true }); await p.waitForSelector('text=แชร์ผลการเล่น', { timeout: 8000 }); await p.waitForTimeout(800); await shot('8_share');
-    check(`[${tag}] share sheet has download + Facebook + LINE + X + copy`, await p.locator('text=บันทึกภาพ').count() > 0 && await p.locator('text=Facebook').count() > 0 && await p.locator('text=LINE').count() > 0 && await p.locator('text=คัดลอกลิงก์').count() > 0);
+    await p.waitForSelector('text=แชร์ลง IG Story 📸', { timeout: 8000 }).catch(() => {});
+    check(`[${tag}] game reaches a final result`, await p.locator('text=แชร์ลง IG Story 📸').count() > 0);
+    await p.click('text=แชร์ลง IG Story 📸', { force: true }); await p.waitForSelector('text=สติกเกอร์', { timeout: 8000 }); await p.waitForTimeout(800); await shot('8_share');
+    check(`[${tag}] share sheet has download + IG steps + Facebook + LINE + X + copy`, await p.locator('text=⬇️ บันทึกภาพ').count() > 0 && await p.locator('text=Facebook').count() > 0 && await p.locator('text=LINE').count() > 0 && await p.locator('text=คัดลอกข้อความ').count() > 0);
     const imgOk = await p.evaluate(() => { const i = document.querySelector('img[alt="การ์ดผลการเล่น"]'); return !!i && i.naturalWidth === 1080 && i.naturalHeight === 1920 });
     check(`[${tag}] share card is 1080x1920`, imgOk);
     await p.mouse.click(10, 10); await p.waitForTimeout(500);

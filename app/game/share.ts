@@ -59,5 +59,5 @@ export async function buildCard(kind: ShareKind): Promise<Blob> {
   g.fillStyle = '#3f8f3a'; fitText(g, window.location.host + '/game', 1575, 700, 48, 'Prompt', W - 320)
   g.fillStyle = '#6b6a55'; g.font = '600 34px Plex, sans-serif'; g.fillText('ชนะทั้งคู่ รับส่วนลด 50% · 5 สาขา', W / 2, 1640)
   g.fillStyle = '#9a9578'; g.font = '600 34px Plex, sans-serif'; g.fillText('#HibiMatcha #HibiAndCapy', W / 2, 1810)
-  return new Promise(res => cv.toBlob(b => res(b!), 'image/png'))
+  return new Promise((res, rej) => cv.toBlob(b => (b ? res(b) : rej(new Error('card'))), 'image/jpeg', 0.92))
 }
