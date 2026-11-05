@@ -301,3 +301,52 @@ enum BookingStatus {
   CANCELLED
   COMPLETED
 }
+
+// ---- Hibi & Capy rock-paper-scissors game ----
+model GamePlayer {
+  phone     String   @id
+  consentAt DateTime @default(now())
+
+  @@map("game_players")
+}
+
+model GameOtp {
+  id        String   @id @default(cuid())
+  phone     String
+  codeHash  String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([phone, createdAt])
+  @@map("game_otps")
+}
+
+model GamePlay {
+  id        String   @id @default(cuid())
+  phone     String
+  day       String
+  stage     String
+  result    String?
+  updatedAt DateTime @updatedAt
+
+  @@unique([phone, day])
+  @@map("game_plays")
+}
+
+model GameCoupon {
+  code       String    @id
+  phone      String
+  prizeKey   String
+  label      String
+  percent    Int
+  day        String
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime
+  redeemedAt DateTime?
+  voided     Boolean   @default(false)
+
+  @@index([prizeKey, day])
+  @@index([phone])
+  @@map("game_coupons")
+}

@@ -1,0 +1,18 @@
+@font-face{font-family:'Prompt';font-weight:600;src:url('/game/fonts/Prompt-600-thai.woff2') format('woff2'),url('/game/fonts/Prompt-600-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Prompt';font-weight:700;src:url('/game/fonts/Prompt-700-thai.woff2') format('woff2'),url('/game/fonts/Prompt-700-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Plex';font-weight:400;src:url('/game/fonts/IBMPlexSansThai-400-thai.woff2') format('woff2'),url('/game/fonts/IBMPlexSansThai-400-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Plex';font-weight:600;src:url('/game/fonts/IBMPlexSansThai-600-thai.woff2') format('woff2'),url('/game/fonts/IBMPlexSansThai-600-latin.woff2') format('woff2');font-display:swap}
+.hg{font-family:'Plex',sans-serif;color:#3b3a2e;min-height:100dvh;
+  background:radial-gradient(circle at 15% 10%,#fff3c4 0,transparent 35%),radial-gradient(circle at 85% 90%,#ffe0ea 0,transparent 35%),#fffaf0}
+.hg h1,.hg h2,.hg .display{font-family:'Prompt',sans-serif}
+.hg-card{background:#fff;border-radius:28px;box-shadow:0 12px 30px rgba(120,100,40,.12)}
+.hg-btn{font-family:'Prompt',sans-serif;font-weight:700;border-radius:999px;padding:14px 22px;font-size:18px;transition:transform .12s}
+.hg-btn:active{transform:scale(.96)}
+.hg-btn:disabled{opacity:.5}
+.hg-primary{background:#243e1b;color:#fff}
+.hg-soft{background:#eef6e6;color:#243e1b}
+.hg-input{width:100%;border:2px solid #e5dcc0;border-radius:18px;padding:14px 16px;font-size:20px;background:#fffdf7;outline:none}
+.hg-input:focus{border-color:#7fb24a}
+.hg-move{width:96px;height:96px;border-radius:28px;background:#fff;box-shadow:0 8px 20px rgba(120,100,40,.15);font-size:48px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.hg-move span{font-size:14px;font-family:'Prompt';font-weight:600;color:#243e1b;margin-top:2px}
+.hg-coupon{border:3px dashed #e5484d;background:linear-gradient(135deg,#fff,#fff6e0)}
