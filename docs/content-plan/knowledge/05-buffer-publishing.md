@@ -36,5 +36,6 @@
 | 29 ต.ค. | 10:30 | Halloween “แต่งแบบ Hibi หรือ Capy” | IG + FB |
 | 30 ต.ค. | 19:30 | 5 ความผิดพลาดที่ทำให้มัทฉะขม (VO reel 1:24) | IG + FB + TikTok (แจ้งเตือน) |
 | 1 พ.ย. | 19:30 | มัทฉะตีมือ 4 ขั้น (reel 21 วิ) | IG + FB + TikTok (แจ้งเตือน) |
+| 11 พ.ย. | 19:30 | Capy หัดตีมัทฉะ (Hibi & Capy reel 32 วิ) | IG + FB + TikTok (แจ้งเตือน) |
 - ทีมร้านตั้งเองด้วย (ดูใน Buffer): มัทฉะ vs ชาเขียว 28 ต.ค. · Nutty 30 ต.ค. 11:00 · Yame Saeakari 1 พ.ย. 11:00 · Hojicha Kokoro 2 พ.ย.
 - ปฏิทินเดือน ต.ค. ฉบับเต็ม: `../calendar/2026-10-content-calendar.md`
