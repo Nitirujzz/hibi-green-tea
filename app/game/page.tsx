@@ -30,6 +30,50 @@ function Char({ who, mood, size = 240 }: { who: Opp | 'both'; mood?: 'ready' | '
   )
 }
 
+/** Looping character animation (Higgsfield clip on a cream card); falls back to the still pose. */
+function Loop({ who, size = 260 }: { who: 'both' | Opp; size?: number }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return <Char who={who} mood="ready" size={size} />
+  return (
+    <motion.div initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 220, damping: 16 }}
+      className="mx-auto overflow-hidden rounded-[36px] shadow-[0_14px_30px_rgba(120,100,40,.15)]" style={{ width: size, height: size, background: '#fff6e0' }}>
+      <video poster={`/game/loop_${who}.jpg`} autoPlay muted loop playsInline
+        style={{ width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${who === 'both' ? 1.32 : 1.22})`, transformOrigin: 'center 58%' }}>
+        <source src={`/game/loop_${who}.webm`} type="video/webm" />
+        <source src={`/game/loop_${who}.mp4`} type="video/mp4" onError={() => setFailed(true)} />
+      </video>
+    </motion.div>
+  )
+}
+
+/** Soft floating leaves, hearts and sparkles behind every screen. */
+function Floaties() {
+  const items = useMemo(() => Array.from({ length: 14 }, (_, i) => ({ i, e: ['🍃', '💚', '✨', '🌸', '🍵'][i % 5], x: (i * 37) % 100, s: 14 + (i % 4) * 6, d: 9 + (i % 5) * 2.5, delay: (i % 7) * 1.3 })), [])
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden" aria-hidden>
+      {items.map(f => (
+        <motion.div key={f.i} initial={{ y: '105vh', x: `${f.x}vw`, opacity: 0 }} animate={{ y: '-10vh', opacity: [0, 0.55, 0.55, 0], rotate: [0, 25, -20, 0] }}
+          transition={{ duration: f.d, delay: f.delay, repeat: Infinity, ease: 'linear' }} style={{ position: 'absolute', fontSize: f.s }}>{f.e}</motion.div>
+      ))}
+    </div>
+  )
+}
+
+/** Speech bubble that types its text out. */
+function Bubble({ text }: { text: string }) {
+  const [n, setN] = useState(0)
+  useEffect(() => { setN(0); const t = setInterval(() => setN(v => (v >= text.length ? v : v + 1)), 28); return () => clearInterval(t) }, [text])
+  return (
+    <motion.div initial={{ scale: 0.6, opacity: 0, y: 10 }} animate={{ scale: 1, opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+      className="relative mx-auto mt-3 max-w-[320px] rounded-[22px] bg-white px-4 py-3 text-center text-[16px] shadow-[0_8px_20px_rgba(120,100,40,.12)]">
+      <span className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
+      <span className="relative">{text.slice(0, n)}</span>
+    </motion.div>
+  )
+}
+
+const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms) } catch {} }
+
 function Confetti() {
   const bits = useMemo(() => Array.from({ length: 46 }, (_, i) => ({ i, x: Math.random() * 100, d: 1.8 + Math.random() * 1.6, delay: Math.random() * 0.8,
     c: ['#ff7aa2', '#ffd23f', '#7fb24a', '#a8d48a', '#e07b39'][i % 5], r: Math.random() * 360 })), [])
@@ -47,14 +91,17 @@ function Confetti() {
 function CouponCard({ c, phone }: { c: Coupon; phone: string }) {
   const exp = new Date(c.expiresAt).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' })
   return (
-    <div className="hg-card hg-coupon p-5 text-center">
+    <motion.div initial={{ rotateY: 90, scale: 0.8 }} animate={{ rotateY: 0, scale: 1 }} transition={{ type: 'spring', stiffness: 160, damping: 14, delay: 0.3 }}
+      className="hg-card hg-coupon relative overflow-hidden p-5 text-center" style={{ perspective: 800 }}>
+      <motion.div className="pointer-events-none absolute inset-y-0 w-1/3" style={{ background: 'linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent)' }}
+        initial={{ x: '-120%' }} animate={{ x: '420%' }} transition={{ duration: 1.6, delay: 0.9, repeat: Infinity, repeatDelay: 2.4 }} />
       <div className="display text-[15px] font-semibold text-[#e5484d]">🎟️ คูปองของคุณ</div>
       <div className="display mt-1 text-[40px] font-bold leading-none text-[#243e1b]">{c.label}</div>
       <div className="display mt-3 select-all rounded-2xl bg-[#243e1b] px-3 py-2 text-[24px] font-bold tracking-[2px] text-white">{c.code}</div>
       <div className="mt-3 text-[14px] text-[#6b6a55]">เบอร์ {phone} · ใช้ได้ถึง {exp} · ทุกสาขา</div>
       <div className="mt-1 text-[14px] font-semibold text-[#3f8f3a]">📸 แคปหน้าจอนี้ แล้วโชว์พนักงานตอนสั่งเครื่องดื่ม</div>
       {c.redeemed && <div className="mt-2 font-semibold text-[#e5484d]">ใช้สิทธิ์แล้ว</div>}
-    </div>
+    </motion.div>
   )
 }
 
@@ -96,36 +143,43 @@ export default function GamePage() {
     setScreen('count'); setBeat(0)
     const res = api<PlayRes>('/api/game/play', { move: m })
     res.catch(() => {})   // handled after the countdown
-    for (let i = 1; i <= 3; i++) { await new Promise(r => setTimeout(r, 650)); setBeat(i) }
-    try { const r = await res; setLast(r); setState(r.state); setScreen('reveal') } catch (e) { setScreen('lobby'); throw e }
+    buzz(30)
+    for (let i = 1; i <= 3; i++) { await new Promise(r => setTimeout(r, 650)); setBeat(i); buzz(i === 3 ? 60 : 30) }
+    try { const r = await res; setLast(r); setState(r.state); setScreen('reveal'); buzz(r.outcome === 'win' ? [40, 60, 120] : r.outcome === 'lose' ? 120 : [30, 40, 30]) } catch (e) { setScreen('lobby'); throw e }
   })
 
   const opp: Opp = state?.stage === 'capy' ? 'capy' : (last?.opponent ?? 'hibi')
   const grand = state?.result === 'beat_both' && state.coupon?.percent === 50
 
   return (
-    <main className="mx-auto flex min-h-[100dvh] max-w-[440px] flex-col px-4 pb-10 pt-6">
+    <main className="relative mx-auto flex min-h-[100dvh] max-w-[440px] flex-col px-4 pb-10 pt-6">
+      <Floaties />
       <header className="mb-2 flex items-center justify-between">
         <div className="display text-[18px] font-bold text-[#243e1b]">Hibi Matcha Cafe</div>
         {maskedPhone && <div className="text-[13px] text-[#9a9578]">📱 {maskedPhone}</div>}
       </header>
 
       <AnimatePresence mode="wait">
-        <motion.section key={screen + (last?.outcome ?? '')} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }} className="flex flex-1 flex-col">
+        <motion.section key={screen + (last?.outcome ?? '')} style={{ position: 'relative', zIndex: 1 }} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }} className="flex flex-1 flex-col">
 
           {screen === 'loading' && <div className="m-auto text-[#9a9578]">กำลังโหลด…</div>}
 
           {screen === 'intro' && <>
             <div className="mt-2 text-center">
-              <h1 className="text-[34px] font-bold leading-tight text-[#243e1b]">เป่ายิ้งฉุบ<br /><span className="text-[#e0a800]">กับ Hibi & Capy</span></h1>
+              <h1 className="text-[34px] font-bold leading-tight text-[#243e1b]">
+                {['เป่า', 'ยิ้ง', 'ฉุบ'].map((w, i) => (
+                  <motion.span key={w} className="inline-block" animate={{ y: [0, -10, 0] }} transition={{ duration: 0.6, delay: i * 0.18, repeat: Infinity, repeatDelay: 1.6 }}>{w}</motion.span>
+                ))}
+                <br /><span className="text-[#e0a800]">กับ Hibi & Capy</span></h1>
             </div>
-            <div className="flex justify-center"><Char who="both" size={260} /></div>
+            <div className="my-3"><Loop who="both" size={270} /></div>
             <div className="hg-card space-y-2 p-5 text-[16px]">
               <div>🥇 <b>ชนะ Hibi</b> → {state?.prizes.win1 ?? prizes?.win1 ?? ''}</div>
               <div>🏆 <b>ชนะทั้ง Hibi และ Capy</b> → <b className="text-[#e5484d]">ส่วนลด 50%</b></div>
               <div className="text-[14px] text-[#6b6a55]">เล่นได้วันละ 1 ครั้งต่อเบอร์ · เสมอเล่นใหม่ได้ · คูปองใช้ได้ทุกสาขา</div>
             </div>
-            <button className="hg-btn hg-primary mt-5" onClick={() => setScreen('phone')}>เริ่มเล่นเลย! ✊✋✌️</button>
+            <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
+              onClick={() => { buzz(20); setScreen('phone') }}>เริ่มเล่นเลย! ✊✋✌️</motion.button>
           </>}
 
           {screen === 'phone' && <>
@@ -156,11 +210,12 @@ export default function GamePage() {
             {state.stage !== 'done' ? <>
               <div className="mt-2 text-center display text-[16px] font-semibold text-[#9a9578]">รอบที่ {OPP[state.stage].round} / 2</div>
               <h2 className="text-center text-[28px] font-bold text-[#243e1b]">เจอกับ {OPP[state.stage].name}!</h2>
-              <div className="flex justify-center"><Char who={state.stage} mood="ready" size={250} /></div>
-              <p className="text-center text-[16px]">{OPP[state.stage].line}</p>
+              <div className="my-2"><Loop who={state.stage} size={250} /></div>
+              <Bubble text={OPP[state.stage].line} />
               {!state.grandAvailable && <p className="mt-2 rounded-2xl bg-[#fff3c4] p-2 text-center text-[14px]">รางวัลส่วนลด 50% ของวันนี้หมดแล้ว · ยังลุ้นรางวัลรอบแรกได้นะ</p>}
               {state.coupon && <p className="mt-2 text-center text-[14px] text-[#3f8f3a]">คุณได้ {state.coupon.label} แล้ว · ชนะ Capy อัปเกรดเป็นส่วนลด 50%!</p>}
-              <button className="hg-btn hg-primary mt-5" onClick={() => setScreen('pick')}>พร้อมแล้ว! เป่า ยิ้ง ฉุบ</button>
+              <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
+                onClick={() => { buzz(20); setScreen('pick') }}>พร้อมแล้ว! เป่า ยิ้ง ฉุบ</motion.button>
             </> : <>
               {grand && <Confetti />}
               <h2 className="mt-2 text-center text-[28px] font-bold text-[#243e1b]">{grand ? 'ชนะทั้งคู่! 🎉' : state.coupon ? 'เก่งมาก! 🎉' : 'วันนี้ยังไม่ใช่วันของเรา'}</h2>
@@ -172,11 +227,13 @@ export default function GamePage() {
 
           {screen === 'pick' && state && state.stage !== 'done' && <>
             <div className="mt-2 text-center display text-[16px] font-semibold text-[#9a9578]">รอบที่ {OPP[state.stage].round} / 2 · {OPP[state.stage].name}</div>
-            <div className="flex justify-center"><Char who={state.stage} mood="ready" size={230} /></div>
+            <div className="my-2"><Loop who={state.stage} size={220} /></div>
             <h2 className="mb-4 text-center text-[24px] font-bold text-[#243e1b]">เลือกเลย!</h2>
             <div className="flex justify-center gap-4">
-              {(['rock', 'paper', 'scissors'] as Move[]).map(m => (
-                <motion.button key={m} whileTap={{ scale: 0.9 }} whileHover={{ y: -4 }} className="hg-move" disabled={busy} onClick={() => choose(m)}>
+              {(['rock', 'paper', 'scissors'] as Move[]).map((m, i) => (
+                <motion.button key={m} initial={{ y: 40, opacity: 0 }} animate={{ y: [0, -6, 0], opacity: 1, rotate: [0, -4, 4, 0] }}
+                  transition={{ y: { duration: 1.6, repeat: Infinity, delay: i * 0.2 }, rotate: { duration: 1.6, repeat: Infinity, delay: i * 0.2 }, opacity: { duration: 0.3, delay: i * 0.08 } }}
+                  whileTap={{ scale: 0.85 }} className="hg-move" disabled={busy} onClick={() => { buzz(15); choose(m) }}>
                   {HAND[m]}<span>{NAME[m]}</span>
                 </motion.button>
               ))}
@@ -185,10 +242,12 @@ export default function GamePage() {
           </>}
 
           {screen === 'count' && <>
-            <div className="flex justify-center"><Char who={opp} mood="ready" size={230} /></div>
+            <motion.div key={'c' + beat} animate={{ y: [0, -22, 0], rotate: [0, beat % 2 ? 6 : -6, 0], scaleY: [1, 0.94, 1] }} transition={{ duration: 0.45 }} className="flex justify-center">
+              <Char who={opp} mood="ready" size={230} />
+            </motion.div>
             <div className="mt-6 flex items-center justify-center gap-10 text-[80px]">
-              <motion.div animate={{ y: [0, -30, 0] }} transition={{ repeat: Infinity, duration: 0.65 }}>✊</motion.div>
-              <motion.div animate={{ y: [0, -30, 0] }} transition={{ repeat: Infinity, duration: 0.65 }}>✊</motion.div>
+              <motion.div animate={{ y: [0, -34, 0], rotate: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 0.65 }}>✊</motion.div>
+              <motion.div animate={{ y: [0, -34, 0], rotate: [0, 12, 0] }} transition={{ repeat: Infinity, duration: 0.65 }}>✊</motion.div>
             </div>
             <motion.div key={beat} initial={{ scale: 1.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="display mt-4 text-center text-[44px] font-bold text-[#243e1b]">
               {['เป่า…', 'ยิ้ง…', 'ฉุบ!', 'ฉุบ!'][beat]}
@@ -197,11 +256,15 @@ export default function GamePage() {
 
           {screen === 'reveal' && last && <>
             {last.outcome === 'win' && last.opponent === 'capy' && last.newCoupon?.percent === 50 && <Confetti />}
-            <div className="flex justify-center"><Char who={last.opponent} mood={last.outcome === 'win' ? 'lose' : last.outcome === 'lose' ? 'win' : 'ready'} size={220} /></div>
+            <motion.div className="flex justify-center"
+              animate={last.outcome === 'win' ? { x: [0, -10, 10, -8, 8, 0] } : last.outcome === 'lose' ? { y: [0, -26, 0, -16, 0] } : { rotate: [0, -5, 5, 0] }}
+              transition={{ duration: 0.9, delay: 0.5, repeat: Infinity, repeatDelay: 1.4 }}>
+              <Char who={last.opponent} mood={last.outcome === 'win' ? 'lose' : last.outcome === 'lose' ? 'win' : 'ready'} size={220} />
+            </motion.div>
             <div className="mt-2 flex items-center justify-center gap-6">
-              <div className="text-center"><motion.div initial={{ scale: 0, rotate: -40 }} animate={{ scale: 1, rotate: 0 }} className="text-[72px]">{HAND[last.playerMove]}</motion.div><div className="text-[14px] text-[#6b6a55]">คุณ</div></div>
-              <div className="display text-[24px] font-bold text-[#9a9578]">VS</div>
-              <div className="text-center"><motion.div initial={{ scale: 0, rotate: 40 }} animate={{ scale: 1, rotate: 0 }} className="text-[72px]">{HAND[last.opponentMove]}</motion.div><div className="text-[14px] text-[#6b6a55]">{OPP[last.opponent].name}</div></div>
+              <div className="text-center"><motion.div initial={{ x: -140, rotate: -60, scale: 0.6 }} animate={{ x: [-140, 12, 0], rotate: [-60, 8, 0], scale: [0.6, 1.15, 1] }} transition={{ duration: 0.45 }} className="text-[72px]">{HAND[last.playerMove]}</motion.div><div className="text-[14px] text-[#6b6a55]">คุณ</div></div>
+              <motion.div initial={{ scale: 0 }} animate={{ scale: [0, 1.6, 1] }} transition={{ delay: 0.35, duration: 0.35 }} className="display text-[24px] font-bold text-[#9a9578]">💥</motion.div>
+              <div className="text-center"><motion.div initial={{ x: 140, rotate: 60, scale: 0.6 }} animate={{ x: [140, -12, 0], rotate: [60, -8, 0], scale: [0.6, 1.15, 1] }} transition={{ duration: 0.45 }} className="text-[72px]">{HAND[last.opponentMove]}</motion.div><div className="text-[14px] text-[#6b6a55]">{OPP[last.opponent].name}</div></div>
             </div>
             <motion.h2 initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25, type: 'spring' }}
               className={`mt-3 text-center text-[32px] font-bold ${last.outcome === 'win' ? 'text-[#3f8f3a]' : last.outcome === 'lose' ? 'text-[#e5484d]' : 'text-[#e0a800]'}`}>
