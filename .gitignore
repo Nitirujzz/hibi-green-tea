@@ -46,3 +46,6 @@ dev.db-journal
 
 # uploads
 /public/uploads
+
+# Netlify local link state
+.netlify
