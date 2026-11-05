@@ -1,11 +1,11 @@
 // Prize and limit settings for the Hibi & Capy rock-paper-scissors game.
 // The shop edits these values (or the matching env vars) before going live.
 export const GAME_CONFIG = {
-  /** Beat Hibi only (round 1). Placeholder reward until the shop confirms it. */
+  /** Beat Hibi only (round 1). */
   win1: {
     key: 'WIN1',
-    label: process.env.GAME_WIN1_LABEL ?? 'ส่วนลด 10%',
-    percent: Number(process.env.GAME_WIN1_PERCENT ?? 10),
+    label: process.env.GAME_WIN1_LABEL ?? 'ส่วนลด 15%',
+    percent: Number(process.env.GAME_WIN1_PERCENT ?? 15),
     dailyCap: Number(process.env.GAME_WIN1_DAILY_CAP ?? 200),
   },
   /** Beat Hibi and Capy (both rounds): the grand prize. */
