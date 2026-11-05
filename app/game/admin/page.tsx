@@ -34,6 +34,7 @@ export default function GameAdmin() {
         <div className="hg-card p-5">
           <input className="hg-input" type="password" inputMode="numeric" placeholder="PIN พนักงาน" value={pin} onChange={e => setPin(e.target.value)} />
           <button className="hg-btn hg-primary mt-4 w-full" onClick={() => act('stats')}>เข้าสู่ระบบ</button>
+          {msg && <p className="mt-3 font-semibold">{msg}</p>}
         </div>
       ) : (
         <>

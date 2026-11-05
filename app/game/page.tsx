@@ -38,7 +38,8 @@ function Loop({ who, size = 260 }: { who: 'both' | Opp; size?: number }) {
   if (failed) return <Char who={who} mood="ready" size={size} />
   return (
     <motion.div initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 220, damping: 16 }}
-      className="mx-auto overflow-hidden rounded-[36px] shadow-[0_14px_30px_rgba(120,100,40,.15)]" style={{ width: size, height: size, background: '#fff6e0' }}>
+      className="mx-auto overflow-hidden rounded-[36px] shadow-[0_14px_30px_rgba(120,100,40,.15)]"
+      style={{ width: `min(${size}px, 34dvh)`, height: `min(${size}px, 34dvh)`, background: '#fff6e0' }}>
       <video poster={`/game/loop_${who}.jpg`} autoPlay muted loop playsInline
         style={{ width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${who === 'both' ? 1.32 : 1.22})`, transformOrigin: 'center 58%' }}>
         <source src={`/game/loop_${who}.webm`} type="video/webm" />
