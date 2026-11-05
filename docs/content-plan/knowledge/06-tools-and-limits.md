@@ -13,7 +13,7 @@
 | Playwright/Chromium | มีติดตั้งแล้ว `require('playwright')` · `/opt/pw-browsers/chromium` · ห้าม `playwright install` |
 | ดิสก์ | งานคลิปใช้ ~1–2 GB ต่อชิ้นใน scratchpad (เฟรม PNG) — ลบ `frames/` หลังเสร็จได้ |
 | เครดิต Higgsfield หมดกลางงาน (วิดีโอ Seedance 4–5 วิ ใช้เครดิตมาก) | เช็ก `balance` ก่อนสั่งชุดใหญ่ · ช็อตที่ขาดใช้ภาพนิ่ง + zoompan + motion graphic แทนได้ |
-| Seedance ตอบ `ip_detected` (ปฏิเสธบางช็อตตัวละคร) | ใช้ภาพนิ่ง fallback หรือเขียน prompt ใหม่ให้เลี่ยงคำที่ไวต่อระบบ |
+| Seedance ตอบ `ip_detected` (ปฏิเสธบางช็อตตัวละคร มักเป็นช็อตสองตัวละครใกล้ชิด) | ส่งใหม่ 1 ครั้ง: prompt แบบกลาง ๆ ไม่เรียกชื่อสัตว์/ตัวละคร (“the cream fluffy friend”, “the brown fluffy friend”) + การเคลื่อนไหวเบา ๆ → ผ่านทั้ง 2 ครั้งในคลิป Capy หัดตีมัทฉะ · ถ้ายังไม่ผ่านใช้ภาพนิ่ง fallback · เครดิตของงานที่ถูกปฏิเสธได้คืน |
 | Seedance แนะนำ preset แทนการสร้าง (เช่น “Earth zoom out” เมื่อ prompt มีคำว่า zoom out) | ใส่ `declined_preset_id` ของ preset นั้น หรือเลี่ยงคำว่า zoom out |
 
 ## ค่าเครดิต Higgsfield (เช็กจริง 28 ต.ค. 2026)
