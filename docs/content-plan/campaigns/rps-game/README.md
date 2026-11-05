@@ -46,4 +46,6 @@
 - [ ] **PDPA:** ใส่ลิงก์นโยบายความเป็นส่วนตัวจริง (ตอนนี้ลิงก์ไปท้ายหน้า) และระยะเวลาเก็บข้อมูล
 - [ ] รางวัลรอบแรก · เงื่อนไขคูปอง (1 ใบ/บิล? ใช้กับเมนูไหน? ร่วมโปรอื่นได้ไหม?)
 - [ ] ระบบ OTP จริง — **ยังไม่ทำตามที่ตกลง** (ตอนนี้เป็นโหมดทดลอง แสดงรหัสบนจอ) · ตั้ง `GAME_SECRET` และ `GAME_ADMIN_PIN`
-- [ ] Deploy (เช่น Vercel) + ฐานข้อมูล Postgres
+- [x] ลิงก์ทดสอบบน Netlify: https://frabjous-blancmange-5c2a40.netlify.app/game (โปรเจกต์ `frabjous-blancmange-5c2a40`, deploy อัตโนมัติจาก branch `claude/confident-gauss-05ftf8`, OTP โหมด demo, ข้อมูลเก็บในหน่วยความจำ — หายเมื่อ server cold start)
+  - env vars ตั้งใน Netlify แล้ว: `GAME_SECRET` (secret), `GAME_OTP_MODE=demo`, `GAME_ADMIN_PIN` (secret), `NEXT_PUBLIC_SITE_URL`
+- [ ] ฐานข้อมูล Postgres (`DATABASE_URL`) ก่อนเปิดใช้จริง
