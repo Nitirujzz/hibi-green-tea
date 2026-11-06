@@ -1,6 +1,9 @@
 """API test suite for the Hibi & Capy RPS game (run against a dev server in GAME_OTP_MODE=demo).
 Usage: python3 api_test.py [base_url] [--caps]   (--caps expects GAME_WIN2_DAILY_CAP=3, GAME_WIN1_DAILY_CAP=5)"""
-import json, sys, random, urllib.request, urllib.error, http.cookiejar, collections
+import json, sys, random, urllib.request, urllib.error, http.cookiejar, collections, datetime
+TODAY = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=7))).date()
+receipt_seq = iter(range(random.randint(0, 50000), 100000))
+def new_receipt(): return f'{next(receipt_seq) % 100000:05d}'
 BASE = (sys.argv[1] if len(sys.argv) > 1 and sys.argv[1].startswith('http') else 'http://localhost:3005') + '/api/game'
 results = []
 def check(name, cond, detail=''):
@@ -18,6 +21,7 @@ def new_phone(prefix='06'): return f'{prefix}{70000000 + next(seq) + random.rand
 def login(op, phone):
     s, d = call(op, '/otp/request', {'phone': phone, 'consent': True}); assert s == 200, d
     s, d = call(op, '/otp/verify', {'phone': phone, 'code': d['demoCode']}); assert s == 200, d
+    s, d = call(op, '/receipt', {'last5': new_receipt(), 'date': TODAY.isoformat()}); assert s == 200, d
 def play_out(op):
     """Play random moves until today's game ends. Returns (final_state, list_of_responses)."""
     out = []
@@ -44,6 +48,21 @@ def suite_main():
     s, d = call(a, '/otp/verify', {'phone': ph, 'code': 'abc'}); check('reject malformed OTP', s == 400)
     s, d = call(a, '/otp/verify', {'phone': ph, 'code': code}); check('accept correct OTP', s == 200 and d['state']['stage'] == 'hibi', d)
     s, d = call(a, '/state'); check('session cookie works + phone masked', s == 200 and d['loggedIn'] and 'xxx' in d['phone'])
+    # --- receipt gate ---
+    check('state asks for a receipt first', d['state']['needReceipt'] is True, d)
+    s, d = call(a, '/play', {'move': 'rock'}); check('cannot play before entering a receipt', s == 403, d)
+    s, d = call(a, '/receipt', {'last5': '1234', 'date': TODAY.isoformat()}); check('receipt needs exactly 5 digits', s == 400)
+    s, d = call(a, '/receipt', {'last5': '12a45', 'date': TODAY.isoformat()}); check('receipt digits only', s == 400)
+    s, d = call(a, '/receipt', {'last5': '12345', 'date': (TODAY + datetime.timedelta(days=1)).isoformat()}); check('receipt date cannot be in the future', s == 400)
+    s, d = call(a, '/receipt', {'last5': '12345', 'date': (TODAY - datetime.timedelta(days=5)).isoformat()}); check('old receipt date rejected', s == 400)
+    s, d = call(a, '/receipt', {'last5': '12345', 'date': ''}); check('receipt date required', s == 400)
+    rc = new_receipt()
+    s, d = call(a, '/receipt', {'last5': rc, 'date': TODAY.isoformat()}); check('valid receipt unlocks the game', s == 200 and d['state']['needReceipt'] is False and d['state']['stage'] == 'hibi', d)
+    s, d = call(a, '/receipt', {'last5': new_receipt(), 'date': TODAY.isoformat()}); check('one receipt registration per phone per day', s == 409)
+    o = client(); ph3 = new_phone(); s, d = call(o, '/otp/request', {'phone': ph3, 'consent': True}); call(o, '/otp/verify', {'phone': ph3, 'code': d['demoCode']})
+    s, d = call(o, '/receipt', {'last5': rc, 'date': TODAY.isoformat()}); check('same receipt cannot be used by another phone', s == 409, d)
+    s, d = call(o, '/receipt', {'last5': new_receipt(), 'date': (TODAY - datetime.timedelta(days=1)).isoformat()}); check("yesterday's receipt accepted", s == 200, d)
+    check('coupon terms: 30 days, in-store, max 1,000 per bill, next visit', any('30 วัน' in t for t in d['state']['prizes']['terms']) and any('หน้าร้าน' in t for t in d['state']['prizes']['terms']) and any('1,000' in t for t in d['state']['prizes']['terms']) and any('ครั้งถัดไป' in t for t in d['state']['prizes']['terms']))
     s, d = call(a, '/play', {'move': 'lizard'}); check('reject invalid move', s == 400)
     # lockout after 5 wrong codes
     b = client(); ph2 = new_phone(); call(b, '/otp/request', {'phone': ph2, 'consent': True})
@@ -62,7 +81,7 @@ def suite_main():
         opps = [r['opponent'] for r in resp]
         if 'capy' in opps and opps.index('capy') < len(opps) and any(o == 'hibi' for o in opps[opps.index('capy'):]): flow_ok = False
         totals[st['result']] += 1
-        if st['result'] == 'beat_both' and not (st['coupon'] and st['coupon']['percent'] == 50): upgrade_ok = False
+        if st['result'] == 'beat_both' and not (st['coupon'] and st['coupon']['percent'] == 35): upgrade_ok = False
         if st['result'] == 'lost_capy' and not (st['coupon'] and st['coupon']['percent'] == 15): keep_ok = False
         if st['result'] == 'lost_hibi' and st['coupon']: keep_ok = False
         if st['coupon']: codes.append(st['coupon']['code'])
@@ -70,14 +89,14 @@ def suite_main():
         if s != 409: flow_ok = False
     check('every result matches rock-paper-scissors rules', judge_ok, f'{rounds} rounds')
     check('Hibi first, then Capy; one game per phone per day', flow_ok)
-    check('beat both -> single 50% coupon (15% upgraded)', upgrade_ok)
+    check('beat both -> single 35% coupon (15% upgraded)', upgrade_ok)
     check('lose to Capy keeps 15% coupon; lose to Hibi gets none', keep_ok)
     n = sum(totals.values()); both = totals['beat_both'] / n; hibi = (totals['beat_both'] + totals['lost_capy'] + totals['beat_hibi']) / n
     check('win rate vs Hibi about 66%', 0.56 <= hibi <= 0.76, f'{hibi:.0%}')
     capy_games = totals['beat_both'] + totals['lost_capy']
     capy = totals['beat_both'] / capy_games if capy_games else 0
-    check('win rate vs Capy about 50% (while 50% prizes remain)', 0.38 <= capy <= 0.62, f'{capy:.0%} of {capy_games}')
-    check('50% coupons never exceed the daily cap (20)', totals['beat_both'] <= 20, totals['beat_both'])
+    check('win rate vs Capy about 33% (while 35% prizes remain)', 0.20 <= capy <= 0.47, f'{capy:.0%} of {capy_games}')
+    check('35% coupons never exceed the daily cap (20)', totals['beat_both'] <= 20, totals['beat_both'])
     print(f'      fairness over {n} players: beat Hibi {hibi:.1%} · results {dict(totals)}')
     check('coupon codes are unique', len(codes) == len(set(codes)))
     # --- staff admin ---
@@ -87,8 +106,8 @@ def suite_main():
     if codes:
         c = codes[0]
         s, d = call(adm, '/admin', {'pin': '1234', 'action': 'lookup', 'code': c.lower()}); check('lookup is case-insensitive', s == 200 and d['code'] == c)
-        s, d = call(adm, '/admin', {'pin': '1234', 'action': 'redeem', 'code': c}); check('redeem coupon', s == 200 and d['redeemedAt'])
-        s, d = call(adm, '/admin', {'pin': '1234', 'action': 'redeem', 'code': c}); check('cannot redeem twice', s == 409)
+        check('lookup shows the receipt used to play', d.get('receipt') and len(d['receipt']['last5']) == 5, d)
+        s, d = call(adm, '/admin', {'pin': '1234', 'action': 'redeem', 'code': c}); check('coupon cannot be used on the day it was won (next visit)', s == 409, d)
     s, d = call(adm, '/admin', {'pin': '1234', 'action': 'lookup', 'code': 'HIBI-NOPE-NOPE'}); check('unknown coupon -> not found', s == 404)
 
 def suite_caps():
@@ -98,9 +117,9 @@ def suite_caps():
         st, resp = play_out(op)
         for r in resp:
             if r.get('note'): notes[r['note']] += 1
-        if st['coupon'] and st['coupon']['percent'] == 50: got50 += 1
+        if st['coupon'] and st['coupon']['percent'] == 35: got50 += 1
         if st['coupon'] and st['coupon']['percent'] == 15: got15 += 1
-    check('50% coupons stop at the daily cap (3)', got50 == 3, got50)
+    check('35% coupons stop at the daily cap (3)', got50 == 3, got50)
     check('15% coupons stop at the daily cap (5)', got15 <= 5, got15)
     s, d = call(client(), '/state'); 
     print('      notes shown to players:', dict(notes))

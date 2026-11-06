@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './game.css'
 
 const title = 'เป่ายิ้งฉุบกับ Hibi & Capy · Hibi Matcha Cafe'
-const description = 'ชนะ Hibi รับส่วนลด 15% · ชนะทั้ง Hibi และ Capy รับส่วนลด 50%! เล่นฟรีวันละครั้ง'
+const description = 'ซื้อที่ร้าน กรอกเลขท้ายใบเสร็จ แล้วท้าเป่ายิ้งฉุบ! ชนะ Hibi รับส่วนลด 15% · ชนะทั้ง Hibi และ Capy รับส่วนลด 35%'
 
 export const metadata: Metadata = {
   // Set NEXT_PUBLIC_SITE_URL to the live domain so link previews use absolute image URLs.

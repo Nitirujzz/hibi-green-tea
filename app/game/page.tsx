@@ -7,9 +7,11 @@ import { buildCard, shareText, shareUrl, type ShareKind } from './share'
 type Move = 'rock' | 'paper' | 'scissors'
 type Opp = 'hibi' | 'capy'
 type Coupon = { code: string; label: string; percent: number; expiresAt: string; redeemed: boolean }
-type State = { stage: Opp | 'done'; result: string | null; coupon: Coupon | null; grandAvailable: boolean; prizes: { win1: string; win2: string } }
+type Prizes = { win1: string; win2: string; win1Percent: number; win2Percent: number; validDays: number; terms: string[] }
+type State = { stage: Opp | 'done'; result: string | null; coupon: Coupon | null; grandAvailable: boolean; prizes: Prizes
+  needReceipt: boolean; receipt: { last5: string; date: string } | null; receiptMinDate: string; today: string }
 type PlayRes = { opponent: Opp; playerMove: Move; opponentMove: Move; outcome: 'win' | 'lose' | 'tie'; newCoupon: Coupon | null; note: string | null; state: State }
-type Screen = 'loading' | 'intro' | 'phone' | 'otp' | 'lobby' | 'pick' | 'count' | 'reveal'
+type Screen = 'loading' | 'intro' | 'phone' | 'otp' | 'receipt' | 'lobby' | 'pick' | 'count' | 'reveal'
 
 const HAND: Record<Move, string> = { rock: '✊', paper: '✋', scissors: '✌️' }
 const NAME: Record<Move, string> = { rock: 'ค้อน', paper: 'กระดาษ', scissors: 'กรรไกร' }
@@ -94,25 +96,25 @@ function inAppBrowser(): boolean {
  * Instagram needs the image on its own: sending text with the file hides IG or drops the image,
  * so the caption + link go to the clipboard for a Link sticker instead.
  */
-function ShareButton({ kind }: { kind: ShareKind }) {
+function ShareButton({ kind, prizes }: { kind: ShareKind; prizes: Prizes }) {
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [img, setImg] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [inApp, setInApp] = useState(false)
   const url = typeof window !== 'undefined' ? shareUrl() : ''
-  const text = shareText(kind)
+  const text = shareText(kind, prizes)
 
   useEffect(() => {
     let alive = true, obj: string | null = null
     setInApp(inAppBrowser())
-    buildCard(kind).then(b => {
+    buildCard(kind, prizes).then(b => {
       if (!alive) return
       obj = URL.createObjectURL(b); setImg(obj)
       setFile(new File([b], 'hibi-capy-result.jpg', { type: b.type || 'image/jpeg' }))
     }).catch(() => {})
     return () => { alive = false; if (obj) URL.revokeObjectURL(obj) }
-  }, [kind])
+  }, [kind, prizes])
 
   async function copyCaption() {
     try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true); return true } catch { return false }
@@ -185,7 +187,7 @@ function Confetti() {
   )
 }
 
-function CouponCard({ c, phone }: { c: Coupon; phone: string }) {
+function CouponCard({ c, phone, terms }: { c: Coupon; phone: string; terms?: string[] }) {
   const exp = new Date(c.expiresAt).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' })
   return (
     <motion.div initial={{ rotateY: 90, scale: 0.8 }} animate={{ rotateY: 0, scale: 1 }} transition={{ type: 'spring', stiffness: 160, damping: 14, delay: 0.3 }}
@@ -195,8 +197,9 @@ function CouponCard({ c, phone }: { c: Coupon; phone: string }) {
       <div className="display text-[15px] font-semibold text-[#e5484d]">🎟️ คูปองของคุณ</div>
       <div className="display mt-1 text-[40px] font-bold leading-none text-[#243e1b]">{c.label}</div>
       <div className="display mt-3 select-all rounded-2xl bg-[#243e1b] px-3 py-2 text-[24px] font-bold tracking-[2px] text-white">{c.code}</div>
-      <div className="mt-3 text-[14px] text-[#6b6a55]">เบอร์ {phone} · ใช้ได้ถึง {exp} · ทุกสาขา</div>
-      <div className="mt-1 text-[14px] font-semibold text-[#3f8f3a]">📸 แคปหน้าจอนี้ แล้วโชว์พนักงานตอนสั่งเครื่องดื่ม</div>
+      <div className="mt-3 text-[14px] text-[#6b6a55]">เบอร์ {phone} · ใช้ได้ถึง {exp}</div>
+      <div className="mt-1 text-[14px] font-semibold text-[#3f8f3a]">📸 แคปหน้าจอนี้ แล้วโชว์พนักงานตอนมาครั้งถัดไป</div>
+      {terms && <ul className="mt-3 space-y-0.5 rounded-2xl bg-[#fffaf0] p-3 text-left text-[12.5px] leading-snug text-[#6b6a55]">{terms.map(t => <li key={t}>• {t}</li>)}</ul>}
       {c.redeemed && <div className="mt-2 font-semibold text-[#e5484d]">ใช้สิทธิ์แล้ว</div>}
     </motion.div>
   )
@@ -214,7 +217,9 @@ export default function GamePage() {
   const [busy, setBusy] = useState(false)
   const [last, setLast] = useState<PlayRes | null>(null)
   const [beat, setBeat] = useState(0)
-  const [prizes, setPrizes] = useState<State['prizes'] | null>(null)
+  const [prizes, setPrizes] = useState<Prizes | null>(null)
+  const [last5, setLast5] = useState('')
+  const [rDate, setRDate] = useState('')
   const [muted, setMutedState] = useState(false)
   useEffect(() => {
     setMutedState(gameAudio().muted)
@@ -225,9 +230,12 @@ export default function GamePage() {
   const toggleMute = () => { gameAudio().unlock(); const m = !gameAudio().muted; gameAudio().setMuted(m); setMutedState(m) }
 
   async function refresh() {
-    const s = await api<{ loggedIn: boolean; phone?: string; state?: State; prizes?: State['prizes'] }>('/api/game/state')
+    const s = await api<{ loggedIn: boolean; phone?: string; state?: State; prizes?: Prizes }>('/api/game/state')
     if (s.prizes) setPrizes(s.prizes)
-    if (s.loggedIn && s.state) { setState(s.state); setMaskedPhone(s.phone ?? ''); setScreen('lobby') } else setScreen('intro')
+    if (s.loggedIn && s.state) {
+      setState(s.state); setPrizes(s.state.prizes); setMaskedPhone(s.phone ?? '')
+      if (s.state.needReceipt) { setRDate(d => d || s.state!.today); setScreen('receipt') } else setScreen('lobby')
+    } else setScreen('intro')
   }
   useEffect(() => { refresh().catch(() => setScreen('intro')) }, [])
 
@@ -246,6 +254,11 @@ export default function GamePage() {
     await api('/api/game/otp/verify', { phone, code })
     await refresh()
   })
+  const submitReceipt = () => run(async () => {
+    sfx('tap')
+    const r = await api<{ state: State }>('/api/game/receipt', { last5, date: rDate })
+    setState(r.state); buzz(20); setScreen('lobby')
+  })
   const choose = (m: Move) => run(async () => {
     setScreen('count'); setBeat(0)
     const res = api<PlayRes>('/api/game/play', { move: m })
@@ -255,12 +268,13 @@ export default function GamePage() {
     try { const r = await res; setLast(r); setState(r.state); setScreen('reveal'); buzz(r.outcome === 'win' ? [40, 60, 120] : r.outcome === 'lose' ? 120 : [30, 40, 30])
       sfx('clash', 0.7)
       setTimeout(() => sfx(r.outcome === 'win' ? 'win' : r.outcome === 'lose' ? 'lose' : 'tie'), 380)
-      if (r.newCoupon?.percent === 50) setTimeout(() => { gameAudio().duck(); sfx('grand', 0.9) }, 900)
+      if (r.newCoupon && r.newCoupon.percent === r.state.prizes.win2Percent) setTimeout(() => { gameAudio().duck(); sfx('grand', 0.9) }, 900)
       else if (r.newCoupon) setTimeout(() => sfx('coupon'), 1000) } catch (e) { setScreen('lobby'); throw e }
   })
 
   const opp: Opp = state?.stage === 'capy' ? 'capy' : (last?.opponent ?? 'hibi')
-  const grand = state?.result === 'beat_both' && state.coupon?.percent === 50
+  const grand = state?.result === 'beat_both' && state.coupon?.percent === state.prizes.win2Percent
+  const P = state?.prizes ?? prizes
 
   return (
     <main className="relative mx-auto flex min-h-[100dvh] max-w-[440px] flex-col px-4 pb-10 pt-6">
@@ -287,10 +301,10 @@ export default function GamePage() {
                 <br /><span className="text-[#e0a800]">กับ Hibi & Capy</span></h1>
             </div>
             <div className="my-3"><Loop who="both" size={270} /></div>
-            <div className="hg-card space-y-2 p-5 text-[16px]">
-              <div>🥇 <b>ชนะ Hibi</b> → {state?.prizes.win1 ?? prizes?.win1 ?? ''}</div>
-              <div>🏆 <b>ชนะทั้ง Hibi และ Capy</b> → <b className="text-[#e5484d]">ส่วนลด 50%</b></div>
-              <div className="text-[14px] text-[#6b6a55]">เล่นได้วันละ 1 ครั้งต่อเบอร์ · เสมอเล่นใหม่ได้ · คูปองใช้ได้ทุกสาขา</div>
+            <div className="hg-card space-y-1.5 px-5 py-4 text-[16px]">
+              <div>🥇 <b>ชนะ Hibi</b> → {P?.win1 ?? ''}</div>
+              <div>🏆 <b>ชนะทั้ง Hibi และ Capy</b> → <b className="text-[#e5484d]">{P?.win2 ?? ''}</b></div>
+              <div className="text-[14px] leading-snug text-[#6b6a55]">🧾 ใช้เลขท้ายใบเสร็จ 5 หลัก + วันที่ · 1 ใบเสร็จเล่นได้ 1 ครั้ง</div>
             </div>
             <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
               onClick={() => { sfx('tap'); buzz(20); setScreen('phone') }}>เริ่มเล่นเลย! ✊✋✌️</motion.button>
@@ -320,23 +334,36 @@ export default function GamePage() {
             <button className="mt-3 text-[14px] text-[#6b6a55] underline" disabled={busy} onClick={sendOtp}>ไม่ได้รับรหัส? ขอใหม่</button>
           </>}
 
+          {screen === 'receipt' && state && <>
+            <div className="flex justify-center"><Char who="both" size={190} /></div>
+            <h2 className="text-center text-[24px] font-bold text-[#243e1b]">กรอกข้อมูลใบเสร็จ 🧾</h2>
+            <p className="mb-4 text-center text-[15px] text-[#6b6a55]">ดูเลขที่ใบเสร็จ แล้วกรอก <b>5 หลักท้าย</b> และ<b>วันที่</b>ในใบเสร็จ</p>
+            <label className="mb-1 text-[14px] font-semibold text-[#5b5a48]" htmlFor="r5">เลขท้ายใบเสร็จ 5 หลัก</label>
+            <input id="r5" className="hg-input text-center text-[28px] tracking-[10px]" inputMode="numeric" maxLength={5} placeholder="•••••" value={last5} onChange={e => setLast5(e.target.value.replace(/\D/g, '').slice(0, 5))} />
+            <label className="mb-1 mt-4 text-[14px] font-semibold text-[#5b5a48]" htmlFor="rd">วันที่ในใบเสร็จ</label>
+            <input id="rd" type="date" className="hg-input text-center" min={state.receiptMinDate} max={state.today} value={rDate} onChange={e => setRDate(e.target.value)} />
+            <p className="mt-2 text-center text-[13px] text-[#9a9578]">1 ใบเสร็จใช้เล่นได้ 1 ครั้ง · เก็บใบเสร็จไว้ให้พนักงานตรวจตอนใช้คูปอง</p>
+            {err && <p className="mt-3 text-center font-semibold text-[#e5484d]">{err}</p>}
+            <button className="hg-btn hg-primary mt-5" disabled={busy || last5.length !== 5 || !rDate} onClick={submitReceipt}>{busy ? 'กำลังตรวจสอบ…' : 'ยืนยันแล้วเล่นเลย! ✊✋✌️'}</button>
+          </>}
+
           {screen === 'lobby' && state && <>
             {state.stage !== 'done' ? <>
               <div className="mt-2 text-center display text-[16px] font-semibold text-[#9a9578]">รอบที่ {OPP[state.stage].round} / 2</div>
               <h2 className="text-center text-[28px] font-bold text-[#243e1b]">เจอกับ {OPP[state.stage].name}!</h2>
               <div className="my-2"><Loop who={state.stage} size={250} /></div>
               <Bubble text={OPP[state.stage].line} />
-              {!state.grandAvailable && <p className="mt-2 rounded-2xl bg-[#fff3c4] p-2 text-center text-[14px]">รางวัลส่วนลด 50% ของวันนี้หมดแล้ว · ยังลุ้นรางวัลรอบแรกได้นะ</p>}
-              {state.coupon && <p className="mt-2 text-center text-[14px] text-[#3f8f3a]">คุณได้ {state.coupon.label} แล้ว · ชนะ Capy อัปเกรดเป็นส่วนลด 50%!</p>}
+              {!state.grandAvailable && <p className="mt-2 rounded-2xl bg-[#fff3c4] p-2 text-center text-[14px]">รางวัล{state.prizes.win2}ของวันนี้หมดแล้ว · ยังลุ้นรางวัลรอบแรกได้นะ</p>}
+              {state.coupon && <p className="mt-2 text-center text-[14px] text-[#3f8f3a]">คุณได้ {state.coupon.label} แล้ว · ชนะ Capy อัปเกรดเป็น{state.prizes.win2}!</p>}
               <motion.button className="hg-btn hg-primary mt-5" animate={{ scale: [1, 1.04, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
                 onClick={() => { sfx('tap'); buzz(20); setScreen('pick') }}>พร้อมแล้ว! เป่า ยิ้ง ฉุบ</motion.button>
             </> : <>
               {grand && <Confetti />}
               <h2 className="mt-2 text-center text-[28px] font-bold text-[#243e1b]">{grand ? 'ชนะทั้งคู่! 🎉' : state.coupon ? 'เก่งมาก! 🎉' : 'วันนี้ยังไม่ใช่วันของเรา'}</h2>
               <div className="flex justify-center"><Char who={grand ? 'both' : state.result === 'lost_capy' ? 'capy' : 'hibi'} mood="win" size={220} /></div>
-              {state.coupon ? <CouponCard c={state.coupon} phone={maskedPhone} /> : <p className="hg-card p-5 text-center text-[16px]">พรุ่งนี้มาท้า Hibi & Capy ใหม่ได้นะ 💚<br />ระหว่างนี้แวะมาดื่มมัทฉะที่ร้านได้ทุกสาขา 🍵</p>}
-              <ShareButton kind={shareKind(state.result)} />
-              <p className="mt-4 text-center text-[13px] text-[#9a9578]">เล่นได้วันละ 1 ครั้งต่อเบอร์</p>
+              {state.coupon ? <CouponCard c={state.coupon} phone={maskedPhone} terms={state.prizes.terms} /> : <p className="hg-card p-5 text-center text-[16px]">มาดื่มมัทฉะครั้งหน้า เอาใบเสร็จมาท้า Hibi & Capy ใหม่ได้นะ 💚🍵</p>}
+              <ShareButton kind={shareKind(state.result)} prizes={state.prizes} />
+              <p className="mt-4 text-center text-[13px] text-[#9a9578]">1 ใบเสร็จเล่นได้ 1 ครั้ง · วันละ 1 ครั้งต่อเบอร์</p>
             </>}
           </>}
 
@@ -370,7 +397,7 @@ export default function GamePage() {
           </>}
 
           {screen === 'reveal' && last && <>
-            {last.outcome === 'win' && last.opponent === 'capy' && last.newCoupon?.percent === 50 && <Confetti />}
+            {last.outcome === 'win' && last.opponent === 'capy' && last.newCoupon?.percent === last.state.prizes.win2Percent && <Confetti />}
             <motion.div className="flex justify-center"
               animate={last.outcome === 'win' ? { x: [0, -10, 10, -8, 8, 0] } : last.outcome === 'lose' ? { y: [0, -26, 0, -16, 0] } : { rotate: [0, -5, 5, 0] }}
               transition={{ duration: 0.9, delay: 0.5, repeat: Infinity, repeatDelay: 1.4 }}>
@@ -386,18 +413,18 @@ export default function GamePage() {
               {last.outcome === 'tie' ? 'เสมอ! เอาใหม่ 🤝' : last.outcome === 'win' ? (last.opponent === 'capy' ? 'ชนะ Capy! 🏆' : 'ชนะ Hibi! 🎉') : `${OPP[last.opponent].name} ชนะ 😝`}
             </motion.h2>
             {last.note && <p className="mt-1 text-center text-[14px] text-[#8a5a2a]">{last.note}</p>}
-            {last.newCoupon && <div className="mt-3"><CouponCard c={last.newCoupon} phone={maskedPhone} /></div>}
+            {last.newCoupon && <div className="mt-3"><CouponCard c={last.newCoupon} phone={maskedPhone} terms={last.state.prizes.terms} /></div>}
             <div className="mt-5 flex flex-col gap-3">
               {last.outcome === 'tie' && <button className="hg-btn hg-primary" onClick={() => { sfx('tap'); setScreen('pick') }}>เป่า ยิ้ง ฉุบ อีกครั้ง</button>}
-              {last.state.stage === 'capy' && last.outcome === 'win' && <button className="hg-btn hg-primary" onClick={() => { sfx('tap'); setScreen('lobby') }}>ท้า Capy ต่อ! ลุ้นส่วนลด 50% 🍊</button>}
-              {last.state.stage === 'done' && <><ShareButton kind={shareKind(last.state.result)} /><button className="hg-btn hg-soft" onClick={() => { sfx('tap'); setScreen('lobby') }}>ดูผลของวันนี้</button></>}
+              {last.state.stage === 'capy' && last.outcome === 'win' && <button className="hg-btn hg-primary" onClick={() => { sfx('tap'); setScreen('lobby') }}>ท้า Capy ต่อ! ลุ้น{last.state.prizes.win2} 🍊</button>}
+              {last.state.stage === 'done' && <><ShareButton kind={shareKind(last.state.result)} prizes={last.state.prizes} /><button className="hg-btn hg-soft" onClick={() => { sfx('tap'); setScreen('lobby') }}>ดูผลของวันนี้</button></>}
             </div>
           </>}
         </motion.section>
       </AnimatePresence>
 
       <footer id="privacy" className="mt-8 text-center text-[12px] leading-relaxed text-[#9a9578]">
-        เกมนี้จัดโดย Hibi Matcha Cafe · เราใช้เบอร์มือถือเพื่อยืนยันตัวตนและการใช้สิทธิ์รางวัลเท่านั้น<br />เงื่อนไขการใช้คูปองเป็นไปตามที่ร้านกำหนด
+        เกมนี้จัดโดย Hibi Matcha Cafe · เราใช้เบอร์มือถือเพื่อยืนยันตัวตนและการใช้สิทธิ์รางวัลเท่านั้น<br />เงื่อนไขคูปอง: {(P?.terms ?? []).join(' · ')}
       </footer>
     </main>
   )

@@ -4,7 +4,7 @@ import type { Opponent } from './config'
 
 export type Stage = Opponent | 'done'
 export interface OtpRow { phone: string; codeHash: string; expiresAt: Date; attempts: number; createdAt: Date }
-export interface PlayRow { phone: string; day: string; stage: Stage; result: string | null }
+export interface PlayRow { phone: string; day: string; stage: Stage; result: string | null; receiptLast5?: string | null; receiptDate?: string | null }
 export interface CouponRow { code: string; phone: string; prizeKey: string; label: string; percent: number; day: string; createdAt: Date; expiresAt: Date; redeemedAt: Date | null; voided: boolean }
 
 export interface GameStore {
@@ -15,6 +15,7 @@ export interface GameStore {
   recordConsent(phone: string): Promise<void>
   getPlay(phone: string, day: string): Promise<PlayRow | null>
   savePlay(row: PlayRow): Promise<void>
+  findPlayByReceipt(last5: string, date: string): Promise<PlayRow | null>
   addCoupon(row: CouponRow): Promise<void>
   voidCoupon(code: string): Promise<void>
   couponsForPhone(phone: string): Promise<CouponRow[]>
@@ -33,6 +34,7 @@ class MemoryStore implements GameStore {
   async recordConsent(p: string) { if (!this.players.has(p)) this.players.set(p, new Date()) }
   async getPlay(p: string, d: string) { return this.plays.get(`${p}|${d}`) ?? null }
   async savePlay(r: PlayRow) { this.plays.set(`${r.phone}|${r.day}`, { ...r }) }
+  async findPlayByReceipt(l: string, d: string) { return [...this.plays.values()].find(p => p.receiptLast5 === l && p.receiptDate === d) ?? null }
   async addCoupon(r: CouponRow) { this.coupons.set(r.code, { ...r }) }
   async voidCoupon(c: string) { const r = this.coupons.get(c); if (r) r.voided = true }
   async couponsForPhone(p: string) { return [...this.coupons.values()].filter(c => c.phone === p && !c.voided) }
@@ -56,7 +58,8 @@ class PrismaStore implements GameStore {
   async clearOtps(phone: string) { await this.db.gameOtp.deleteMany({ where: { phone } }) }
   async recordConsent(phone: string) { await this.db.gamePlayer.upsert({ where: { phone }, create: { phone }, update: {} }) }
   async getPlay(phone: string, day: string) { return this.db.gamePlay.findUnique({ where: { phone_day: { phone, day } } }) }
-  async savePlay(r: PlayRow) { await this.db.gamePlay.upsert({ where: { phone_day: { phone: r.phone, day: r.day } }, create: r, update: { stage: r.stage, result: r.result } }) }
+  async savePlay(r: PlayRow) { await this.db.gamePlay.upsert({ where: { phone_day: { phone: r.phone, day: r.day } }, create: r, update: { stage: r.stage, result: r.result, receiptLast5: r.receiptLast5 ?? null, receiptDate: r.receiptDate ?? null } }) }
+  async findPlayByReceipt(receiptLast5: string, receiptDate: string) { return this.db.gamePlay.findFirst({ where: { receiptLast5, receiptDate } }) }
   async addCoupon(r: CouponRow) { await this.db.gameCoupon.create({ data: r }) }
   async voidCoupon(code: string) { await this.db.gameCoupon.update({ where: { code }, data: { voided: true } }) }
   async couponsForPhone(phone: string) { return this.db.gameCoupon.findMany({ where: { phone, voided: false }, orderBy: { createdAt: 'desc' } }) }

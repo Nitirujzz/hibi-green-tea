@@ -4,19 +4,24 @@
 
 export type ShareKind = 'grand' | 'beat_hibi' | 'lost_hibi' | 'lost_capy'
 
-const COPY: Record<ShareKind, { title: string; sub: string; img: string; text: string }> = {
-  grand: { title: 'ฉันชนะ Hibi & Capy! 🏆', sub: 'ได้ส่วนลด 50% ไปเลย!', img: '/game/both_cheer.webp', text: 'ฉันชนะทั้ง Hibi & Capy ได้ส่วนลด 50% 🏆 มาท้าดวลเป่ายิ้งฉุบกันที่ Hibi Matcha Cafe!' },
-  beat_hibi: { title: 'ฉันชนะ Hibi! 🎉', sub: 'ได้ส่วนลด 15% · Capy รอบหน้าเจอกัน!', img: '/game/hibi_lose.webp', text: 'ฉันชนะ Hibi ได้ส่วนลด 15% 🎉 ใครจะชนะ Capy ได้บ้าง? มาลองที่ Hibi Matcha Cafe!' },
-  lost_capy: { title: 'ชนะ Hibi แต่แพ้ Capy 😆', sub: 'Capy ใจเย็นเกินไปแล้ว… ใครจะแก้แค้นให้?', img: '/game/capy_win.webp', text: 'ฉันชนะ Hibi แต่แพ้ Capy 😆 ใครจะมาแก้แค้นให้? เป่ายิ้งฉุบกับ Hibi & Capy ที่ Hibi Matcha Cafe!' },
-  lost_hibi: { title: 'Hibi ชนะฉันไปได้ 😝', sub: 'ใครจะมาแก้แค้นให้ฉันบ้าง?', img: '/game/hibi_win.webp', text: 'Hibi ชนะฉันไปได้ 😝 ใครจะมาแก้แค้นให้? เป่ายิ้งฉุบกับ Hibi & Capy ลุ้นส่วนลด 50% ที่ Hibi Matcha Cafe!' },
+type Pz = { win1Percent: number; win2Percent: number }
+
+function copy(kind: ShareKind, p: Pz): { title: string; sub: string; img: string; text: string } {
+  const w1 = p.win1Percent, w2 = p.win2Percent
+  return {
+    grand: { title: 'ฉันชนะ Hibi & Capy! 🏆', sub: `ได้ส่วนลด ${w2}% ไปเลย!`, img: '/game/both_cheer.webp', text: `ฉันชนะทั้ง Hibi & Capy ได้ส่วนลด ${w2}% 🏆 มาท้าดวลเป่ายิ้งฉุบกันที่ Hibi Matcha Cafe!` },
+    beat_hibi: { title: 'ฉันชนะ Hibi! 🎉', sub: `ได้ส่วนลด ${w1}% · Capy รอบหน้าเจอกัน!`, img: '/game/hibi_lose.webp', text: `ฉันชนะ Hibi ได้ส่วนลด ${w1}% 🎉 ใครจะชนะ Capy ได้บ้าง? มาลองที่ Hibi Matcha Cafe!` },
+    lost_capy: { title: 'ชนะ Hibi แต่แพ้ Capy 😆', sub: 'Capy ใจเย็นเกินไปแล้ว… ใครจะแก้แค้นให้?', img: '/game/capy_win.webp', text: 'ฉันชนะ Hibi แต่แพ้ Capy 😆 ใครจะมาแก้แค้นให้? เป่ายิ้งฉุบกับ Hibi & Capy ที่ Hibi Matcha Cafe!' },
+    lost_hibi: { title: 'Hibi ชนะฉันไปได้ 😝', sub: 'ใครจะมาแก้แค้นให้ฉันบ้าง?', img: '/game/hibi_win.webp', text: `Hibi ชนะฉันไปได้ 😝 ใครจะมาแก้แค้นให้? เป่ายิ้งฉุบกับ Hibi & Capy ลุ้นส่วนลด ${w2}% ที่ Hibi Matcha Cafe!` },
+  }[kind]
 }
 
 export function shareUrl(): string {
   return `${window.location.origin}/game?ref=share`
 }
 
-export function shareText(kind: ShareKind): string {
-  return COPY[kind].text
+export function shareText(kind: ShareKind, p: Pz): string {
+  return copy(kind, p).text
 }
 
 function loadImg(src: string): Promise<HTMLImageElement> {
@@ -69,10 +74,10 @@ function text(g: CanvasRenderingContext2D, font: string, t: string, y: number) {
   if (k) drawInk(g, k, y); else { g.font = font; g.textAlign = 'center'; g.fillText(t, W / 2, y) }
 }
 
-export async function buildCard(kind: ShareKind): Promise<Blob> {
-  const c = COPY[kind], W = 1080, H = 1920
+export async function buildCard(kind: ShareKind, p: Pz): Promise<Blob> {
+  const c = copy(kind, p), W = 1080, H = 1920
   // FontFace.load only fetches the unicode-range subsets the sample text needs: pass every drawn string (Thai included).
-  const sample = [c.title, c.sub, 'Hibi Matcha Cafe เป่ายิ้งฉุบกับ Hibi & Capy มาท้าดวลกันได้ที่ ชนะทั้งคู่ รับส่วนลด 50% · 5 สาขา #HibiMatcha', window.location.host].join(' ')
+  const sample = [c.title, c.sub, 'Hibi Matcha Cafe เป่ายิ้งฉุบกับ Hibi & Capy มาท้าดวลกันได้ที่ ชนะทั้งคู่ รับส่วนลด · 5 สาขา #HibiMatcha' + p.win2Percent, window.location.host].join(' ')
   await Promise.all(['700 80px Prompt', '600 40px Plex'].map(f => document.fonts.load(f, sample).catch(() => {})))
   await document.fonts.ready
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H
@@ -94,7 +99,7 @@ export async function buildCard(kind: ShareKind): Promise<Blob> {
   g.strokeStyle = '#ffd23f'; g.lineWidth = 6; g.stroke()
   g.fillStyle = '#243e1b'; text(g, '700 52px Prompt, sans-serif', 'มาท้าดวลกันได้ที่ 👇', 1495)
   g.fillStyle = '#3f8f3a'; fitText(g, window.location.host + '/game', 1575, 700, 48, 'Prompt', W - 320)
-  g.fillStyle = '#6b6a55'; text(g, '600 34px Plex, sans-serif', 'ชนะทั้งคู่ รับส่วนลด 50% · 5 สาขา', 1640)
+  g.fillStyle = '#6b6a55'; text(g, '600 34px Plex, sans-serif', `ชนะทั้งคู่ รับส่วนลด ${p.win2Percent}% · 5 สาขา`, 1640)
   g.fillStyle = '#9a9578'; text(g, '600 34px Plex, sans-serif', '#HibiMatcha #HibiAndCapy', 1810)
   return new Promise((res, rej) => cv.toBlob(b => (b ? res(b) : rej(new Error('card'))), 'image/jpeg', 0.92))
 }

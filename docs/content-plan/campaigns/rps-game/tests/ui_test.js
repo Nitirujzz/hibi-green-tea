@@ -15,7 +15,7 @@ const results = []; const check = (n, c, d = '') => { results.push([n, !!c]); co
     const inView = async (sel, step) => { const bb = await p.locator(sel).first().boundingBox(); check(`[${tag}] main button visible without scrolling: ${step}`, bb && bb.y + bb.height <= dev.height, bb && Math.round(bb.y + bb.height)) };
 
     await p.goto(BASE + '/game'); await p.waitForTimeout(2500); await shot('1_intro');
-    check(`[${tag}] intro shows prize 15% and 50%`, (await p.content()).includes('ส่วนลด 15%') && (await p.content()).includes('ส่วนลด 50%'));
+    check(`[${tag}] intro shows prize 15% and 35% + receipt rule`, (await p.content()).includes('ส่วนลด 15%') && (await p.content()).includes('ส่วนลด 35%') && (await p.content()).includes('ใบเสร็จ'));
     check(`[${tag}] character loop video plays`, await p.evaluate(() => { const v = document.querySelector('video'); return !!v && !v.paused && v.currentTime > 0.2 }));
     await noOverflow('intro'); await inView('text=เริ่มเล่นเลย', 'intro');
     await p.click('text=เริ่มเล่นเลย', { force: true }); await p.waitForTimeout(500);
@@ -27,6 +27,11 @@ const results = []; const check = (n, c, d = '') => { results.push([n, !!c]); co
     check(`[${tag}] wrong OTP shows Thai error`, (await p.content()).includes('รหัสไม่ถูกต้อง'));
     const code = (await p.locator('b.tracking-\\[3px\\]').innerText()).trim();
     await p.fill('input[inputmode=numeric]', code); await p.click('text=ยืนยันแล้วเล่นเลย', { force: true });
+    await p.waitForSelector('text=กรอกข้อมูลใบเสร็จ'); await p.waitForTimeout(600); await shot('3b_receipt'); await noOverflow('receipt');
+    check(`[${tag}] receipt button disabled until 5 digits`, await p.locator('button:has-text("ยืนยันแล้วเล่นเลย")').isDisabled());
+    check(`[${tag}] receipt date defaults to today`, (await p.inputValue('#rd')).length === 10);
+    await p.fill('#r5', String(10000 + Math.floor(Math.random() * 89999))); await inView('button:has-text("ยืนยันแล้วเล่นเลย")', 'receipt');
+    await p.click('button:has-text("ยืนยันแล้วเล่นเลย")', { force: true });
     await p.waitForSelector('text=พร้อมแล้ว'); await p.waitForTimeout(1500); await shot('4_lobby'); await noOverflow('lobby'); await inView('text=พร้อมแล้ว', 'lobby');
     await p.reload(); await p.waitForTimeout(1500);
     check(`[${tag}] stays logged in after reload`, await p.locator('text=พร้อมแล้ว').count() > 0);
@@ -55,7 +60,7 @@ const results = []; const check = (n, c, d = '') => { results.push([n, !!c]); co
     check(`[${tag}] share card is 1080x1920`, imgOk);
     await p.mouse.click(10, 10); await p.waitForTimeout(500);
     await p.goto(BASE + '/game'); await p.waitForTimeout(1200);
-    check(`[${tag}] after finishing, today's result is shown (no replay)`, await p.locator('text=เล่นได้วันละ 1 ครั้งต่อเบอร์').count() > 0 && await p.locator('text=พร้อมแล้ว').count() === 0);
+    check(`[${tag}] after finishing, today's result is shown (no replay)`, await p.locator('text=วันละ 1 ครั้งต่อเบอร์').count() > 0 && await p.locator('text=พร้อมแล้ว').count() === 0);
     check(`[${tag}] no page errors / failed requests`, errs.length === 0, errs.slice(0, 3).join(' | '));
     console.log(`      [${tag}] downloaded ~${Math.round(bytes / 1024)} KB this session (dev build, unminified)`);
     await ctx.close();

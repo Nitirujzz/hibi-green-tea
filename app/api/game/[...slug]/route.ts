@@ -1,11 +1,11 @@
 // All game API endpoints live in this one route so they share one server instance (and its
 // in-memory store) when no database is configured, e.g. a Vercel test deployment.
-// Paths: otp/request, otp/verify, state, play, logout, admin.
+// Paths: otp/request, otp/verify, state, receipt, play, logout, admin.
 import { NextResponse } from 'next/server'
 import { timingSafeEqual } from 'crypto'
-import { GAME_CONFIG, isDemoMode } from '@/lib/game/config'
+import { isDemoMode } from '@/lib/game/config'
 import { isMove, maskPhone, normalizePhone } from '@/lib/game/logic'
-import { adminAction, GameError, getState, play, requestOtp, verifyOtp } from '@/lib/game/service'
+import { adminAction, GameError, getState, play, publicPrizes, registerReceipt, requestOtp, verifyOtp } from '@/lib/game/service'
 import { SESSION_COOKIE, sessionCookie } from '@/lib/game/session'
 import { currentPhone, fail } from '../_util'
 
@@ -30,7 +30,7 @@ async function otpVerify(req: Request) {
 
 async function stateOf() {
   const phone = await currentPhone()
-  if (!phone) return NextResponse.json({ loggedIn: false, prizes: { win1: GAME_CONFIG.win1.label, win2: GAME_CONFIG.win2.label } })
+  if (!phone) return NextResponse.json({ loggedIn: false, prizes: publicPrizes() })
   return NextResponse.json({ loggedIn: true, phone: maskPhone(phone), state: await getState(phone) })
 }
 
@@ -40,6 +40,13 @@ async function playMove(req: Request) {
   const { move } = await req.json()
   if (!isMove(move)) throw new GameError(400, 'เลือก ค้อน กระดาษ หรือ กรรไกร')
   return NextResponse.json(await play(phone, move))
+}
+
+async function receipt(req: Request) {
+  const phone = await currentPhone()
+  if (!phone) throw new GameError(401, 'กรุณายืนยันเบอร์มือถือก่อน')
+  const { last5, date } = await req.json()
+  return NextResponse.json({ ok: true, state: await registerReceipt(phone, String(last5 ?? '').trim(), String(date ?? '')) })
 }
 
 async function logout() {
@@ -65,6 +72,7 @@ const ROUTES: Record<string, { method: 'GET' | 'POST'; fn: (req: Request) => Pro
   'otp/request': { method: 'POST', fn: otpRequest },
   'otp/verify': { method: 'POST', fn: otpVerify },
   state: { method: 'GET', fn: stateOf },
+  receipt: { method: 'POST', fn: receipt },
   play: { method: 'POST', fn: playMove },
   logout: { method: 'POST', fn: logout },
   admin: { method: 'POST', fn: admin },

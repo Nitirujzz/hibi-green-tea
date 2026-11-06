@@ -328,9 +328,12 @@ model GamePlay {
   day       String
   stage     String
   result    String?
+  receiptLast5 String?
+  receiptDate  String?
   updatedAt DateTime @updatedAt
 
   @@unique([phone, day])
+  @@unique([receiptLast5, receiptDate])
   @@map("game_plays")
 }
 

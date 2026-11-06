@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 type Stats = { day: string; players: number; plays: number; win1: number; win2: number; redeemed: number; caps: { win1: number; win2: number } }
-type Info = { code: string; label: string; percent: number; phone: string; expiresAt: string; redeemedAt: string | null }
+type Info = { code: string; label: string; percent: number; phone: string; wonOn: string; expiresAt: string; redeemedAt: string | null; receipt: { last5: string; date: string } | null; terms: string[] }
 
 async function call<T>(body: object): Promise<T> {
   const res = await fetch('/api/game/admin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
@@ -42,7 +42,7 @@ export default function GameAdmin() {
             <div><div className="text-[13px] text-[#6b6a55]">เล่นวันนี้</div><div className="text-[28px] font-bold">{stats.plays}</div></div>
             <div><div className="text-[13px] text-[#6b6a55]">ผู้ลงทะเบียนทั้งหมด</div><div className="text-[28px] font-bold">{stats.players}</div></div>
             <div><div className="text-[13px] text-[#6b6a55]">รางวัลรอบแรกวันนี้</div><div className="text-[28px] font-bold">{stats.win1}<span className="text-[14px] text-[#9a9578]"> / {stats.caps.win1}</span></div></div>
-            <div><div className="text-[13px] text-[#6b6a55]">ส่วนลด 50% วันนี้</div><div className="text-[28px] font-bold text-[#e5484d]">{stats.win2}<span className="text-[14px] text-[#9a9578]"> / {stats.caps.win2}</span></div></div>
+            <div><div className="text-[13px] text-[#6b6a55]">รางวัลใหญ่ (35%) วันนี้</div><div className="text-[28px] font-bold text-[#e5484d]">{stats.win2}<span className="text-[14px] text-[#9a9578]"> / {stats.caps.win2}</span></div></div>
             <div className="col-span-2 text-[13px] text-[#6b6a55]">ใช้สิทธิ์แล้วทั้งหมด {stats.redeemed} ใบ · {stats.day}</div>
           </div>
           <div className="hg-card mt-4 p-5">
@@ -56,7 +56,9 @@ export default function GameAdmin() {
               <div className="mt-3 rounded-2xl bg-[#f6f2e6] p-4 text-[15px] leading-relaxed">
                 <div><b>{info.label}</b> · {info.code}</div>
                 <div>เบอร์ {info.phone.slice(0, 3)}-xxx-{info.phone.slice(6)}</div>
-                <div>หมดอายุ {new Date(info.expiresAt).toLocaleDateString('th-TH')}</div>
+                <div>ได้รับเมื่อ {new Date(info.wonOn + 'T00:00:00').toLocaleDateString('th-TH')} · หมดอายุ {new Date(info.expiresAt).toLocaleDateString('th-TH')}</div>
+                {info.receipt && <div>ใบเสร็จที่ใช้เล่น: เลขท้าย <b>{info.receipt.last5}</b> · {new Date(info.receipt.date + 'T00:00:00').toLocaleDateString('th-TH')}</div>}
+                <ul className="mt-2 text-[13px] text-[#6b6a55]">{info.terms.map(t => <li key={t}>• {t}</li>)}</ul>
                 <div>{info.redeemedAt ? `ใช้แล้วเมื่อ ${new Date(info.redeemedAt).toLocaleString('th-TH')}` : 'ยังไม่ได้ใช้'}</div>
               </div>
             )}
