@@ -38,6 +38,16 @@
 | 1 พ.ย. | 19:30 | มัทฉะตีมือ 4 ขั้น (reel 21 วิ) | IG + FB + TikTok (แจ้งเตือน) |
 | 11 พ.ย. | 19:30 | Capy หัดตีมัทฉะ (Hibi & Capy reel 32 วิ) | IG + FB + TikTok (แจ้งเตือน) |
 | 18 พ.ย. | 19:30 | หนาวนี้ Capy แช่ออนเซ็น (Hibi & Capy reel 33 วิ) | IG + FB + TikTok (แจ้งเตือน) |
+| 12 พ.ย. | 12:00 / TikTok 18:00 | K01 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 14 พ.ย. | 15:00 / TikTok 19:00 | G14 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 16 พ.ย. | 12:00 / TikTok 18:00 | G13 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 17 พ.ย. | 12:00 / TikTok 17:00 | SQ01 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 20 พ.ย. | 12:00 / TikTok 18:00 | SQ02 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 21 พ.ย. | 15:00 / TikTok 19:00 | SQ03 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 23 พ.ย. | 12:00 / TikTok 18:00 | G12 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 26 พ.ย. | 12:00 / TikTok 18:00 | K09 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+| 29 พ.ย. | 15:00 / TikTok 19:00 | SQ05 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
+- Done batch พ.ย.: รายละเอียด/Post IDs/งานที่ Hold → `../campaigns/done-batch-nov26/README.md` · TikTok รูปต้อง ≤ 2,073,600 px → ย่อเป็น 1080×1920 (พื้นหลังเบลอ)
 - ทีมร้านตั้งเองด้วย (ดูใน Buffer): มัทฉะ vs ชาเขียว 28 ต.ค. · Nutty 30 ต.ค. 11:00 · Yame Saeakari 1 พ.ย. 11:00 · Hojicha Kokoro 2 พ.ย.
 - ปฏิทินเดือน ต.ค. ฉบับเต็ม: `../calendar/2026-10-content-calendar.md`
 
