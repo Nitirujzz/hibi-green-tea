@@ -1,4 +1,11 @@
-# Matcha Lab 🔬 #1 · ทำไมชาที่ดีที่สุด ต้องปลูกในที่มืด? (Storyboard v1)
+# Matcha Lab 🔬 #1 · ทำไมชาที่ดีที่สุด ต้องปลูกในที่มืด?
+
+> **คลิป: `matcha_lab_01_shade_reel.mp4`** (1080×1920 · 30fps · 52.8 วิ · −14 LUFS) · ปก `cover.jpg`
+> วิดีโอ Higgsfield Seedance 2.5 · 1080p 8 ช็อต (1, 2, 3, 4, 5, 6, 8, 9) · ช็อต 7, 10 ภาพนิ่ง + กล้องเคลื่อน · ช็อต 11 การ์ดเซฟ (motion graphic)
+> เสียงพากย์: Higgsfield `seed_audio` เสียง **Mama-Jeep** (เจ้าของเลือก) → ตัดช่องว่างทุกช่วง + เร่ง 1.1× (`src/vo_tight.py`) · เพลงแต่งเอง `src/music.py` (ducking ใต้เสียงพูด) · ตัดต่อ `src/compose.py` · กราฟิก `src/mg.py` · ช่วงเวลาตามความยาวเสียงพากย์ `src/timeline.py`
+> ใช้เครดิต ~600 (วิดีโอ 8 × ~64–80 + เสียง) · บรรทัด 6 ถูกระบบเสียงปฏิเสธ 3 ครั้ง → ใช้ถ้อยคำ “พอคลุมไว้ การเปลี่ยนก็น้อยลง ธีอะนีนเลยเหลือเยอะ”
+
+## Storyboard v1
 
 > สตอรีบอร์ด: `storyboard/MatchaLab01_Shade_Storyboard.pdf` (3 หน้า) · ภาพแยก `storyboard/SB_01–03.jpg`
 > เฟรม 10 ภาพ: `frames/s01–s10.png` (Higgsfield gpt_image_2_5 · ช็อต 2, 10 อ้างอิงชีต Hibi ทางการ) · จัดหน้า `src/build_storyboard.py`
