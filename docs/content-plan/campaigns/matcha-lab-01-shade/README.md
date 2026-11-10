@@ -86,3 +86,6 @@
 ## Buffer
 - 10 พ.ย. 2026: สร้าง **Idea** “Matcha Lab #1 | รอ VoiceOver | AI | …” (id `6af2d90eac2d5f2a6bea5b25`) แท็ก 🤖 AI Generate + ความรู้เรื่องชา · แนบปก + storyboard · ใส่ลิงก์คลิป (commit `ba9b28c`) + สคริปต์ VO พร้อมเวลา + Caption draft · ยังไม่ตั้งเวลาโพสต์
 - ⚠️ เครื่องมือสร้าง Idea เลือกคอลัมน์ไม่ได้ → ต้องลากเข้าคอลัมน์ “AI ทำเด้อ” เองในหน้า Ideas
+- 10 พ.ย. 2026: บรีฟให้ Year 2 ใบ (แท็ก ให้น้อง Year ทำเด้อ + Draft รอ Owner · ต้องลากเข้าคอลัมน์ “Year ทำเด้อ” เอง)
+  - `LAB01-C | Draft | Year | Carousel: ทำไมชาที่ดีที่สุด ต้องปลูกในที่มืด?` (id `6af2daef219e00b713ae1523`) — Carousel 6 หน้า 1080×1350 ข้อความบนภาพครบ + ลิงก์ภาพ frames
+  - `LAB-PHOTO | Draft | Year | ถ่ายจริง: ชุดภาพมัทฉะระยะใกล้` (id `6af2daef5fe58c720df18229`) — 10 ช็อตมาโคร ใช้กับ Matcha Lab ตอนหินโม่/ฟอง
