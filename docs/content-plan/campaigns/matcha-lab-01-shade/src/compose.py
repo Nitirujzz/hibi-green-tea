@@ -1,5 +1,6 @@
 """Edit Matcha Lab #1: 11 shots on the VO-driven timeline, MG overlay, VO + original music bed + SFX."""
-import subprocess, os, timeline
+import subprocess, os, sys, timeline
+NO_VO="--no-vo" in sys.argv   # owner asked for a music-only version (no voice-over)
 D=os.path.dirname(os.path.abspath(__file__)); os.chdir(D)
 F=f"{D}/../frames"; S,VO=timeline.plan(); T=S[-1]
 def run(a): subprocess.run(["ffmpeg","-v","error","-y"]+a,check=True)
@@ -44,8 +45,11 @@ ins=[];fl=[]
 for k,(f,t) in enumerate(ev): ins+=["-i",f]; fl.append(f"[{k}]adelay={int(t*1000)}|{int(t*1000)}[e{k}]")
 fl.append("".join(f"[e{k}]" for k in range(len(ev)))+f"amix=inputs={len(ev)}:normalize=0,apad,atrim=0:{T:.3f}[o]")
 run(ins+["-filter_complex",";".join(fl),"-map","[o]","-ac","2","sfx.wav"])
-# mix: VO on top, music ducked under the voice (sidechain), SFX
-run(["-i","vo.wav","-i","music.wav","-i","sfx.wav","-filter_complex",
+# mix: VO on top, music ducked under the voice (sidechain), SFX  ·  --no-vo: music + SFX only
+if NO_VO:
+    run(["-i","music.wav","-i","sfx.wav","-filter_complex",
+         f"[0:a]volume=-3dB[mu];[mu][1:a]amix=inputs=2:normalize=0,atrim=0:{T:.3f},loudnorm=I=-14:TP=-1.5:LRA=8[a]","-map","[a]","-ar","48000","mix.wav"])
+else: run(["-i","vo.wav","-i","music.wav","-i","sfx.wav","-filter_complex",
      "[0:a]aformat=channel_layouts=stereo,asplit=2[vo][sc];[1:a]volume=-12dB[mu];[mu][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=350[duck];"
      f"[vo][duck][2:a]amix=inputs=3:normalize=0,atrim=0:{T:.3f},loudnorm=I=-14:TP=-1.5:LRA=8[a]","-map","[a]","-ar","48000","mix.wav"])
 run(["-i","base.mp4","-framerate","30","-i","frames/%05d.png","-i","mix.wav","-filter_complex","[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]",
