@@ -16,6 +16,12 @@
 - คลิปตัวละครจากสตอรีบอร์ด: สร้างเฟรมนิ่งก่อน (อ้างอิงชีต) → ใช้ job id ของเฟรมเป็น `start_image` → ตัวละครคงที่ทุกช็อต
 - ใช้ฟุตเทจจริงเป็น start_image เพื่อสร้าง **มุมกล้องใหม่** (มาโคร/มุมต่ำ) ที่ดูกลมกลืนกับของจริง
 
+- **Reel ตามเพลง (ไม่มีเสียงพูด)** — ทำแล้วกับ `campaigns/xmas-band-hibi-capy/`
+  - หา BPM, บีต และจุดเปลี่ยนท่อนด้วย `librosa` (beat_track + agglomerative segments + RMS ทุก 4 วิ)
+  - เลือกช่วง 30 วิที่ **จบเพลงจริง** หรือมีดรอป · ตัดทุก 1 บาร์ และซูมกระแทกบนบีต
+  - คลิป Seedance 5 วิ: หาจังหวะ action ก่อน (ดูเฟรมทุก 0.4 วิ) แล้วตั้ง `OFF` / `SPD`
+  - อัปโหลดไฟล์ตรงไป upload.higgsfield.ai ถูกบล็อก → push ไฟล์ขึ้น repo แล้วใช้ `media_import_url` ผ่าน jsDelivr
+
 ## 2) ตัดต่อวิดีโอ (ffmpeg)
 - ฟังก์ชัน `seg()/shot()`: scale 2× → `zoompan` → 1080×1920 · โหมดซูม: `ramp` (ดันช้า) · `punch` (1.16→1.0 ใน 8 เฟรม) · `punchramp`
 - **Stabilizer**: `vidstabdetect` → `vidstabtransform` (2 pass) ลดการสั่น ~60%
