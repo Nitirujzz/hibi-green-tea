@@ -1,0 +1,18 @@
+# Hibi Matcha Cafe — Content & Ads Plan (5 สาขา)
+
+| ไฟล์ | เนื้อหา | ใช้โดย |
+|---|---|---|
+| [01-content-strategy.md](./01-content-strategy.md) | Brand foundation, Objective (SMART), Content Funnel, 6 Pillars + สัดส่วน, Branch Playbook 5 สาขา, Content Bank 60 หัวข้อ, Calendar เดือนแรก, Workflow | ทีม Marketing / Content |
+| [02-platform-captions.md](./02-platform-captions.md) | พฤติกรรมลูกค้าแต่ละแพลตฟอร์ม, Voice ของ Hibi-Capy, สูตร + ตัวอย่างแคปชัน FB / IG / TikTok / LINE OA / Lemon8 / Google Business, Template bank | Content writer / Admin |
+| [03-ads-brief.md](./03-ads-brief.md) | Master visual guideline, Capy guideline, ขนาด & safe zone, Brief 6 Ads (Key Message, Key Takeaway, Layout, Storyboard), Seasonal, Brief template | ทีมกราฟิก / Media buyer |
+| [04-ai-vs-graphics-and-prompts.md](./04-ai-vs-graphics-and-prompts.md) | กฎแบ่งงาน AI vs กราฟิก, Production matrix, Style DNA, Prompt ภาพ (I1–I7), วิดีโอ (V1–V5), เสียง (A1–A2), ข้อความ (T1–T9) | Content lead / ผู้ใช้ AI |
+| [05-detailed-ads-brief.md](./05-detailed-ads-brief.md) | Global design spec (grid, สี, ฟอนต์, component), Base assets, Layer spec พร้อมพิกัด px ของ A1–A6 ทุกขนาด, Handoff package, QC checklist | ทีมกราฟิก |
+| [06-value-content-series.md](./06-value-content-series.md) | ซีรีส์ “Matcha Lab 🔬 ความลับในถ้วยชา” — คอนเทนต์เชิงลึก/วิทยาศาสตร์ 8 ชิ้น (ไม่ขายของ) พร้อมแหล่งอ้างอิง | ทีมคอนเทนต์ |
+| [knowledge/README.md](./knowledge/README.md) | **Knowledge base** จากงานจริง: ข้อมูลร้าน/เมนู · กฎจาก feedback · สูตรคอนเทนต์ · ขั้นตอนผลิต · Buffer · ข้อจำกัดเครื่องมือ | ทุกคน — อ่านก่อนเริ่มงาน |
+| [calendar/2026-10-content-calendar.md](./calendar/2026-10-content-calendar.md) · [buffer-queue-2026-10.json](./calendar/buffer-queue-2026-10.json) | ปฏิทินคอนเทนต์ 17–31 ต.ค. 2026: 15 ชิ้นงาน / 36 โพสต์ (FB · IG · TikTok) พร้อมแคปชัน เวลา ไฟล์สื่อ และข้อมูลสำหรับนำเข้า Buffer | Content lead / แอดมิน |
+
+**สัดส่วนหลัก (สรุป)**
+- Funnel: TOFU 40% · MOFU 30% · BOFU 20% · Loyalty 10%
+- Pillars: Hibi-Capy 25% · Menu 20% · Matcha Knowledge 15% · Branch 15% · Branding 10% · Customer Curiosity/UGC 15%
+
+> ช่อง `[ ]` ในเอกสาร = ข้อมูลที่ต้องเติมจากหน้างาน (ชื่อสาขาจริง เมนู ราคา ตัวเลขฐาน KPI)
