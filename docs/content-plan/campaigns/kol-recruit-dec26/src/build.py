@@ -54,7 +54,7 @@ page("kol_03_apply",1080,1350,"bg3.png",f'''
  <div class="small" style="margin-top:12px">*เราดูความเข้ากันของสไตล์คอนเทนต์ ไม่ใช่แค่ยอดผู้ติดตาม</div></div>
 <div class="card" style="position:absolute;left:470px;right:60px;top:790px;padding:28px 34px">
  <h2 style="font-size:38px">🗓️ ไทม์ไลน์</h2>
- <div style="font-size:28px;line-height:1.6;margin-top:6px">ส่งใบสมัครถึง <b>25 พ.ย.</b><br>แจ้งผลภายใน <b>30 พ.ย.</b><br>ถ่ายทำ <b>5 ธ.ค. 69</b></div>
+ <div style="font-size:28px;line-height:1.6;margin-top:6px">ส่งใบสมัครถึง <b>30 พ.ย.</b><br>แจ้งผลภายใน <b>5 ธ.ค.</b><br>ถ่ายทำ <b>10–15 ธ.ค. 69</b></div>
  <div style="margin-top:16px;padding-top:14px;border-top:2px dashed #dfe8d2;font-size:28px;line-height:1.5"><b>📩 สมัคร:</b> DM / คอมเมนต์<br>ชื่อ + ลิงก์ช่อง · ยอดผู้ติดตาม<br>+ คลิปที่ภูมิใจที่สุด 1 คลิป</div></div>''')
 # story 9:16
 page("kol_story",1080,1920,"bg_story.png",'''
@@ -64,7 +64,7 @@ page("kol_story",1080,1920,"bg_story.png",'''
  <div style="font-weight:700;font-size:60px;letter-spacing:14px;color:#4e7c3a">WANTED</div>
  <div style="font-weight:600;font-size:46px;margin-top:22px">Hibi กับ Capy ชวนครีเอเตอร์<br>มาส่งท้ายปีด้วยกัน 🎄</div>
  <div class="card" style="display:inline-block;margin-top:34px;padding:24px 40px;text-align:left;font-size:40px;line-height:1.6">
-  🍵 มัทฉะ + ขนม 1 เซต + ค่าตอบแทน<br>🎬 คลิปแนวตั้ง ~60 วิ · ถ่าย 5 ธ.ค.<br>📩 สมัครถึง 25 พ.ย. · DM @hibimatchacafe</div>
+  🍵 มัทฉะ + ขนม 1 เซต + ค่าตอบแทน<br>🎬 คลิปแนวตั้ง ~60 วิ · ถ่าย 10–15 ธ.ค.<br>📩 สมัครถึง 30 พ.ย. · DM @hibimatchacafe</div>
 </div>
 <div class="brand" style="left:0;right:0;text-align:center;bottom:70px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.35)">HIBI MATCHA CAFE</div>''')
 print("ok")
