@@ -48,6 +48,7 @@
 | 26 พ.ย. | 12:00 / TikTok 18:00 | K09 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
 | 29 พ.ย. | 15:00 / TikTok 19:00 | SQ05 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
 - Done batch พ.ย.: รายละเอียด/Post IDs/งานที่ Hold → `../campaigns/done-batch-nov26/README.md` · TikTok รูปต้อง ≤ 2,073,600 px → ย่อเป็น 1080×1920 (พื้นหลังเบลอ)
+| 18 พ.ย. | 20:00 | โปร HIBI ครบ 1 ปี เป่ายิ้งฉุบ (ขยายถึง 22 พ.ย.) · IG 6afd88e4be723dbbcfdb6289 · FB 6afd88e9812f98283313373a · TikTok 6afd88eef4526871ade31264 | IG + FB + TikTok (แจ้งเตือน) |
 - ทีมร้านตั้งเองด้วย (ดูใน Buffer): มัทฉะ vs ชาเขียว 28 ต.ค. · Nutty 30 ต.ค. 11:00 · Yame Saeakari 1 พ.ย. 11:00 · Hojicha Kokoro 2 พ.ย.
 - ปฏิทินเดือน ต.ค. ฉบับเต็ม: `../calendar/2026-10-content-calendar.md`
 
