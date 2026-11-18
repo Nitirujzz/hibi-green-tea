@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hibi Digital Marketing Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@500;600&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Hibi brand: dark green ink, matcha accent, cream paper, gold detail. Layout: one reading column, scorecard first, then findings by channel, then the plan. */
+  --paper: #F7F3E9;
+  --card: #FFFDF7;
+  --ink: #1F3D24;
+  --muted: #5B6B58;
+  --line: #DCD6C3;
+  --accent: #6E9B2F;
+  --accent-soft: #E6F0D3;
+  --gold: #B8913A;
+  --good: #2F7D3A;
+  --warn: #A86A00;
+  --bad: #B23A2E;
+  --good-bg: #E3F1E1;
+  --warn-bg: #FBEFD5;
+  --bad-bg: #F8E1DD;
+  --display: "Mitr", "Prompt", system-ui, sans-serif;
+  --body: "Prompt", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #142417; --card: #1B2F1F; --ink: #EEE9DA; --muted: #A9B6A3; --line: #2E4532;
+    --accent: #9CC65B; --accent-soft: #24391F; --gold: #E6C47E;
+    --good: #8FD08A; --warn: #F0BE5C; --bad: #F08A7E;
+    --good-bg: #1F3A22; --warn-bg: #3A3018; --bad-bg: #3D211D;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #142417; --card: #1B2F1F; --ink: #EEE9DA; --muted: #A9B6A3; --line: #2E4532;
+  --accent: #9CC65B; --accent-soft: #24391F; --gold: #E6C47E;
+  --good: #8FD08A; --warn: #F0BE5C; --bad: #F08A7E;
+  --good-bg: #1F3A22; --warn-bg: #3A3018; --bad-bg: #3D211D;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.7; }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.3; text-wrap: balance; margin: 0; }
+h1 { font-size: 2.1rem; }
+h2 { font-size: 1.5rem; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
+section { display: grid; gap: 18px; }
+.lede { color: var(--muted); max-width: 65ch; }
+.meta { font-size: .9rem; color: var(--muted); }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 20px 22px; display: grid; gap: 10px; }
+.verdict p { max-width: 65ch; }
+.score { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: .95rem; }
+.score th, .score td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.score th { font-weight: 600; background: var(--accent-soft); }
+.score tr:last-child td { border-bottom: 0; }
+.tablewrap { overflow-x: auto; }
+.pill { display: inline-block; font-size: .8rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.good { color: var(--good); background: var(--good-bg); }
+.warn { color: var(--warn); background: var(--warn-bg); }
+.bad { color: var(--bad); background: var(--bad-bg); }
+.channel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: grid; gap: 10px; }
+.channel header { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.channel ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.src { font-size: .82rem; color: var(--muted); }
+.plan { display: grid; gap: 14px; }
+.step { display: grid; grid-template-columns: 54px 1fr; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.step .n { font-family: var(--display); font-size: 1.6rem; color: var(--accent); line-height: 1; }
+.step h3 { margin-bottom: 4px; }
+.step ul { margin: 6px 0 0; padding-left: 1.2em; display: grid; gap: 3px; }
+.phase { font-family: var(--display); font-size: 1.05rem; color: var(--gold); margin-top: 8px; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.pillar { background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; }
+.pillar b { font-family: var(--display); font-weight: 500; }
+.pillar span { font-size: .92rem; color: var(--muted); }
+.note { background: var(--warn-bg); border-radius: 10px; padding: 14px 18px; font-size: .95rem; }
+.num { font-variant-numeric: tabular-nums; }
+ol.sources { font-size: .88rem; color: var(--muted); padding-left: 1.4em; display: grid; gap: 4px; margin: 0; }
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  h1 { font-size: 1.7rem; }
+  .step { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:12px">
+  <p class="meta">ตรวจสอบ 18 พ.ย. 2026 · Hibi Matcha Cafe · 5 สาขาในกรุงเทพฯ</p>
+  <h1>Hibi Digital &amp; Social Marketing Audit</h1>
+  <p class="lede">ภาพรวมช่องทางออนไลน์ทั้งหมดของ Hibi: เว็บไซต์, Google Maps / Wongnai, Facebook, Instagram, TikTok, LINE OA และแอปเดลิเวอรี พร้อมแผนปรับ 90 วัน เรียงตามสิ่งที่ส่งผลต่อยอดขายหน้าร้านมากที่สุดก่อน</p>
+</header>
+
+<section class="verdict" aria-labelledby="v">
+  <h2 id="v" style="border:0;padding:0">สรุปสั้น</h2>
+  <p><b>เว็บไซต์แข็งแรงกว่าคาเฟ่ขนาดเดียวกันส่วนใหญ่</b> มีโครงสร้าง SEO, Schema แยกสาขา, ปุ่มสั่งผ่าน Grab / ShopeeFood แยกตามสาขา และติดตั้ง Google Analytics, Meta Pixel, TikTok Pixel ไว้แล้ว</p>
+  <p><b>จุดอ่อนอยู่นอกเว็บ:</b> ลูกค้าส่วนใหญ่หาร้านผ่าน Google Maps และ Wongnai แต่ข้อมูลสาขาบนสองที่นี้ไม่ตรงกับเว็บ (เวลาเปิดปิดขัดกัน, รายชื่อสาขาไม่ครบ) และรีวิวมีน้อยมาก โซเชียลยังเล็ก (Facebook ราว 3.2K, Instagram ราว 1.2K) และชื่อ TikTok ไม่ตรงกับแบรนด์</p>
+  <p><b>สิ่งที่ควรทำก่อน:</b> แก้ข้อมูลสาขาให้ตรงกันทุกช่องทาง, เริ่มเก็บรีวิว Google ทุกสาขา, เปลี่ยนภาพเครื่องดื่ม AI เป็นภาพถ่ายจริง แล้วค่อยลงแรงกับคอนเทนต์ Capy / Hibi ที่เป็นจุดต่างของแบรนด์</p>
+</section>
+
+<section aria-labelledby="sc">
+  <h2 id="sc">คะแนนรายช่องทาง</h2>
+  <div class="tablewrap">
+  <table class="score">
+    <thead><tr><th>ช่องทาง</th><th>สถานะ</th><th>เรื่องสำคัญที่สุด</th></tr></thead>
+    <tbody>
+      <tr><td>เว็บไซต์ hibimatcha.com</td><td><span class="pill good">ดี</span></td><td>ภาพเครื่องดื่มเป็นภาพ AI, บทความ Matcha Class ทั้ง 6 ยังกดอ่านไม่ได้</td></tr>
+      <tr><td>Google Maps / Business Profile</td><td><span class="pill bad">ต้องแก้ด่วน</span></td><td>เวลาเปิดปิดไม่ตรงกับเว็บ, รีวิวน้อย</td></tr>
+      <tr><td>Wongnai</td><td><span class="pill bad">ต้องแก้ด่วน</span></td><td>มีหน้าสาขา "ดินแดง" ที่ไม่อยู่ใน 5 สาขา, ไม่พบหน้านาคนิวาส 48, รีวิว 0–2 รีวิวต่อสาขา</td></tr>
+      <tr><td>Facebook</td><td><span class="pill warn">ปานกลาง</span></td><td>ผู้ติดตามราว 3,232 คน, มีคนพูดถึงเพียงราว 37 คน</td></tr>
+      <tr><td>Instagram</td><td><span class="pill warn">ปานกลาง</span></td><td>ผู้ติดตามราว 1,201 คน, 270 โพสต์</td></tr>
+      <tr><td>TikTok</td><td><span class="pill bad">ต้องแก้ด่วน</span></td><td>ชื่อบัญชี @hibimatchacafebywarin ไม่ตรงแบรนด์ และค้นหาไม่เจอ</td></tr>
+      <tr><td>LINE OA</td><td><span class="pill warn">ปานกลาง</span></td><td>เป็นปุ่มหลักบนเว็บแล้ว แต่ยังไม่เห็นระบบสมาชิกหรือสะสมแต้ม</td></tr>
+      <tr><td>แอปเดลิเวอรี</td><td><span class="pill good">ดี</span></td><td>มีลิงก์ Grab / ShopeeFood แยกสาขาบนเว็บแล้ว ควรเปลี่ยนภาพเมนูเป็นภาพจริง</td></tr>
+      <tr><td>ชื่อแบรนด์บนการค้นหา</td><td><span class="pill warn">ปานกลาง</span></td><td>ชื่อซ้ำกับร้านอื่น: Hibi Coffee &amp; Matcha (ฟิลิปปินส์), Hi Matcha, HIIBI MATCHA</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="src">เว็บไซต์ตรวจตรงจากหน้าจริง (เปิดในเบราว์เซอร์ทั้งมือถือและเดสก์ท็อป) · ตัวเลข Facebook, Instagram, Wongnai, Google Maps มาจากผลค้นหา เพราะเซสชันนี้เปิดหน้าเหล่านั้นตรงๆ ไม่ได้ ตัวเลขจึงอาจไม่ใช่ล่าสุด</p>
+</section>
+
+<section aria-labelledby="f">
+  <h2 id="f">สิ่งที่พบในแต่ละช่องทาง</h2>
+
+  <article class="channel">
+    <header><h3>1. เว็บไซต์ hibimatcha.com</h3><span class="pill good">ดี</span></header>
+    <p><b>ทำได้ดีแล้ว</b></p>
+    <ul>
+      <li>มีครบ: title, meta description ที่ระบุชื่อทั้ง 5 สาขา, Open Graph, canonical, sitemap.xml และ robots.txt, hreflang ไทย / อังกฤษ</li>
+      <li>Schema แบบ CafeOrCoffeeShop แยกทีละสาขา ช่วยให้ Google เข้าใจว่าร้านมีหลายสาขา</li>
+      <li>ติดตั้ง Google Analytics / Tag Manager, Meta Pixel และ TikTok Pixel แล้ว และมี event <code>order_click</code> ที่แยกตามสาขาและแอปเดลิเวอรี พร้อมใช้ทำโฆษณาและ retarget</li>
+      <li>โหลดบนมือถือราว 3 วินาที ไม่มี error · CTA ชัด: ดูเมนู, หาสาขาใกล้คุณ, สั่งทาง LINE</li>
+      <li>เมนูมีราคาชัด: Velvet Matcha Whisk Latte 129 บาท (ขายดี), Pistachio Kunafeh 159, Hojicha Cheesecake Mochi 179, Pink Coconut 259</li>
+    </ul>
+    <p><b>ต้องแก้</b></p>
+    <ul>
+      <li><b>ภาพเครื่องดื่มเป็นภาพ AI</b> พร้อมข้อความ "ภาพสินค้าเป็นภาพประกอบจาก AI · สินค้าจริงอาจแตกต่าง" การติดป้ายเป็นเรื่องถูกต้อง แต่สำหรับร้านเครื่องดื่ม ภาพจริงสร้างความเชื่อใจและยอดสั่งได้มากกว่า ควรใช้ภาพ AI กับมาสคอตเท่านั้น</li>
+      <li><b>บทความ Matcha Class / #AskHibi ทั้ง 6 การ์ด</b> ลิงก์ไปที่ <code>#class</code> เหมือนกันหมด ยังไม่มีบทความจริงให้อ่าน ทั้งที่หัวข้ออย่าง "มัทฉะต่างจากชาเขียวยังไง" หรือ "โฮจิฉะคืออะไร" เป็นคำที่คนค้นจริง</li>
+      <li>เวลาเปิดปิดใน Schema ตั้งเป็น 08:00–18:00 ทุกวันทุกสาขา ซึ่งขัดกับ Google Maps และ Wongnai (ดูหัวข้อถัดไป)</li>
+      <li>ภาพราว 8 จาก 25 ภาพไม่มี alt text (ส่วนใหญ่เป็นภาพ feed Instagram) และแผนที่สาขาเป็นแผนผังจำลอง ควรมีลิงก์ Google Maps ของแต่ละสาขา</li>
+      <li>หน้าโอนเงินค่าผงมัทฉะแสดงชื่อบัญชีไว้บนเว็บ ควรย้ายไปให้ในแชท LINE หรือใช้ QR PromptPay ในใบสั่งซื้อ เพื่อลดความเสี่ยงที่มิจฉาชีพจะปลอมเป็นร้าน</li>
+    </ul>
+  </article>
+
+  <article class="channel">
+    <header><h3>2. Google Maps และ Wongnai (Local SEO)</h3><span class="pill bad">ต้องแก้ด่วน</span></header>
+    <p>นี่คือช่องทางที่คนตัดสินใจ "ไปร้านไหนตอนนี้" มากที่สุด และเป็นจุดที่อ่อนที่สุดของ Hibi</p>
+    <ul>
+      <li><b>เวลาเปิดปิดไม่ตรงกัน:</b> เว็บบอก 08:00–18:00 ทุกวัน, Google Maps สาขาสะพานควายบอก 09:00–19:00 จันทร์–เสาร์ ปิดวันอาทิตย์, Wongnai สามย่านบอก 10:00–21:30 ทุกวัน (อีกหน้าบอกถึง 20:00), Wongnai ลาดพร้าว 107 ก็ขัดกันเอง ลูกค้าที่มาเจอร้านปิดจะไม่กลับมาอีก</li>
+      <li><b>รายชื่อสาขาไม่ตรง:</b> Wongnai มีหน้า "Hibi Matcha Cafe สาขาดินแดง" ที่ไม่อยู่ในรายชื่อ 5 สาขา (อาจเป็นสาขาสะพานควายที่ตั้งชื่อไม่ตรง) และค้นไม่พบหน้าของสาขานาคนิวาส 48</li>
+      <li><b>รีวิวน้อยมาก:</b> สามย่าน 4.0 จาก 2 รีวิว, นวมินทร์ 111 ยังไม่มีคะแนน ร้านมัทฉะคู่แข่งในกรุงเทพฯ หลายร้านมีรีวิวหลักร้อย</li>
+      <li>รีวิวที่มีอยู่ชมรสชาติชัดเจน (เช่น Gyokuro Yame ที่ลาดพร้าว 107) แสดงว่าสินค้าดี แค่ยังไม่มีระบบเก็บรีวิว</li>
+    </ul>
+  </article>
+
+  <article class="channel">
+    <header><h3>3. Facebook และ Instagram</h3><span class="pill warn">ปานกลาง</span></header>
+    <ul>
+      <li>Facebook @hibimatchacafe ราว 3,232 ผู้ติดตาม, 308 เช็กอิน แต่มีคนพูดถึงเพียงราว 37 คน แปลว่าคนติดตามแต่ไม่ค่อยมีส่วนร่วม</li>
+      <li>Instagram @hibimatchacafe ราว 1,201 ผู้ติดตาม จาก 270 โพสต์ อัตราผู้ติดตามต่อโพสต์ต่ำ บ่งบอกว่าโพสต์เดี่ยวยังไม่ถูกแชร์หรือถูกดันโดยอัลกอริทึม</li>
+      <li>Capy และ Hibi เป็นทรัพย์สินที่แข็งที่สุดของแบรนด์ (ร้านมัทฉะคู่แข่งส่วนใหญ่ไม่มีคาแรกเตอร์) ควรเป็นแกนหลักของคอนเทนต์</li>
+    </ul>
+  </article>
+
+  <article class="channel">
+    <header><h3>4. TikTok</h3><span class="pill bad">ต้องแก้ด่วน</span></header>
+    <ul>
+      <li>เว็บลิงก์ไปที่ @hibimatchacafebywarin ชื่อนี้ยาว มีชื่อบุคคลต่อท้าย ไม่ตรงกับ @hibimatchacafe บน IG / Facebook และค้นหาบนเว็บไม่เจอเลย</li>
+      <li>TikTok คือช่องที่คอนเทนต์ Capy (คลิปสั้น คาแรกเตอร์น่ารัก ASMR ตีมัทฉะ) จะโตเร็วที่สุด ควรเปลี่ยนชื่อเป็น @hibimatchacafe ก่อนเริ่มลงคลิปชุดใหญ่</li>
+    </ul>
+  </article>
+
+  <article class="channel">
+    <header><h3>5. LINE OA และแอปเดลิเวอรี</h3><span class="pill warn">ปานกลาง</span></header>
+    <ul>
+      <li>LINE OA เป็นปุ่มหลักบนเว็บแล้ว (สั่งซื้อ, ถาม Capy) แต่ยังไม่เห็นบัตรสมาชิกหรือสะสมแต้ม ซึ่งตรงกับแนวคิด "日々 ดื่มได้ทุกวัน" ที่สุด</li>
+      <li>เว็บมีลิงก์ GrabFood และ ShopeeFood แยกรายสาขา และนับคลิกไว้แล้ว ควรเปลี่ยนภาพเมนูบนแอปเป็นภาพถ่ายจริงชุดเดียวกับเว็บ</li>
+    </ul>
+  </article>
+
+  <article class="channel">
+    <header><h3>6. ราคาเทียบตลาด</h3><span class="pill good">แข่งได้</span></header>
+    <div class="tablewrap">
+    <table class="score">
+      <thead><tr><th>ร้าน</th><th class="num">ช่วงราคาต่อแก้ว (บาท)</th></tr></thead>
+      <tbody>
+        <tr><td>Mini Oriental (Peace Teahouse)</td><td class="num">65</td></tr>
+        <tr><td>Matcha Commonly</td><td class="num">101–250</td></tr>
+        <tr><td><b>Hibi Matcha Cafe</b></td><td class="num"><b>129–259</b></td></tr>
+        <tr><td>MTCH</td><td class="num">125–220</td></tr>
+        <tr><td>Chaya Teahouse</td><td class="num">140–160</td></tr>
+        <tr><td>Koto Tea Space</td><td class="num">350 ขึ้นไป</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Hibi อยู่ระดับกลางของตลาด ราคาเริ่มต้น 129 บาทสอดคล้องกับข้อความ "ของดีไม่จำเป็นต้องแพง" แต่บนโซเชียลยังไม่มีการสื่อสารเรื่องนี้ชัดๆ ควรมีเมนูหรือราคาสมาชิกที่เป็น "แก้วประจำวัน" ให้คนจำได้</p>
+    <p class="src">ราคาคู่แข่งมาจากบทความรีวิวปี 2025–2026 อาจเปลี่ยนแล้ว</p>
+  </article>
+</section>
+
+<section aria-labelledby="p">
+  <h2 id="p">แผน 90 วัน</h2>
+
+  <p class="phase">สัปดาห์ 1–2 · แก้พื้นฐานให้ลูกค้าเจอร้านและเชื่อใจ</p>
+  <div class="plan">
+    <div class="step"><div class="n">01</div><div>
+      <h3>ทำข้อมูลสาขาให้ตรงกันทุกช่องทาง</h3>
+      <ul>
+        <li>เคลมและยืนยัน Google Business Profile ครบ 5 สาขา ตั้งชื่อแบบเดียวกัน: "Hibi Matcha Cafe – สาขา…"</li>
+        <li>ตั้งเวลาเปิดปิดจริงของแต่ละสาขา แล้วใช้ชุดเดียวกันทั้งใน Google, Wongnai, Facebook, LINE และ Schema บนเว็บ</li>
+        <li>แก้หรือรวมหน้า Wongnai "สาขาดินแดง" และสร้างหน้าสาขานาคนิวาส 48</li>
+        <li>ลงภาพจริงอย่างน้อย 10 ภาพต่อสาขา: หน้าร้าน, ที่นั่ง, เมนูขายดี, ป้ายร้าน</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">02</div><div>
+      <h3>เริ่มระบบเก็บรีวิว</h3>
+      <ul>
+        <li>QR รีวิว Google ของแต่ละสาขาบนปลอกแก้ว / ป้ายเคาน์เตอร์ ใช้ Capy เป็นคนชวน: "ชอบแก้วนี้ไหม? บอก Capy หน่อย~"</li>
+        <li>ตอบทุกรีวิวภายใน 48 ชั่วโมง ทั้งดีและไม่ดี</li>
+        <li>ขอรีวิวได้ แต่ห้ามให้ของแลกรีวิว เพราะผิดนโยบาย Google และอาจทำให้รีวิวถูกลบ</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">03</div><div>
+      <h3>เปลี่ยนภาพเครื่องดื่ม AI เป็นภาพถ่ายจริง</h3>
+      <ul>
+        <li>ถ่ายเมนูหลัก 4–6 แก้วในแสงธรรมชาติ ใช้ชุดเดียวกันบนเว็บ, Grab, ShopeeFood, LINE MAN และ Google</li>
+        <li>เก็บภาพ AI ไว้เฉพาะมาสคอต Capy / Hibi พร้อมป้าย "ภาพประกอบสร้างด้วย AI"</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">04</div><div>
+      <h3>เปลี่ยนชื่อ TikTok เป็น @hibimatchacafe</h3>
+      <ul>
+        <li>ให้ทุกช่องทางใช้ชื่อเดียวกัน แล้วอัปเดตลิงก์บนเว็บและไบโอทุกที่</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <p class="phase">สัปดาห์ 3–8 · สร้างระบบคอนเทนต์และลูกค้าประจำ</p>
+  <div class="plan">
+    <div class="step"><div class="n">05</div><div>
+      <h3>คอนเทนต์ 4 เสาหลัก</h3>
+      <div class="pillars" style="margin-top:8px">
+        <div class="pillar"><b>P1 Capy &amp; Hibi</b><span>คาแรกเตอร์ #HibiMoments: Capy ชิลทุกวัน, Hibi บาริสต้า · เริ่มจากคลิปแนะนำตัว Capy ที่ทำ storyboard ไว้แล้ว</span></div>
+        <div class="pillar"><b>P2 Matcha Class</b><span>ความรู้มัทฉะ: Yame กับ Kagoshima ต่างกันยังไง, วิธีตีมัทฉะ, first flush · ไม่มีคำกล่าวอ้างด้านสุขภาพ</span></div>
+        <div class="pillar"><b>P3 เมนูและของใหม่</b><span>เปิดตัวเมนูใหม่, ภาพจริง, ราคาชัด, "แก้วประจำวัน"</span></div>
+        <div class="pillar"><b>P4 สาขาและลูกค้า</b><span>เรื่องเล่าแต่ละย่าน (นิสิตจุฬาฯ ที่สามย่าน, คนทำงานแถวสะพานควาย), รีโพสต์รูปจากลูกค้า</span></div>
+      </div>
+      <ul>
+        <li>ความถี่: TikTok / Reels 3–4 คลิปต่อสัปดาห์, โพสต์ FB / IG 3 ต่อสัปดาห์, Stories ทุกวัน, LINE broadcast 2 ครั้งต่อเดือน</li>
+        <li>ใช้คลิป Brand Story 37 วินาทีที่ทำไว้แล้วเป็นวิดีโอปักหมุดบนทุกช่องทาง</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">06</div><div>
+      <h3>เปิดบทความ Matcha Class บนเว็บให้อ่านได้จริง</h3>
+      <ul>
+        <li>เขียน 6 บทความตามการ์ดที่มีอยู่ แต่ละบทความมีหน้า URL ของตัวเอง แล้วตัดเป็นคลิปสั้นหรือ carousel ลงโซเชียล</li>
+        <li>ช่วยให้ติดการค้นหาคำอย่าง "มัทฉะ vs ชาเขียว" และ "โฮจิฉะคืออะไร"</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">07</div><div>
+      <h3>LINE OA เป็นบัตรสมาชิก "日々"</h3>
+      <ul>
+        <li>สะสมแต้มดิจิทัล เช่น ครบ 10 แก้วรับฟรี 1 แก้ว ตรงกับแนวคิด "ดื่มได้ทุกวัน"</li>
+        <li>Rich menu: สั่งตามสาขา, บัตรสมาชิก, ถาม Capy, ซื้อผงมัทฉะ · แบ่งกลุ่มเพื่อนตามสาขาที่ไปบ่อย</li>
+        <li>ช่วง "พักบ่ายกับ Capy" 14:00–16:00 เป็นโปรประจำสำหรับสมาชิก ใช้ดันยอดช่วงเวลาที่ร้านเงียบ</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <p class="phase">สัปดาห์ 9–12 · ขยายการเข้าถึง</p>
+  <div class="plan">
+    <div class="step"><div class="n">08</div><div>
+      <h3>Micro-influencer และ Lemon8</h3>
+      <ul>
+        <li>ชวนครีเอเตอร์สายคาเฟ่ 5–10 คน (ผู้ติดตาม 5K–50K) ใกล้แต่ละสาขา เน้นนิสิตจุฬาฯ สำหรับสามย่าน</li>
+        <li>Lemon8 เป็นแหล่งที่คนไทยหาคาเฟ่มากขึ้น ร้านคู่แข่งหลายร้านถูกรีวิวที่นี่</li>
+        <li>ทุกโพสต์ที่ได้รับสินค้าหรือค่าตอบแทนต้องระบุว่าเป็นโฆษณา</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">09</div><div>
+      <h3>โฆษณางบเล็ก รัศมีรอบสาขา</h3>
+      <ul>
+        <li>Meta และ TikTok Ads ยิงรัศมี 2–3 กม. รอบแต่ละสาขา ใช้คลิป Capy เป็นครีเอทีฟหลัก</li>
+        <li>Pixel ติดตั้งแล้ว: retarget คนที่เข้าเว็บแต่ยังไม่กดสั่ง และวัดผลด้วย event <code>order_click</code> แยกสาขา</li>
+      </ul>
+    </div></div>
+    <div class="step"><div class="n">10</div><div>
+      <h3>รายงานผลรายสัปดาห์</h3>
+      <ul>
+        <li>สัปดาห์แรกให้จดตัวเลขตั้งต้นของทุกช่องทางไว้ก่อน แล้ววัดทุกสัปดาห์:</li>
+        <li>Google: ยอดดู, ขอเส้นทาง, โทร, จำนวนรีวิวและคะแนนแยกสาขา</li>
+        <li>โซเชียล: ผู้ติดตาม, engagement rate, ยอดเซฟและแชร์ของคลิป</li>
+        <li>เว็บและ LINE: <code>order_click</code> แยกสาขาและแอป, จำนวนเพื่อน LINE, สมาชิกที่ใช้แต้ม</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section aria-labelledby="r">
+  <h2 id="r">ข้อควรระวัง</h2>
+  <ul style="margin:0;padding-left:1.2em;display:grid;gap:6px">
+    <li><b>ไม่มีคำกล่าวอ้างด้านสุขภาพ</b> ในโพสต์, โฆษณา และบทความ Matcha Class (เช่น ต้านอนุมูลอิสระ, ลดน้ำหนัก, ดีต่อสุขภาพ)</li>
+    <li>คำว่า "ออร์แกนิก" และ "Single-origin" บนเว็บ ควรมีเอกสารยืนยันจากผู้ผลิตเก็บไว้ หากถูกถาม</li>
+    <li>ติดป้าย "ภาพประกอบสร้างด้วย AI" ทุกครั้งที่ใช้ภาพ AI</li>
+    <li>ชื่อแบรนด์ซ้ำกับร้านอื่น (Hibi Coffee &amp; Matcha ในฟิลิปปินส์, Hi Matcha, HIIBI MATCHA) ใช้ชื่อเต็ม "Hibi Matcha Cafe" และชื่อบัญชีเดียวกันทุกช่องทาง เพื่อให้ค้นเจอง่าย</li>
+    <li>โค้ดเว็บในโปรเจกต์ hibi-green-tea ยังใช้ชื่อ "Hibi Green Tea" และข้อความ "100% Organic", "1000+ Happy Customers", "wellness in every cup" ถ้าจะนำโค้ดนี้ขึ้นใช้งาน ต้องแก้ให้ตรงแบรนด์และตัดคำกล่าวอ้างก่อน</li>
+  </ul>
+  <p class="note">สิ่งที่ยังตรวจไม่ได้ในรอบนี้: เนื้อหาโพสต์ล่าสุด, ความถี่โพสต์ และ engagement จริงบน Facebook / Instagram / TikTok, หน้า Wongnai และ Google Maps แบบเต็ม, เว็บ hibimatcha.love ถ้าส่งสิทธิ์ดูสถิติ (Meta Business Suite, TikTok Analytics, Google Business Profile) หรือเปิดสิทธิ์เข้าเว็บเหล่านี้ในเซสชัน จะตรวจตัวเลขจริงและตั้งเป้าเป็นตัวเลขได้</p>
+</section>
+
+<section aria-labelledby="s">
+  <h2 id="s">แหล่งข้อมูล</h2>
+  <ol class="sources">
+    <li><a href="https://hibimatcha.com/">hibimatcha.com</a> (ตรวจตรงจากหน้าเว็บ, 18 พ.ย. 2026)</li>
+    <li><a href="https://www.facebook.com/hibimatchacafe/">Facebook: Hibi Matcha Cafe</a></li>
+    <li><a href="https://www.instagram.com/hibimatchacafe/">Instagram: @hibimatchacafe</a></li>
+    <li><a href="https://www.tiktok.com/@hibimatchacafebywarin">TikTok: @hibimatchacafebywarin</a></li>
+    <li><a href="https://maps.app.goo.gl/2eqxdQXj5wb5EgYE8">Google Maps: Hibi Matcha Cafe สะพานควาย</a></li>
+    <li><a href="https://www.wongnai.com/restaurants/3508785Go-hibi-matcha-cafe-%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%A7-107">Wongnai: ลาดพร้าว 107</a></li>
+    <li><a href="https://www.wongnai.com/restaurants/3626787cB-hibi-matcha-cafe-%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A1%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%99">Wongnai: สามย่าน</a></li>
+    <li><a href="https://www.wongnai.com/restaurants/3627018Rf-hibi-matcha-cafe-%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%99%E0%B8%A7%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B9%8C111-hibi-matcha-cafe-nawamin111">Wongnai: นวมินทร์ 111</a></li>
+    <li><a href="https://www.wongnai.com/restaurants/3623299km-hibi-matcha-cafe-%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B9%81%E0%B8%94%E0%B8%87-%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B9%81%E0%B8%94%E0%B8%87">Wongnai: สาขาดินแดง</a></li>
+    <li><a href="https://www.wongnai.com/reviews/4b7341ed6ae446da85c7f3865ddf4ff4">Wongnai: รีวิว Gyokuro Yame ลาดพร้าว 107</a></li>
+    <li><a href="https://www.instagram.com/hibicoffeeandmatcha/">Instagram: HIBI Café (ฟิลิปปินส์, ชื่อซ้ำ)</a></li>
+    <li><a href="https://thematter.co/lifestyle/matcha-around-bangkok-2025/237732">The Matter: 10 ร้านมัทฉะในกรุงเทพฯ</a></li>
+    <li><a href="https://www.innnews.co.th/lifestyle/news_918433/">INN News: 9 ร้านมัทฉะในกรุงเทพ</a></li>
+    <li><a href="https://www.wongnai.com/reviews/eecc5069eb55401c9d9573ba4cc6ce94">Wongnai: รีวิว Matcha Commonly</a></li>
+  </ol>
+</section>
+
+</main>
+</body>
+</html>
