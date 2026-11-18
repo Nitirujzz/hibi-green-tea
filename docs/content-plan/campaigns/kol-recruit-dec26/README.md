@@ -55,3 +55,11 @@ Hibi กับ Capy รอเจอนะ 🐰🍊
 - [ ] **เซตเครื่องดื่ม + ขนม:** เป็นเมนูอะไร
   - ต้นฉบับพูดถึง “ของฝาก” แต่ Hibi ยังไม่มีข้อมูลชุดของฝาก จึงตัดคำนี้ออก
   - ขนมที่ยืนยันแล้วคือ Noisette Financier
+
+## ภาพประกอบ (18 พ.ย.)
+- `out/kol_01_cover.jpg` · `kol_02_details.jpg` · `kol_03_apply.jpg`: carousel 3 สไลด์ 1080×1350
+- `out/kol_story.jpg`: IG Story 1080×1920
+- ภาพพื้นหลัง: Higgsfield gpt_image_2_5 อ้างอิงชีตทางการ (`art/`)
+  - jobs: bg1 90afaad7 · bg2 d9a69a07 · bg3 ec1ca3bc · story 298e6cec
+- ตัวหนังสือวางทับด้วย HTML (`src/build.py`) · ฟอนต์ Prompt + Cormorant Garamond
+- ⚠️ ในภาพใส่ตัวเลขค่าตอบแทนและวันถ่าย 5 ธ.ค. ไว้แล้ว ถ้าร้านเปลี่ยน ให้แก้ใน `src/build.py` แล้วรันใหม่
