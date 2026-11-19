@@ -46,3 +46,8 @@ dev.db-journal
 
 # uploads
 /public/uploads
+
+# Netlify local link state
+.netlify
+docs/content-plan/campaigns/xmas-band-hibi-capy/src/frames/
+docs/content-plan/campaigns/xmas-band-hibi-capy/src/segs/

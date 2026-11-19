@@ -1,0 +1,13 @@
+# Netlify build settings for the Next.js site (game at /game).
+# Netlify's Next.js runtime is applied automatically; all API routes run in one server function.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Set in the Netlify UI (Site configuration > Environment variables), not here:
+  #   GAME_SECRET     long random string (required in production)
+  #   GAME_OTP_MODE   demo   (shows the OTP on screen; no SMS yet)
+  #   GAME_ADMIN_PIN  staff PIN for /game/admin
+  #   NEXT_PUBLIC_SITE_URL  the site URL, for link previews when sharing
