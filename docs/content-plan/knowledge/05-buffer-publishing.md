@@ -49,6 +49,9 @@
 | 29 พ.ย. | 15:00 / TikTok 19:00 | SQ05 (Done batch) | IG + FB / TikTok (แจ้งเตือน) |
 - Done batch พ.ย.: รายละเอียด/Post IDs/งานที่ Hold → `../campaigns/done-batch-nov26/README.md` · TikTok รูปต้อง ≤ 2,073,600 px → ย่อเป็น 1080×1920 (พื้นหลังเบลอ)
 | 18 พ.ย. | 20:00 | โปร HIBI ครบ 1 ปี เป่ายิ้งฉุบ (ขยายถึง 22 พ.ย.) · IG 6afd88e4be723dbbcfdb6289 · FB 6afd88e9812f98283313373a · TikTok 6afd88eef4526871ade31264 | IG + FB + TikTok (แจ้งเตือน) |
+| 24 พ.ย. | 19:30 | Matcha Lab #1 ปลูกในที่มืด (no-VO) · IG 6b0308eabf5d5a73b69dfff1 · FB 6b0308f1846b0ee907974f3f · TikTok 6b0308f4c72676f5e93bb18e | IG + FB + TikTok (แจ้งเตือน) |
+| 27 พ.ย. | 19:30 | Matcha Lab #2 หินโม่ (no-VO) · IG 6b030907bf5d5a73b69e0779 · FB 6b03090ec72676f5e93bb711 · TikTok 6b03091ad864a01105d38bce | IG + FB + TikTok (แจ้งเตือน) |
+- 22 พ.ย.: ย้ายคลิป “ช่วงพัก” 5 โพสต์ไปเป็น draft (IG 6aec004c71cbe1a7c3d87353, 6aec007212c344f9814476a3 · FB 6aec004c71cbe1a7c3d87352, 6aec007212c344f9814476a2 · TikTok 6aec007212c344f9814476a4) ตามแผน reset (`../07-reset-plan-dec26.md`)
 - ทีมร้านตั้งเองด้วย (ดูใน Buffer): มัทฉะ vs ชาเขียว 28 ต.ค. · Nutty 30 ต.ค. 11:00 · Yame Saeakari 1 พ.ย. 11:00 · Hojicha Kokoro 2 พ.ย.
 - ปฏิทินเดือน ต.ค. ฉบับเต็ม: `../calendar/2026-10-content-calendar.md`
 
