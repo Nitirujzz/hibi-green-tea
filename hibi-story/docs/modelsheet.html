@@ -1,0 +1,30 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Display; src: url(../fonts/display-600-thai.woff2); font-weight: 600; unicode-range: U+0E01-0E5B; }
+@font-face { font-family: Display; src: url(../fonts/display-600-latin.woff2); font-weight: 600; unicode-range: U+0000-00FF; }
+@font-face { font-family: UI; src: url(../fonts/ui-400-thai.woff2); font-weight: 400; unicode-range: U+0E01-0E5B; }
+@font-face { font-family: UI; src: url(../fonts/ui-400-latin.woff2); font-weight: 400; unicode-range: U+0000-00FF; }
+@font-face { font-family: Mark; src: url(../fonts/mark-800.woff2); font-weight: 800; }
+body{margin:0}</style></head><body><canvas id="c" width="2000" height="1400"></canvas>
+<script type="module">
+import { C, hibi, capy, glass, chawan, whisk, leaf, tag } from '../lib/chars.js';
+await document.fonts.load('600 40px Display','ทุกวันHibi'); await document.fonts.load('400 30px UI','ทุกวัน AI MATCHA'); await document.fonts.load('800 40px Mark','日々');
+const c=document.getElementById('c'), x=c.getContext('2d');
+x.fillStyle=C.cream; x.fillRect(0,0,2000,1400);
+x.fillStyle=C.green; x.font='600 54px Display'; x.fillText('Model sheet: Hibi (กระต่าย) + Capy (คาปิบารา)', 60, 90);
+x.font='400 30px UI'; x.fillText('วาดด้วยโค้ดโดย AI · ภาพประกอบสร้างด้วย AI', 60, 135);
+const lab=(t,px,py)=>{x.font='400 28px UI';x.fillStyle=C.green;x.textAlign='center';x.fillText(t,px,py);x.textAlign='left';};
+const P=[['ปกติ',{}],['ดีใจ',{eyes:'happy',mouth:'smile',wave:[0,-2.3],ear:[-0.15,0.15]}],['สงสัย',{eyes:'wide',mouth:'o',lean:-0.12,ear:[0.5,-0.1],look:[1,-1]}],['ถือแก้ว',{eyes:'happy',mouth:'w',wave:[0,-0.9],hold:(k)=>glass(k,0,0,0.55)}]];
+P.forEach(([n,p],i)=>{hibi(x,180+i*230,620,0.85,p);lab(n,180+i*230,680);});
+const Q=[['ปกติ',{}],['แว่น/ศึกษา',{glasses:true,eyes:'open',look:[0,1]}],['ส่ายหัว',{lean:0.12,eyes:'blink',mouth:'o'}],['ชูแก้ว',{wave:[0,-1.0],eyes:'happy',hold:(k)=>glass(k,0,0,0.55)}]];
+Q.forEach(([n,p],i)=>{capy(x,190+i*260,1250,0.85,p);lab(n,190+i*260,1310);});
+// props
+glass(x,1260,600,1.3); chawan(x,1560,600,1.1); whisk(x,1800,600,1.2,0.2);
+leaf(x,1300,1000,1.0,-0.3); tag(x,1600,880,1.0,0.1,C.gold,(k)=>{k.fillStyle=C.green;k.font='600 64px Display';k.textAlign='center';k.fillText('฿฿฿',0,150);});
+// logo placeholder
+x.save(); x.translate(1450,1220); x.beginPath(); x.arc(0,0,95,0,Math.PI*2); x.fillStyle=C.green; x.fill();
+x.fillStyle=C.cream; x.font='800 92px Mark'; x.textAlign='center'; x.fillText('日々',0,32); x.restore();
+x.fillStyle=C.green; x.font='600 96px Display'; x.fillText('Hibi',1570,1230); x.font='400 30px UI'; x.fillText('MATCHA CAFE',1576,1272);
+lab('โลโก้ชั่วคราว (แทนด้วยไฟล์โลโก้จริงได้)',1600,1360);
+window.done=true;
+</script></body></html>
